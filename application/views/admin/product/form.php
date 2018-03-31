@@ -68,9 +68,7 @@
                             <div class="col-md-4">
                                 <label for="publish" class="col-md-12">Hiển thị</label>
                                 <div class="col-md-12">
-                                    <?php
-                                    $checked = isset($model) && $model->status == STATUS_INACTIVE ? '' : 'checked'
-                                    ?>
+                                    <?php $checked = (isset($model) && $model->status == STATUS_INACTIVE) ? '' : 'checked'; ?>
                                     <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="status" name="status"/>
                                 </div>
                             </div>
@@ -78,9 +76,7 @@
                             <div class="col-md-4">
                                 <label for="publish" class="col-md-12">Sản Phẩm Tiêu Biểu</label>
                                 <div class="col-md-12">
-                                    <?php
-                                    $checked = isset($model) && $model->status == STATUS_INACTIVE ? '' : 'checked'
-                                    ?>
+                                    <?php $checked = (isset($model) && $model->is_feature == STATUS_INACTIVE) ? '' : 'checked'; ?>
                                     <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="feature" name="is_feature"/>
                                 </div>
                             </div>
@@ -88,9 +84,7 @@
                             <div class="col-md-4">
                                 <label for="publish" class="col-md-12">Sản Phẩm Mới</label>
                                 <div class="col-md-12">
-                                    <?php
-                                    $checked = isset($model) && $model->is_new == STATUS_INACTIVE ? '' : 'checked'
-                                    ?>
+                                    <?php $checked = (isset($model) && $model->is_new == STATUS_INACTIVE) ? '' : 'checked'; ?>
                                     <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="new" name="is_new"/>
                                 </div>
                             </div>
@@ -142,7 +136,7 @@
                                         <?php echo form_error('attributes'); ?>
                                     </div>
                                     <div class="att-value-container" style="margin-top: 0px;">
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                            <input type="text" class="form-control att-value-input" value="">
                                             <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                             <?php echo form_error('attribute_values'); ?>
@@ -168,13 +162,13 @@
                                                 <div class="att-value-container" style="margin-top: 0px;">
                                                     <?php foreach($attributes_values[$attribute->id] as $attVal): ?>
                                                         <?php if($attribute->name == 'Color'): ?>
-                                                                <div class="col-md-1">
+                                                                <div class="col-md-2">
                                                                     <input type="color" class="form-control att-value-input" value="<?php echo $attVal->name; ?>" name="attributes_values[<?php echo $key; ?>][]">
                                                                     <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
                                                         <?php else: ?>
-                                                                <div class="col-md-1">
+                                                                <div class="col-md-2">
                                                                     <input type="text" class="form-control att-value-input" value="<?php echo $attVal->name; ?>" name="attributes_values[<?php echo $key; ?>][]">
                                                                     <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                                                     <?php echo form_error('attribute_values'); ?>
@@ -277,7 +271,7 @@
      });
 
      $('body').on('click', '.delete-att-value', function (){
-         var count = $(this).parent().parent().find('.col-md-1').length;
+         var count = $(this).parent().parent().find('.col-md-2').length;
 
          if(count > 1){
              $(this).parent().remove();

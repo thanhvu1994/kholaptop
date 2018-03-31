@@ -29,8 +29,6 @@ class Sites extends Front_Controller {
         }
 
         $data['template'] = 'sites/index';
-        // $data['categories'] = $this->categories->getDataFE();
-        // $data['projects'] = $this->projects->getProjectsFE();
 
 		$this->load->view('layouts/index', $data);
     }

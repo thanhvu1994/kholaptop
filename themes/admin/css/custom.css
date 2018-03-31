@@ -91,7 +91,7 @@ span.required {
     -webkit-transition: opacity 0.5s linear;
 }
 
-.col-md-1:hover .delete-att-value {
+.col-md-2:hover .delete-att-value {
     opacity: 1;
     transition:opacity 2s linear;
     -moz-transition: opacity 2s linear;

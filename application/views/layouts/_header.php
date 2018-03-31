@@ -111,13 +111,13 @@
 										<strong class="dark">Tổng cộng:(đã bao gồm thuế)</strong>
 										<span class="ajax_block_cart_total"></span>
 									</div>
-									<div class="button-container">	
+									<div class="button-container">
 										<span class="continue btn btn-default button exclusive-medium button-medium" title="Tiếp tục mua hàng">
 											<span>Tiếp tục mua hàng</span>
 										</span>
 										<a class="btn btn-default button button-medium"	href="order.html" title="Proceed to checkout" rel="nofollow">
 											<span>Proceed to checkout</span>
-										</a>	
+										</a>
 									</div>
 								</div>
 							</div>
