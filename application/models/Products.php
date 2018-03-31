@@ -230,4 +230,20 @@ class Products extends CI_Model {
 
         return $this->$field;
     }
+
+    public function getNewProducts($limit, $start){
+        $this->db->limit($limit, $start);
+        $query = $this->db->query("SELECT * FROM ci_products WHERE is_new = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc");
+        return $query->result('Products');
+    }
+
+    public function getFeatureProducts($limit, $start){
+        $this->db->limit($limit, $start);
+        $query = $this->db->query("SELECT * FROM ci_products WHERE is_feature = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc");
+        return $query->result('Products');
+    }
+
+    public function getUrl(){
+        return base_url('pro-').$this->slug;
+    }
 }

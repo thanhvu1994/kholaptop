@@ -29,6 +29,8 @@ class Sites extends Front_Controller {
         }
 
         $data['template'] = 'sites/index';
+        $data['newProducts'] = $this->products->getNewProducts(10,0);
+        $data['featureProducts'] = $this->products->getFeatureProducts(10,0);
 
 		$this->load->view('layouts/index', $data);
     }
