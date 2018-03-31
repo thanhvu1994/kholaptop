@@ -1,4 +1,4 @@
-<div class="magestore-bannerslider">
+<div id="main-height">
     <div class="magestore-bannerslider-standard">
         <script src="<?php echo base_url('themes/website/script/flexslider.js')?>"></script>
         <script type="text/javascript">
@@ -30,4 +30,4 @@
             </ul>
         </div><!--flexslider-->
     </div>
-</div><!--magestore-bannerslider-->
+</div>
