@@ -1,0 +1,1 @@
+var product_view_history = []
