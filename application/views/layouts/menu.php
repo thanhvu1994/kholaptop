@@ -25,7 +25,6 @@
 <div id="header-nav" class="skip-content">
     <nav id="nav">
         <ol class="nav-primary">
-
             <li class="level0 nav-1 first parent">
                 <a href="laptop.html" class="level0 has-children">Laptop</a>
                 <ul class="level0">

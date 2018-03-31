@@ -1,7 +1,5 @@
 <div class="main-container col2-right-layout">
     <div class="main">
-        <?php $this->load->view('layouts/banner'); ?>
-
         <div class="col-main">
             <div class="banner-homepage">
                 <img border=0 src="<?php echo base_url('themes/website/media/banner/banner_3c59dc04.gif')?>" width='956' height='128' alt=""/>
