@@ -1,13 +1,15 @@
 <h2 class="subtitle">Sản phẩm tiêu biểu</h2>
 <ul class="products-grid products-grid--max-5-col">
-    <li class="item ">
-        <a href="asus-a540up-go097t.html" title="Asus A540UP-GO097T" class="product-image">
-            <img src="<?php echo base_url('themes/website/media/product/250_3558_asus_a540up_i5_7200u_bac_1_org.jpg')?>" alt="Asus A540UP-GO097T"/>
-        </a>
-        <h3 class="product-name"><a href="asus-a540up-go097t.html" title="Asus A540UP-GO097T">Asus A540UP-GO097T</a></h3>
-        <div class="price-box"><span class="regular-price" id="product-price-3558-new">
-            <span class="price">10.990.000 ₫</span> </span>
-        </div>
-    </li>
+    <?php foreach($featureProducts as $key => $product): ?>
+        <li class="item ">
+            <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->product_name; ?>" class="product-image">
+                <img src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>"/>
+            </a>
+            <h3 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->product_name; ?>"><?php echo $product->product_name; ?></a></h3>
+            <div class="price-box"><span class="regular-price" id="product-price-<?php echo $key; ?>-new">
+                <span class="price"><?php echo $product->sale_price; ?></span> </span>
+            </div>
+        </li>
+    <?php endforeach; ?>
 </ul>
-<div class="view-more"><a href="san-pham-hot.html" title="">Xem thêm sản phẩm</a></div>
+<div class="view-more"><a href="<?php echo base_url('san-pham-hot.html'); ?>" title="">Xem thêm sản phẩm</a></div>
