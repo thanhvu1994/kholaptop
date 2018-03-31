@@ -56,27 +56,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'sites/index';
 $route['admin'] = 'admin/login';
 $route['page-(:any).html'] = 'sites/cms/$1';
-$route['cat.html'] = 'sites/categoryAll';
-$route['cat.html/(:num)'] = 'sites/categoryAll';
-$route['cat-(:any).html'] = 'sites/category/$1';
-$route['cat-(:any).html/(:num)'] = 'sites/category/$1';
-$route['pro-(:any)/(:any).html'] = 'sites/product/$2';
-$route['new.html'] = 'sites/news';
-$route['new.html/(:num)'] = 'sites/news';
-$route['new-(:any).html'] = 'sites/newCategory/$1';
-$route['new-(:any).html/(:num)'] = 'sites/newCategory/$1';
-$route['new-(:any)/(:any).html'] = 'sites/newDetail/$2';
 
-$route['(lien-he).html'] = 'sites/contact';
-$route['(dang-nhap).html'] = 'sites/login';
-$route['(quen-mat-khau).html'] = 'sites/forgot';
-$route['(dang-ki).html'] = 'sites/register';
-$route['(gio-hang).html'] = 'sites/cart';
-$route['(them-dia-chi).html'] = 'sites/address';
-$route['(dia-chi-cua-toi).html'] = 'sites/addresses';
-$route['(tai-khoan).html'] = 'sites/account';
-$route['(thong-tin-ca-nhan).html'] = 'sites/infomation';
-$route['(dang-xuat).html'] = 'sites/logout';
+$route['san-pham-moi.html'] = 'sites/newProducts';
 
 
 

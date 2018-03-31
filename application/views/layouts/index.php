@@ -91,11 +91,9 @@
                 $('.header-search').toggle();
             });
         </script>
-        <div class="main-container col2-right-layout">
-            <div class="main">
-                <?php $this->load->view($template); ?>
-            </div>
-        </div>
+
+        <?php $this->load->view($template); ?>
+
         <div id="mHotline_fixed" style="display:none;">
             <p><span style="float:left; margin-right:2px;">Mua hàng gọi ngay</span> <a href="tel:0985 985 278" style="font-weight:bold; float:left;">0985 985 278</a></p>
             <a href="tel:0985 985 278" class="font18"><img src="<?php echo base_url('themes/website/images/icon_tel_whitef195.png?v=2.1')?>" alt="hotline" />&nbsp;Gọi</a>
