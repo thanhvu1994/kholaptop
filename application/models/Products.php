@@ -40,17 +40,18 @@ class Products extends CI_Model {
         $data = array(
             'product_code' => $this->input->post('product_code'),
             'product_name' => $this->input->post('product_name'),
-            'product_name_en' => $this->input->post('product_name_en'),
-            'title' => $this->input->post('title'),
-            'content' => $this->input->post('content'),
-            'content_en' => $this->input->post('content_en'),
-            'description' => $this->input->post('description'),
-            'description_en' => $this->input->post('description_en'),
-            'meta_description' => $this->input->post('meta_description'),
+            'product_name_en' => '',
             'price' => $this->input->post('price'),
             'sale_price' => $this->input->post('sale_price'),
+            'content' => $this->input->post('content'),
+            'content_en' => '',
+            'description' => $this->input->post('description'),
+            'description_en' => '',
+            'title' => $this->input->post('title'),
+            'meta_description' => $this->input->post('meta_description'),
             'slug' => $this->products->generateSlug($this->input->post('product_name')),
-            'feature' => STATUS_ACTIVE,
+            'is_feature' => ($this->input->post('is_feature')) ? $this->input->post('is_feature') : STATUS_INACTIVE,
+            'is_new' => ($this->input->post('is_new')) ? $this->input->post('is_new') : STATUS_INACTIVE,
             'status' => ($this->input->post('status')) ? $this->input->post('status') : STATUS_INACTIVE
         );
         $this->db->insert('products', $data);
@@ -64,15 +65,18 @@ class Products extends CI_Model {
         $data = array(
             'product_code' => $this->input->post('product_code'),
             'product_name' => $this->input->post('product_name'),
-            'product_name_en' => $this->input->post('product_name_en'),
-            'title' => $this->input->post('title'),
-            'content' => $this->input->post('content'),
-            'content_en' => $this->input->post('content_en'),
-            'description' => $this->input->post('description'),
-            'description_en' => $this->input->post('description_en'),
-            'meta_description' => $this->input->post('meta_description'),
+            'product_name_en' => '',
             'price' => $this->input->post('price'),
             'sale_price' => $this->input->post('sale_price'),
+            'content' => $this->input->post('content'),
+            'content_en' => '',
+            'description' => $this->input->post('description'),
+            'description_en' => '',
+            'title' => $this->input->post('title'),
+            'meta_description' => $this->input->post('meta_description'),
+            'slug' => $this->products->generateSlug($this->input->post('product_name')),
+            'is_feature' => ($this->input->post('is_feature')) ? $this->input->post('is_feature') : STATUS_INACTIVE,
+            'is_new' => ($this->input->post('is_new')) ? $this->input->post('is_new') : STATUS_INACTIVE,
             'status' => ($this->input->post('status')) ? $this->input->post('status') : STATUS_INACTIVE
         );
 

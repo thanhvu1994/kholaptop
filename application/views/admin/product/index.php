@@ -41,8 +41,8 @@
                                                     <td><?php echo $model->product_name; ?></td>
                                                     <td><?php echo $model->getCategory(); ?></td>
                                                     <td><img class="center-cropped" src="<?php echo $model->getFirstImage(); ?>" /></td>
-                                                    <td><?php echo number_format($model->price, 2); ?></td>
-                                                    <td><?php echo number_format($model->sale_price, 2); ?></td>
+                                                    <td><?php echo $model->price; ?></td>
+                                                    <td><?php echo $model->sale_price; ?></td>
                                                     <td><?php $checked = $model->status ? 'checked' : '' ?>
                                                         <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" data-id="<?php echo $model->id ?>" value="1"/>
                                                     </td>

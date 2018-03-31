@@ -23,38 +23,18 @@
                             </div>
                         </div>
 
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#name_vn">Tiếng Việt</a></li>
-                            <li><a data-toggle="tab" href="#name_en">Tiếng Anh</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div id="name_vn" class="tab-pane fade in active">
-                                <div class="form-group">
-                                    <label class="col-md-12">Tên Sản Phẩm
-                                        <span class="required"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->product_name : ''?>" name="product_name">
-                                        <?php echo form_error('product_name'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="name_en" class="tab-pane fade">
-                                <div class="form-group">
-                                    <label class="col-md-12">Tên Sản Phẩm Tiếng Anh
-                                        <span class="required"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->product_name_en : ''?>" name="product_name_en">
-                                        <?php echo form_error('product_name_en'); ?>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Tên Sản Phẩm
+                                <span class="required"> *</span>
+                            </label>
+                            <div class="col-md-12">
+                                <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->product_name : ''?>" name="product_name">
+                                <?php echo form_error('product_name'); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-12">Giá</label>
+                            <label class="col-md-12">Giá Cơ Bản</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control money" value="<?php echo (isset($model)) ? $model->price : '1000'?>" name="price">
                                 <?php echo form_error('price'); ?>
@@ -73,6 +53,7 @@
                             <label class="col-md-12">Danh Mục</label>
                             <div class="col-md-12">
                                 <select class="form-control" name="category">
+                                    <option value="">-- Chọn --</option>
                                     <?php if(isset($categories)) : ?>
                                         <?php foreach($categories as $id => $cate): ?>
                                             <option value="<?php echo $id; ?>"><?php echo $cate; ?></option>
@@ -83,38 +64,40 @@
                             </div>
                         </div>
 
-                        <!--<div class="form-group">
-                            <label class="col-md-12">Status</label>
-                            <div class="col-md-12">
-                                <select class="form-control" name="status">
-                                    <option <?php /*echo (isset($model) && $model->status == STATUS_ACTIVE)? 'selected' : ''; */?> value="<?php /*echo STATUS_ACTIVE; */?>">Active</option>
-                                    <option <?php /*echo (isset($model) && $model->status == STATUS_INACTIVE)? 'selected' : ''; */?> value="<?php /*echo STATUS_INACTIVE; */?>">In-Active</option>
-                                </select>
-                                <?php /*echo form_error('status'); */?>
-                            </div>
-                        </div>-->
-
                         <div class="form-group">
-                            <label for="publish" class="col-md-12">Hiển thị</label>
-                            <div class="col-md-12">
-                                <?php
+                            <div class="col-md-4">
+                                <label for="publish" class="col-md-12">Hiển thị</label>
+                                <div class="col-md-12">
+                                    <?php
                                     $checked = isset($model) && $model->status == STATUS_INACTIVE ? '' : 'checked'
-                                ?>
-                                <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="publish" name="status"/>
+                                    ?>
+                                    <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="status" name="status"/>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- <div class="form-group">
-                            <label class="col-md-12">Feature</label>
-                            <div class="col-md-12">
-                                <select class="form-control" name="feature">
-                                    <option <?php echo (isset($model) && $model->feature == STATUS_ACTIVE)? 'selected' : ''; ?> value="<?php echo STATUS_ACTIVE; ?>">Active</option>
-                                    <option <?php echo (isset($model) && $model->feature == STATUS_INACTIVE)? 'selected' : ''; ?> value="<?php echo STATUS_INACTIVE; ?>">In-Active</option>
-                                </select>
-                                <?php echo form_error('feature'); ?>
+                            <div class="col-md-4">
+                                <label for="publish" class="col-md-12">Sản Phẩm Tiêu Biểu</label>
+                                <div class="col-md-12">
+                                    <?php
+                                    $checked = isset($model) && $model->status == STATUS_INACTIVE ? '' : 'checked'
+                                    ?>
+                                    <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="feature" name="is_feature"/>
+                                </div>
                             </div>
-                        </div> -->
+
+                            <div class="col-md-4">
+                                <label for="publish" class="col-md-12">Sản Phẩm Mới</label>
+                                <div class="col-md-12">
+                                    <?php
+                                    $checked = isset($model) && $model->is_new == STATUS_INACTIVE ? '' : 'checked'
+                                    ?>
+                                    <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="new" name="is_new"/>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                     <div class="col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label class="col-md-12">Title</label>
@@ -131,57 +114,22 @@
                                 <?php echo form_error('meta_description'); ?>
                             </div>
                         </div>
-
-                        <!--<div class="form-group">
-                            <label class="col-md-12">Short Content</label>
-                            <div class="col-md-12">
-                                <textarea class="form-control" name="short_content" rows="5" cols="80"><?php /*echo (isset($model)) ? $model->short_content : ''*/?></textarea>
-                                <?php /*echo form_error('short_content'); */?>
-                            </div>
-                        </div>-->
                     </div>
                     <div class="col-xs-12">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#content_vn">Tiếng Việt</a></li>
-                            <li><a data-toggle="tab" href="#content_en">Tiếng Anh</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div id="content_vn" class="tab-pane fade in active">
-                                <div class="form-group">
-                                    <label class="col-md-12">Thông Tin Chi Tiết</label>
-                                    <div class="col-md-12">
-                                        <textarea required class="form-control" name="content" id="editor-full-2" rows="10" cols="80"><?php echo (isset($model)) ? $model->content : ''?></textarea>
-                                        <?php echo form_error('content'); ?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Thông Số Kỹ Thuật</label>
-                                    <div class="col-md-12">
-                                        <textarea required class="form-control" name="description" id="editor-full-1" rows="10" cols="80"><?php echo (isset($model)) ? $model->description : ''?></textarea>
-                                        <?php echo form_error('description'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="content_en" class="tab-pane fade">
-                                <div class="form-group">
-                                    <label class="col-md-12">Thông Tin Chi Tiết</label>
-                                    <div class="col-md-12">
-                                        <textarea required class="form-control" name="content_en" id="editor-full-4" rows="10" cols="80"><?php echo (isset($model)) ? $model->content_en : ''?></textarea>
-                                        <?php echo form_error('content_en'); ?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Thông Số Kỹ Thuật</label>
-                                    <div class="col-md-12">
-                                        <textarea required class="form-control" name="description_en" id="editor-full-3" rows="10" cols="80"><?php echo (isset($model)) ? $model->description_en : ''?></textarea>
-                                        <?php echo form_error('description_en'); ?>
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Thông Tin Sản Phẩm</label>
+                            <div class="col-md-12">
+                                <textarea required class="form-control" name="content" id="editor-full-2" rows="10" cols="80"><?php echo (isset($model)) ? $model->content : ''?></textarea>
+                                <?php echo form_error('content'); ?>
                             </div>
                         </div>
-
-
+                        <div class="form-group">
+                            <label class="col-md-12">Thông Số Kỹ Thuật</label>
+                            <div class="col-md-12">
+                                <textarea required class="form-control" name="description" id="editor-full-1" rows="10" cols="80"><?php echo (isset($model)) ? $model->description : ''?></textarea>
+                                <?php echo form_error('description'); ?>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-xs-12">
                         <div class="form-group attribute-container">
@@ -246,14 +194,18 @@
 
                             <datalist id="options">
                                 <option value="Color">Màu Sắc</option>
-                                <option value="Size">Kích Cỡ</option>
-                                <option value="Material">Chất Liệu</option>
+                                <option value="Cpu">Cpu</option>
+                                <option value="Ram">Ram</option>
+                                <option value="Ssd">Ssd</option>
+                                <option value="Hdd">Hdd</option>
+                                <option value="Vga">Vga</option>
+                                <option value="Monitor">Màn Hình</option>
                             </datalist>
                         </div>
                     </div>
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <label class="col-md-12">Hình Ảnh</label>
+                            <label class="col-md-12">Ảnh Đại Diện</label>
                             <div class="col-md-12">
                                 <input type="file" name="product_image[]" class="dropify" multiple/>
                                 <?php if(isset($images) && !empty($images)): ?>
@@ -292,20 +244,6 @@
      } );
 
      CKEDITOR.replace( 'editor-full-2', {
-         filebrowserBrowseUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/ckfinder.html')?>",
-         filebrowserUploadUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/core/connector/php/connector.php').'?command=QuickUpload&type=Files' ?>",
-         filebrowserWindowWidth: '1000',
-         filebrowserWindowHeight: '700'
-     } );
-
-     CKEDITOR.replace( 'editor-full-3', {
-         filebrowserBrowseUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/ckfinder.html')?>",
-         filebrowserUploadUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/core/connector/php/connector.php').'?command=QuickUpload&type=Files' ?>",
-         filebrowserWindowWidth: '1000',
-         filebrowserWindowHeight: '700'
-     } );
-
-     CKEDITOR.replace( 'editor-full-4', {
          filebrowserBrowseUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/ckfinder.html')?>",
          filebrowserUploadUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/core/connector/php/connector.php').'?command=QuickUpload&type=Files' ?>",
          filebrowserWindowWidth: '1000',
