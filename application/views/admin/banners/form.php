@@ -13,10 +13,10 @@
     <div class="col-sm-12">
         <div class="white-box">
             <?php echo form_open_multipart($link_submit, ['class' => 'form-horizontal']); ?>
-                <ul class="nav nav-tabs">
+                <!-- <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#content_vn">Tiếng Việt</a></li>
                     <li><a data-toggle="tab" href="#content_en">Tiếng Anh</a></li>
-                </ul>
+                </ul> -->
                 <div class="tab-content">
                     <div id="content_vn" class="tab-pane fade in active">
                         <div class="form-group">
@@ -26,13 +26,13 @@
                                 <?php echo form_error('name'); ?>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="col-md-12">Tên nút Slider</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->button_name : ''?>" name="Banner[button_name]">
                                 <?php echo form_error('button_name'); ?>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div id="content_en" class="tab-pane fade">
                         <div class="form-group">

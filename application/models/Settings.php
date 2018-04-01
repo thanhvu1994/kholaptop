@@ -17,9 +17,9 @@ class Settings extends CI_Model {
                 ['name' => 'favicon', 'controlTyle' => 'file', 'notes' => '', 'unit' => '', 'htmlOptions' => [], 'rules' => ''],
                 // ['name' => 'logoBE', 'controlTyle' => 'file', 'notes' => '', 'unit' => '', 'htmlOptions' => [], 'rules' => ''],
                 ['name' => 'defaultPageTitle', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => 'required'],
-                ['name' => 'defaultPageTitle_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => 'required'],
-                ['name' => 'introduce', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full'], 'rules' => ''],
-                ['name' => 'introduce_en', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-2'], 'rules' => ''],
+                // ['name' => 'defaultPageTitle_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => 'required'],
+                // ['name' => 'introduce', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full'], 'rules' => ''],
+                // ['name' => 'introduce_en', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-2'], 'rules' => ''],
                 ['name' => 'copyrightOnFooter', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full'], 'rules' => ''],
                 ['name' => 'googleAnalytics', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['cols' => 77, 'rows' => 4], 'rules' => ''],
             ],
@@ -44,7 +44,7 @@ class Settings extends CI_Model {
             'icon' => '<span class="glyphicon glyphicon-search"></span>',
             'items' => [
                 ['name' => 'companyAddress', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'companyAddress_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['simaxlengthze' => 80], 'rules' => ''],
+                // ['name' => 'companyAddress_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['simaxlengthze' => 80], 'rules' => ''],
                 ['name' => 'companyCellPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
                 ['name' => 'companyPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
                 ['name' => 'companyEmail', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
@@ -59,16 +59,16 @@ class Settings extends CI_Model {
             'favicon' => 'Favicon',
             'logoBE' => 'Logo Trang Admin',
             'defaultPageTitle' => 'Tiêu đề trang web',
-            'defaultPageTitle_en' => 'Tiêu đề trang web (tiếng anh)',
+            // 'defaultPageTitle_en' => 'Tiêu đề trang web (tiếng anh)',
             'copyrightOnFooter' => 'Bản quyền trang web',
             'googleAnalytics' => 'Google Analytics',
             'companyAddress' => 'Địa chỉ công ty',
-            'companyAddress_en' => 'Địa chỉ công ty (tiếng anh)',
+            // 'companyAddress_en' => 'Địa chỉ công ty (tiếng anh)',
             'companyCellPhone' => 'Điện thoại di động',
             'companyPhone' => 'Điện thoại công ty',
             'companyEmail' => 'Địa chỉ Email',
-            'introduce' => 'Sơ lược công ty',
-            'introduce_en' => 'Sơ lược công ty (tiếng anh)'
+            // 'introduce' => 'Sơ lược công ty',
+            // 'introduce_en' => 'Sơ lược công ty (tiếng anh)'
         ];
 
         if (isset($attrbute_name[$field])) {

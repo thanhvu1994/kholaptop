@@ -28,7 +28,7 @@
                                     <tr>
                                         <th class="no-sort text-center"><input type="checkbox" name="" id="select_all"></th>
                                         <th>Tiêu đề Slider</th>
-                                        <th>Tên nút Slider</th>
+                                        <!-- <th>Tên nút Slider</th> -->
                                         <th>Đường dẫn</th>
                                         <th>Hình ảnh</th>
                                         <th>Hiển thị</th>
@@ -41,7 +41,7 @@
                                         <tr id="tr-<?php echo $model->id?>">
                                             <td class="text-center check-element"><input type="checkbox" name="select[]" value="<?php echo $model->id ?>"></td>
                                             <td><?php echo $model->name ?></td>
-                                            <td><?php echo $model->button_name ?></td>
+                                            <!-- <td><?php echo $model->button_name ?></td> -->
                                             <td><?php echo $model->url ?></td>
                                             <td>
                                                 <?php if (isset($model) && $model->image != ''): ?>
