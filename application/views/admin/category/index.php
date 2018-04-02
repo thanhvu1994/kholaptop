@@ -26,6 +26,7 @@
                                         <th class="no-sort text-center"><input type="checkbox" name="" id="select_all"></th>
                                         <th>Tên danh mục</th>
                                         <th>Danh mục cha</th>
+                                        <th>Hiển thị trang chủ</th>
                                         <th>Ngày cập nhật</th>
                                         <th>Action</th>
                                     </tr>
@@ -70,6 +71,24 @@
                     }
                 });
             }
+        });
+
+        $('.publish-ajax').on('change', function() {
+            var id = $(this).data('id');
+            var is_featured;
+            if ($(this).is(':checked')) {
+                is_featured = 1;
+            } else {
+                is_featured = 0;
+            }
+
+            $.ajax({
+                url: '<?php echo base_url('admin/category/ajaxPublish')?>',
+                type: 'POST',
+                data: {id: id, is_featured: is_featured},
+                success: function (returndata) {
+                }
+            });
         });
 
         $('#select_all').change(function() {

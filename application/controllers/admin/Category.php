@@ -12,6 +12,10 @@ class Category extends MY_Controller {
         $config['allowed_types']        = 'gif|jpg|png';
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);
+
+        if (!file_exists('./uploads/categories')) {
+            mkdir('./uploads/categories', 0777, true);
+        }
     }
 
     public function index()
@@ -162,5 +166,21 @@ class Category extends MY_Controller {
             }
         }
         redirect('admin/category/index', 'refresh');
+    }
+
+    public function ajaxPublish() {
+        if (!$this->input->is_ajax_request()) {
+            exit('No direct script access allowed');
+        }
+
+        $id = $this->input->post('id');
+        $is_featured = $this->input->post('is_featured');
+        $model = $this->categories->get_model(['id' => $id]);
+
+        if (count($model) > 0) {
+            $data_update['is_featured'] = $is_featured;
+            $this->db->where('id', $id);
+            $this->db->update('categories', $data_update);
+        }
     }
 }

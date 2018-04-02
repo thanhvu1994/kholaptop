@@ -64,7 +64,12 @@ class Categories extends CI_Model {
 	    }
 	    $data_insert['update_date'] = date('Y-m-d H:i:s');
         $data_insert['slug'] = $this->generateSlug($data_insert['category_name']);
-        $data_insert['slug_en'] = $this->generateSlug($data_insert['category_name_en']);
+        if (isset($data_insert['category_name_en'])) {
+            $data_insert['slug_en'] = $this->generateSlug($data_insert['category_name_en']);
+        }
+        if (!isset($data_insert['is_featured'])) {
+            $data_insert['is_featured'] = 0;
+        }
 	    $data_insert['type_level'] = $type_level;
 
 	    $this->db->where('id', $id);
@@ -347,17 +352,34 @@ class Categories extends CI_Model {
         } elseif ($this->type == 'news') {
             $url = 'admin/categoryNews';
         }
-        echo '<tr id="tr-'.$this->id.'">
+
+        if ($this->type == 'category') {
+            $checked = $this->is_featured ? 'checked' : '';
+            echo '<tr id="tr-'.$this->id.'">
                 <td class="text-center check-element"><input type="checkbox" name="select[]" value="'.$this->id.'"></td>
                 <td>'.$str.' '.$this->category_name.'</td>
                 <td>'.$this->get_parent_name().'</td>
+                <td>
+                    <input type="checkbox" '.$checked.' class="js-switch publish-ajax" data-color="#13dafe" data-id="'.$this->id.'" value="1"/>
+                </td>
                 <td>'.$this->get_update_date().'</td>
                 <td class="button-column">
                     <a class="btn btn-danger" href="'.base_url($url.'/update/'.$this->id).'"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger button-delete" href="javascript:void(0)" title="Delete" data-id="'.$this->id.'"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>';
-
+        } else {
+            echo '<tr id="tr-'.$this->id.'">
+                    <td class="text-center check-element"><input type="checkbox" name="select[]" value="'.$this->id.'"></td>
+                    <td>'.$str.' '.$this->category_name.'</td>
+                    <td>'.$this->get_parent_name().'</td>
+                    <td>'.$this->get_update_date().'</td>
+                    <td class="button-column">
+                        <a class="btn btn-danger" href="'.base_url($url.'/update/'.$this->id).'"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger button-delete" href="javascript:void(0)" title="Delete" data-id="'.$this->id.'"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>';
+        }
         $query = $this->db->query("SELECT * FROM ci_categories WHERE parent_id = ".$this->id." AND type = '".$this->type."' ORDER BY display_order asc, category_name asc");
         $categories =  $query->result('Categories');
 
