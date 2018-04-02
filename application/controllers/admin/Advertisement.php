@@ -1,37 +1,37 @@
 <?php
 
-class Banners extends MY_Controller {
+class Advertisement extends MY_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('banner');
 
-        $config['upload_path']          = './uploads/banners';
-        $config['allowed_types']        = 'jpg|png';
+        $config['upload_path']          = './uploads/advertisement';
+        $config['allowed_types']        = 'jpg|png|gif';
         $config['overwrite']            = FALSE;
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);
 
-        if (!file_exists('./uploads/banners')) {
-            mkdir('./uploads/banners', 0777, true);
+        if (!file_exists('./uploads/advertisement')) {
+            mkdir('./uploads/advertisement', 0777, true);
         }
     }
 
     public function index()
     {
-        $data['title'] = 'Quản lý Slider';
-        $data['template'] = 'admin/banners/index';
-        $query = $this->db->query("SELECT * FROM ci_banners WHERE type='home' ORDER BY created_date desc");
+        $data['title'] = 'Quản lý quảng cáo';
+        $data['template'] = 'admin/advertisement/index';
+        $query = $this->db->query("SELECT * FROM ci_banners WHERE type='advertisement' ORDER BY created_date desc");
         $models = $query->result('Banner');
         $data['models'] = $models;
 		$this->load->view('admin/layouts/index', $data);
     }
 
     public function create() {
-        $data['title'] = 'Tạo Slider';
-    	$data['template'] = 'admin/banners/form';
-        $data['link_submit'] = base_url('admin/banners/create');
+        $data['title'] = 'Tạo quảng cáo';
+    	$data['template'] = 'admin/advertisement/form';
+        $data['link_submit'] = base_url('admin/advertisement/create');
 
         $rules = $this->banner->getRule();
         foreach ($rules as $rule) {
@@ -54,24 +54,24 @@ class Banners extends MY_Controller {
                     $data['error'] = $this->upload->display_errors();
                 } else {
                     $uploadData = $this->upload->data();
-                    $image = '/uploads/banners/'. $uploadData['file_name'];
+                    $image = '/uploads/advertisement/'. $uploadData['file_name'];
                 }
             }
             $data_insert['image'] = $image;
-            $data_insert['type'] = 'home';
+            $data_insert['type'] = 'advertisement';
             $this->banner->set_model($data_insert);
-            redirect('admin/banners/index', 'refresh');
+            redirect('admin/advertisement/index', 'refresh');
         }
 
 		$this->load->view('admin/layouts/index', $data);
     }
 
     public function update($id) {
-        $data['title'] = 'Chỉnh sửa Slider';
-        $data['template'] = 'admin/banners/form';
+        $data['title'] = 'Chỉnh sửa quảng cáo';
+        $data['template'] = 'admin/advertisement/form';
         $model = $this->banner->get_model(['id' => $id]);
         $data['model'] = $model;
-        $data['link_submit'] = base_url('admin/banners/update/'.$id);
+        $data['link_submit'] = base_url('admin/advertisement/update/'.$id);
         $rules = $this->banner->getRule();
         foreach ($rules as $rule) {
             if (count($rule) >= 3) {
@@ -100,14 +100,14 @@ class Banners extends MY_Controller {
                         $data['error'] = $this->upload->display_errors();
                     } else {
                         $uploadData = $this->upload->data();
-                        $image = '/uploads/banners/'. $uploadData['file_name'];
+                        $image = '/uploads/advertisement/'. $uploadData['file_name'];
                         $data_insert['image'] = $image;
                     }
                 }
             }
-            $data_insert['type'] = 'home';
+            $data_insert['type'] = 'advertisement';
             $this->banner->update_model($id, $data_insert);
-            redirect('admin/banners/index', 'refresh');
+            redirect('admin/advertisement/index', 'refresh');
         }
 
         $this->load->view('admin/layouts/index', $data);
@@ -156,7 +156,7 @@ class Banners extends MY_Controller {
                 $this->banner->delete_model($model->id);
             }
         }
-        redirect('admin/banners/index', 'refresh');
+        redirect('admin/advertisement/index', 'refresh');
     }
 
 }

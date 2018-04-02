@@ -16,42 +16,20 @@
             <!-- Tab panes -->
             <?php echo form_open_multipart($link_submit, ['class' => 'form-horizontal']); ?>
                 <div class="col-sm-6 col-xs-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#content_vn">Tiếng Việt</a></li>
-                        <li><a data-toggle="tab" href="#content_en">Tiếng Anh</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="content_vn" class="tab-pane fade in active">
-                            <div class="form-group">
-                                <label class="col-md-12">Tiêu đề</label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title : ''?>" name="Categories[title]">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Tên danh mục</label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->category_name : ''?>" name="Categories[category_name]" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="content_en" class="tab-pane fade">
-                            <div class="form-group">
-                                <label class="col-md-12">Tiêu đề</label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title_en : ''?>" name="Categories[title_en]">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Tên danh mục</label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->category_name_en : ''?>" name="Categories[category_name_en]" required>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Tiêu đề</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title : ''?>" name="Categories[title]">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-md-12">Tên danh mục</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->category_name : ''?>" name="Categories[category_name]" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
                         <label class="col-sm-12">Lớp cha</label>
                         <div class="col-sm-12">
@@ -72,34 +50,25 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#description_vn">Tiếng Việt</a></li>
-                        <li><a data-toggle="tab" href="#description_en">Tiếng Anh</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="description_vn" class="tab-pane fade in active">
-                            <div class="form-group">
-                                <label class="col-md-12">Mô tả</label>
-                                <div class="col-md-12">
-                                    <textarea class="form-control" rows="10" name="Categories[description]"><?php echo (isset($model)) ? $model->description : ''?></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="description_en" class="tab-pane fade">
-                            <div class="form-group">
-                                <label class="col-md-12">Mô tả</label>
-                                <div class="col-md-12">
-                                    <textarea class="form-control" rows="10" name="Categories[description_en]"><?php echo (isset($model)) ? $model->description_en : ''?></textarea>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label for="is_featured" class="col-md-12">Hiển thị Trang chủ</label>
+                        <div class="col-md-12">
+                            <?php
+                                $checked = 'checked';
+                                if (isset($model)) {
+                                    if ($model->is_featured == true) {
+                                        $checked = 'checked';
+                                    } else {
+                                        $checked = '';
+                                    }
+                                }
+                            ?>
+                            <input type="checkbox" <?php echo $checked ?> class="js-switch publish-ajax" data-color="#13dafe" value="1" id="is_featured" name="Categories[is_featured]"/>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 hidden">
                     <div class="form-group">
                         <label class="col-md-12">Hình ảnh</label>
                         <div class="col-md-12">

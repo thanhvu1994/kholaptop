@@ -1,0 +1,3 @@
+ALTER TABLE `ci_categories` ADD `is_featured` TINYINT(1) NOT NULL AFTER `type`;
+ALTER TABLE `ci_banners` ADD `display_order` INT NOT NULL AFTER `publish`;
+ALTER TABLE `ci_banners` CHANGE `type` `type` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'home';
