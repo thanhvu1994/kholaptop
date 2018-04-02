@@ -41,13 +41,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label class="col-md-12">Giá Khuyến Mãi</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control money" value="<?php echo (isset($model)) ? $model->sale_price : '1000'?>" name="sale_price">
-                                <?php echo form_error('sale_price'); ?>
+                                <input type="text" class="form-control money" value="<?php /*echo (isset($model)) ? $model->sale_price : '1000'*/?>" name="sale_price">
+                                <?php /*echo form_error('sale_price'); */?>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="form-group">
                             <label class="col-md-12">Danh Mục</label>
@@ -56,7 +56,7 @@
                                     <option value="">-- Chọn --</option>
                                     <?php if(isset($categories)) : ?>
                                         <?php foreach($categories as $id => $cate): ?>
-                                            <option value="<?php echo $id; ?>"><?php echo $cate; ?></option>
+                                            <option <?php echo (isset($model) && $model->getCategoryId() == $id)? 'selected' : ''; ?> value="<?php echo $id; ?>"><?php echo $cate; ?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select>

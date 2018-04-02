@@ -231,6 +231,7 @@ class Categories extends CI_Model {
                     'title' => $model->getFieldFollowLanguage('title'),
                     'slug' => $model->getFieldFollowLanguage('slug'),
                     'child' => $this->rChildCategoriesFE($model->id),
+                    'url' => $model->getUrl(),
                 ];
             }
         }
@@ -417,5 +418,9 @@ class Categories extends CI_Model {
         }
 
         return $str.'-'.$maxid;
+    }
+
+    public function getUrl(){
+        return base_url().$this->slug.'c.html';
     }
 }

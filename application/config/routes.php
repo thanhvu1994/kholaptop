@@ -58,6 +58,7 @@ $route['admin'] = 'admin/login';
 $route['page-(:any).html'] = 'sites/cms/$1';
 
 $route['san-pham-moi.html'] = 'sites/newProducts';
+$route['san-pham-moi.html/(:num)'] = 'sites/newProducts/$1';
 
 
 

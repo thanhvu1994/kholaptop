@@ -31,7 +31,38 @@ class Sites extends Front_Controller {
     }
 
     public function newProducts(){
-        $data['newProducts'] = $this->products->getNewProducts(10,0);
+        $data['title'] = 'Sản Phẩm Mới';
+        $data['description'] = 'Sản Phẩm Mới';
+
+        $data['treeCategory'] = $this->categories->getCategoryFE();
+
+        $config['base_url'] = base_url('san-pham-moi.html');
+        $config['total_rows'] = $this->products->countNewProducts();
+        $config['per_page'] = 2;
+        $config['uri_segment'] = 2;
+        $config['use_page_numbers'] = TRUE;
+
+        $config["prev_link"] = "Back";
+        $config["prev_tag_open"] = "<li>";
+        $config["prev_tag_close"] = "<li>";
+
+        $config["next_link"] = 'Next';
+        $config["next_tag_open"] = "<li>";
+        $config["next_tag_open"] = "<li>";
+
+        $config["num_tag_open"] = "<li>";
+        $config["num_tag_close"] = "</li>";
+
+        $config["cur_tag_open"] = "<li class='current'>";
+        $config["cur_tag_close"] = "</li>";
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $data['products'] = $this->products->getNewProducts($config["per_page"], $page);
+        $data['countProducts'] = $config['total_rows'];
+        $data["links"] = $this->pagination->create_links();
+
         $data['template'] = 'sites/newProducts';
 
         $this->load->view('layouts/index', $data);

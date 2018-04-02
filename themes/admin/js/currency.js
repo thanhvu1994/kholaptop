@@ -21,7 +21,7 @@
 
     // default Region is en
     $.formatCurrency.regions[''] = {
-        symbol: 'VNĐ',
+        symbol: 'đ',
         positiveFormat: '%n %s',
         negativeFormat: '(%n %s)',
         decimalSymbol: '.',
@@ -42,7 +42,7 @@
             colorize: false,
             region: '',
             global: true,
-            roundToDecimalPlace: 2, // roundToDecimalPlace: -1; for no rounding; 0 to round to the dollar; 1 for one digit cents; 2 for two digit cents; 3 for three digit cents; ...
+            roundToDecimalPlace: 0, // roundToDecimalPlace: -1; for no rounding; 0 to round to the dollar; 1 for one digit cents; 2 for two digit cents; 3 for three digit cents; ...
             eventOnDecimalsEntered: false
         };
         // initialize default region

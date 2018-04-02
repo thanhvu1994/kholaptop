@@ -6,7 +6,7 @@
 <meta name="robots" content="INDEX,FOLLOW"/>
 <link rel="icon" href="<?php echo base_url('themes/website/images/favicon.ico')?>" type="image/x-icon"/>
 <link rel="shortcut icon" href="<?php echo base_url('themes/website/images/favicon.ico')?>" type="image/x-icon"/>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 <!-- header -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('themes/website/css/bt-layout.css?timestamp=1522490327355.css') ?>" media="all"/>
 <!-- end header -->

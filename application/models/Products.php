@@ -42,7 +42,7 @@ class Products extends CI_Model {
             'product_name' => $this->input->post('product_name'),
             'product_name_en' => '',
             'price' => $this->input->post('price'),
-            'sale_price' => $this->input->post('sale_price'),
+            'sale_price' => '',
             'content' => $this->input->post('content'),
             'content_en' => '',
             'description' => $this->input->post('description'),
@@ -67,7 +67,7 @@ class Products extends CI_Model {
             'product_name' => $this->input->post('product_name'),
             'product_name_en' => '',
             'price' => $this->input->post('price'),
-            'sale_price' => $this->input->post('sale_price'),
+            'sale_price' => '',
             'content' => $this->input->post('content'),
             'content_en' => '',
             'description' => $this->input->post('description'),
@@ -166,6 +166,21 @@ class Products extends CI_Model {
         return $attributes;
     }
 
+    public function getCategoryId(){
+        $query = $this->db->get_where('product_categories', array('product_id' => $this->id));
+        $productCategory = $query->row();
+
+        if ($productCategory) {
+            $query = $this->db->get_where('categories', array('id' => $productCategory->category_id));
+            $category = $query->row();
+            if($category){
+                return $category->id;
+            }
+        }
+
+        return '';
+    }
+
     public function getCategory(){
         $query = $this->db->get_where('product_categories', array('product_id' => $this->id));
         $productCategory = $query->row();
@@ -232,9 +247,15 @@ class Products extends CI_Model {
     }
 
     public function getNewProducts($limit, $start){
-        $this->db->limit($limit, $start);
-        $query = $this->db->query("SELECT * FROM ci_products WHERE is_new = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc");
+        $query = $this->db->query("SELECT * FROM ci_products WHERE is_new = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc LIMIT ".$limit." OFFSET ".$start);
         return $query->result('Products');
+    }
+
+    public function countNewProducts() {
+        $this->db->where('status', STATUS_ACTIVE);
+        $this->db->where('is_new', STATUS_ACTIVE);
+        $this->db->from('products');
+        return $this->db->count_all_results();
     }
 
     public function getFeatureProducts($limit, $start){
@@ -244,6 +265,6 @@ class Products extends CI_Model {
     }
 
     public function getUrl(){
-        return base_url('pro-').$this->slug;
+        return base_url().$this->slug.'p.html';
     }
 }
