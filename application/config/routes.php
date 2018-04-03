@@ -59,6 +59,8 @@ $route['page-(:any).html'] = 'sites/cms/$1';
 
 $route['san-pham-moi.html'] = 'sites/newProducts';
 $route['san-pham-moi.html/(:num)'] = 'sites/newProducts/$1';
+$route['san-pham-hot.html'] = 'sites/featureProducts';
+$route['san-pham-hot.html/(:num)'] = 'sites/featureProducts/$1';
 
 
 

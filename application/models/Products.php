@@ -41,7 +41,7 @@ class Products extends CI_Model {
             'product_code' => $this->input->post('product_code'),
             'product_name' => $this->input->post('product_name'),
             'product_name_en' => '',
-            'price' => $this->input->post('price'),
+            'price' => str_replace(array(' đ',','),'', $this->input->post('price')),
             'sale_price' => '',
             'content' => $this->input->post('content'),
             'content_en' => '',
@@ -66,7 +66,7 @@ class Products extends CI_Model {
             'product_code' => $this->input->post('product_code'),
             'product_name' => $this->input->post('product_name'),
             'product_name_en' => '',
-            'price' => $this->input->post('price'),
+            'price' => str_replace(array(' đ',','),'', $this->input->post('price')),
             'sale_price' => '',
             'content' => $this->input->post('content'),
             'content_en' => '',
@@ -247,7 +247,30 @@ class Products extends CI_Model {
     }
 
     public function getNewProducts($limit, $start){
-        $query = $this->db->query("SELECT * FROM ci_products WHERE is_new = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc LIMIT ".$limit." OFFSET ".$start);
+        if(isset($_GET['sort'])){
+            $temp = explode('_', $_GET['sort']);
+
+            if(count($temp) == 2){
+                if($temp[0] == 'name'){
+                    $order = 'product_'.$temp[0];
+                    $order_type = $temp[1];
+                }else{
+                    $order = $temp[0];
+                    $order_type = $temp[1];
+                }
+            }else{
+                $order = 'created_date';
+                $order_type = 'desc';
+            }
+        }else{
+            $order = 'created_date';
+            $order_type = 'desc';
+        }
+
+        $sql = 'SELECT * FROM ci_products WHERE is_new = %s AND status = %s ORDER BY %s %s LIMIT %s OFFSET %s';
+        $sql = sprintf($sql,STATUS_ACTIVE, STATUS_ACTIVE, $order, $order_type, $limit, $start);
+
+        $query = $this->db->query($sql);
         return $query->result('Products');
     }
 
@@ -259,9 +282,38 @@ class Products extends CI_Model {
     }
 
     public function getFeatureProducts($limit, $start){
-        $this->db->limit($limit, $start);
-        $query = $this->db->query("SELECT * FROM ci_products WHERE is_feature = '".STATUS_ACTIVE."' AND status = '".STATUS_ACTIVE."' ORDER BY created_date desc");
+        if(isset($_GET['sort'])){
+            $temp = explode('_', $_GET['sort']);
+
+            if(count($temp) == 2){
+                if($temp[0] == 'name'){
+                    $order = 'product_'.$temp[0];
+                    $order_type = $temp[1];
+                }else{
+                    $order = $temp[0];
+                    $order_type = $temp[1];
+                }
+            }else{
+                $order = 'created_date';
+                $order_type = 'desc';
+            }
+        }else{
+            $order = 'created_date';
+            $order_type = 'desc';
+        }
+
+        $sql = 'SELECT * FROM ci_products WHERE is_feature = %s AND status = %s ORDER BY %s %s LIMIT %s OFFSET %s';
+        $sql = sprintf($sql,STATUS_ACTIVE, STATUS_ACTIVE, $order, $order_type, $limit, $start);
+
+        $query = $this->db->query($sql);
         return $query->result('Products');
+    }
+
+    public function countFeatureProducts() {
+        $this->db->where('status', STATUS_ACTIVE);
+        $this->db->where('is_feature', STATUS_ACTIVE);
+        $this->db->from('products');
+        return $this->db->count_all_results();
     }
 
     public function getUrl(){

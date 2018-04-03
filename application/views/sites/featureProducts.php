@@ -3,7 +3,7 @@
         <div class="breadcrumbs">
             <ul>
                 <li class="home"><a href="<?php echo base_url(); ?>" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
-                <li class="category3"><a title="Sản phẩm Mới">Sản phẩm Mới</a></li>
+                <li class="category3"><a title="Sản phẩm mới">Sản phẩm Tiêu Biểu</a></li>
             </ul>
         </div>
         <div class="col-wrapper">
@@ -28,7 +28,7 @@
                 </div>
             </div><!--col-left-->
             <div class="col-main">
-                <div class="page-title category-title"><h1>Sản phẩm Mới</h1></div>
+                <div class="page-title category-title"><h1>Sản phẩm Tiêu Biểu</h1></div>
                 <ul class="messages" style="display:none;">
                     <li class="success-msg">
                         <ul><li><span></span></li></ul>
@@ -67,10 +67,10 @@
                             <div class="sort-by">
                                 <select onchange="location.href=this.value" title="Sort By">
                                     <option>Sắp xếp theo</option>
-                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=price_asc'); ?>" >Giá: thấp -> cao</option>
-                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=price_desc'); ?>" >Giá: cao -> thấp</option>
-                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=name_asc'); ?>" >Tên A -> Z</option>
-                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=name_desc'); ?>" >Tên Z -> A</option>
+                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=price_asc'); ?>" >Giá: thấp -> cao</option>
+                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=price_desc'); ?>" >Giá: cao -> thấp</option>
+                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=name_asc'); ?>" >Tên A -> Z</option>
+                                    <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=name_desc'); ?>" >Tên Z -> A</option>
                                 </select>
                             </div><!--sort-by-->
                         </div><!--sorter-->
@@ -165,10 +165,10 @@
                                 <div class="sort-by">
                                     <select onchange="location.href=this.value" title="Sort By">
                                         <option>Sắp xếp theo</option>
-                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=price_asc'); ?>" >Giá: thấp -> cao</option>
-                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=price_desc'); ?>" >Giá: cao -> thấp</option>
-                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=name_asc'); ?>" >Tên A -> Z</option>
-                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-moi.html?sort=name_desc'); ?>" >Tên Z -> A</option>
+                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=price_asc'); ?>" >Giá: thấp -> cao</option>
+                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=price_desc'); ?>" >Giá: cao -> thấp</option>
+                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_asc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=name_asc'); ?>" >Tên A -> Z</option>
+                                        <option <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'name_desc')? 'selected': ''; ?> value="<?php echo base_url('san-pham-hot.html?sort=name_desc'); ?>" >Tên Z -> A</option>
                                     </select>
                                 </div><!--sort-by-->
                             </div><!--sorter-->
@@ -259,11 +259,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="widget widget-static-block">
-                <p>
-                    <a href="/ad.php?id=85" target='_blank' rel='nofollow'><img border=0 src="http://kholaptop.vn/media/banner/banner_3ef81541.gif" width='248' height='424' alt="tra gop"/></a><a href="/ad.php?id=13" target='_blank' rel='nofollow'><img border=0 src="http://kholaptop.vn/media/banner/banner_c51ce410.jpg" width='234' height='129' alt=""/></a><img border=0 src="http://kholaptop.vn/media/banner/banner_9bf31c7f.gif" width='234' height='200' alt=""/><a href="/ad.php?id=68" target='_blank' rel='nofollow'><img border=0 src="http://kholaptop.vn/media/banner/banner_a3f390d8.jpg" width='248' height='349' alt="BAO DUONG LAPTOP"/></a><a href="/ad.php?id=19" target='_blank' rel='nofollow'><img border=0 src="http://kholaptop.vn/media/banner/banner_1f0e3dad.gif" width='234' height='400' alt=""/></a>
-                </p>
             </div>
         </div><!--col-right-->
     </div><!--main-->
