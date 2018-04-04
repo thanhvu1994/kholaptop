@@ -1,4 +1,11 @@
-<?php foreach($categories as $category): ?>
+<?php foreach($categories as $key => $category): 
+    $key_qc = $key + 2;
+    if (isset($advertisements[$key_qc])) :?>
+        <div class="banner-homepage">
+            <a href="<?php echo !empty($advertisements[$key_qc]->url) ? $advertisements[$key_qc]->url : 'javascript:void(0)'?>"><img border=0 src="<?php echo $advertisements[$key_qc]->get_image() ?>" alt="<?php echo $advertisements[$key_qc]->name ?>"/></a>
+        </div>
+    <?php endif; ?>
+    
     <?php $products = $category->getProducts(0,0); ?>
     <?php if(!empty($products)): ?>
         <h2 class="subtitle"> <?php echo $category->title; ?></h2>
@@ -19,4 +26,3 @@
         <div class="view-more"><a href="<?php echo $category->getUrl(); ?>" title="">Xem thêm sản phẩm</a></div>
     <?php endif; ?>
 <?php endforeach; ?>
-

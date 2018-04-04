@@ -1,16 +1,21 @@
 <div id="header-height" style="background: rgb(38, 38, 38)">
     <div class="navbar navbar-default portal">
-        <div class="container">
+        <div class="container container-custom">
             <div class="navbar-header">
                 <a href="https://www.bitmain.com" class="navbar-brand">                
                     <img src="https://dn-bitmain-cdn.qbox.me/assets/1608010935/images/icons/logo.png" height="18">       
                 </a>
             </div>
+            <div class="skip-links">
+		    <a href="#header-nav" class="skip-link skip-nav">
+		        <span class="icon"></span>
+		    </a>
+		</div>
             <div id="header-nav" class="skip-content">
-	            <nav id="nav">
+	            <nav id="nav navbar-nav navbar-left en">
 	            	<?php $menus = $this->categories->get_menuFE();
 	            	if (!empty($menus)) :?>
-		                <ol class="nav-primary nav navbar-nav navbar-left en">
+		                <ol class="nav-primary">
 		                <?php foreach ($menus as $menu): ?>
 		                	<li class="level0 nav-1 first parent">
 				                <a href="<?php echo !empty($menu['url']) ? base_url($menu['url']) : 'javascript:void(0)' ?>" class="level0 has-children"><?php echo $menu['name'] ?></a>
@@ -19,7 +24,7 @@
 						                <?php foreach ($menu['child'] as $childs): ?>
 						                	<?php if (!empty($childs['child'])):?>
 							                	<li class="level1 nav-1-1 parent">
-							                        <a class="level1" class="level1 has-children" href="<?php echo !empty($childs['url']) ? base_url($childs['url']) : 'javascript:void(0)' ?>"><?php echo $childs['name'] ?></a>
+							                        <a class="level1 has-children" href="<?php echo !empty($childs['url']) ? base_url($childs['url']) : 'javascript:void(0)' ?>"><?php echo $childs['name'] ?></a>
 							                    	<ul class="level1">
 								                    	<?php foreach ($childs['child'] as $row): ?>
 					                            			<li class="level2"><a class="level2" href="<?php echo !empty($row['url']) ? base_url($row['url']) : 'javascript:void(0)' ?>"><?php echo $row['name'] ?></a></li>
@@ -28,7 +33,7 @@
 							                    </li>
 
 							                <?php else: ?>
-							                	<li class="level1 nav-1-1">
+							                	<li class="level1">
 							                        <a class="level1" href="<?php echo !empty($childs['url']) ? base_url($childs['url']) : 'javascript:void(0)' ?>"><?php echo $childs['name'] ?></a>
 							                    </li>
 						                	<?php endif ?>

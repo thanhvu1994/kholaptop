@@ -9,7 +9,7 @@
 }
 
 .navbar.navbar-default.portal .navbar-header{
-  padding: 29px 0px;
+  padding-top: 43px;
 }
 
 .navbar.navbar-default.portal .navbar-header a.navbar-brand{
@@ -287,6 +287,13 @@ ul.navbar-nav li a.img.dropdown-toggle img{
 
 .navbar-header {
   float: left;
+}
+
+.container-custom{
+    width: 1280px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
 }
 
 .navbar-collapse {

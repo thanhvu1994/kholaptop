@@ -24,9 +24,14 @@ class Sites extends Front_Controller {
         $data['description'] = 'Trang Chủ';
 
         $data['template'] = 'sites/index';
+
+        $query = $this->db->query("SELECT * FROM ci_banners WHERE publish = 1 AND type = 'advertisement' ORDER BY display_order asc, name asc");
+        $advertisements = $query->result('Banner');
+        $data['advertisements'] = $advertisements;
+
         $data['newProducts'] = $this->products->getNewProducts(10,0);
         $data['featureProducts'] = $this->products->getFeatureProducts(10,0);
-
+        
         $data['categories'] = $this->categories->getFeatureCategories();
 
 		$this->load->view('layouts/index', $data);
