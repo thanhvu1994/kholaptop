@@ -118,4 +118,65 @@ class Sites extends Front_Controller {
 
         $this->load->view('layouts/index', $data);
     }
+
+    public function shoppingCart() {
+        $data['title'] = 'Giỏ hàng';
+        $data['description'] = 'Giỏ hàng';
+
+        $data['template'] = 'sites/shoppingCart';
+
+        $this->load->view('layouts/index', $data);
+    }
+
+    public function addCart() {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
+
+            $id = isset($_POST['id']) ? $_POST['id'] : 0;
+            $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+
+            $product = $this->products->get_model(['id' => $id]);
+            if (count($product) > 0) {
+                $arr_product[$product->id] = [
+                    'product_name' => $product->product_name,
+                    'quantity' => $quantity,
+                    'price' => (int)$product->price * (int)$quantity,
+                ];
+
+                $total_price = 0;
+                foreach ($arr_product as $row) {
+                    $total_price += (int)$row['price'];
+                }
+                $arr_product['total_price'] = $total_price;
+
+                $_SESSION['shopping_cart'] = $arr_product;
+            }
+        } else {
+            
+        }
+    }
+
+    public function subCart() {
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
+
+            $id = isset($_POST['id']) ? $_POST['id'] : 0;
+            $product = $this->products->get_model(['id' => $id]);
+            if (count($product) > 0) {
+                if (isset($arr_product[$product->id])) {
+                    unset($arr_product[$product->id]);
+                }
+
+                $total_price = 0;
+                foreach ($arr_product as $row) {
+                    $total_price += (int)$row['price'];
+                }
+                $arr_product['total_price'] = $total_price;
+
+                $_SESSION['shopping_cart'] = $arr_product;
+            }
+        } else {
+            
+        }
+    }
 }

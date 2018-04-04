@@ -51,16 +51,26 @@
         
         <!-- Header -->
         <?php $this->load->view('layouts/header'); ?>
-
-        <?php $this->load->view('layouts/banner'); ?>
-
         <script type="text/javascript">
             $('#search-mobi-click').click(function (event) {
                 $('.header-search').toggle();
             });
         </script>
 
-        <div class="main-container col2-right-layout">
+        <?php 
+            if ($this->router->fetch_class() == 'sites' && $this->router->fetch_method() == 'index') {
+                $this->load->view('layouts/banner'); 
+            }
+        ?>
+        <?php 
+
+            if ($this->router->fetch_class() == 'sites' && $this->router->fetch_method() == 'index') {
+                $class_main = 'col2-right-layout';
+            } else {
+                $class_main = 'col3-layout';
+            }
+        ?>
+        <div class="main-container <?php echo $class_main ?>">
             <div class="main">
                 <?php $this->load->view($template); ?>
             </div>
