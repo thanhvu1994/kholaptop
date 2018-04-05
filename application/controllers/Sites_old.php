@@ -143,8 +143,8 @@ class Sites extends Front_Controller {
 
             $this->pagination->initialize($config);
 
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-            $data['products'] = $data['category']->getProducts($config["per_page"], $page);
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+            $data['products'] = $data['category']->getProducts($config["per_page"], ($page-1)*$config["per_page"]);
             $data["links"] = $this->pagination->create_links();
         }else{
             $data['products'] = array();
@@ -190,8 +190,8 @@ class Sites extends Front_Controller {
 
         $this->pagination->initialize($config);
 
-        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        $data['products'] = $this->categories->getAllProducts($config["per_page"], $page);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+        $data['products'] = $this->categories->getAllProducts($config["per_page"], ($page-1)*$config["per_page"]);
         $data["links"] = $this->pagination->create_links();
 
         if ($this->session->userdata['languages'] == 'vn'){
@@ -502,8 +502,8 @@ class Sites extends Front_Controller {
 
         $this->pagination->initialize($config);
 
-        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        $data['news'] = $this->news->getNews($config["per_page"], $page);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+        $data['news'] = $this->news->getNews($config["per_page"], ($page-1)*$config["per_page"]);
         $data["links"] = $this->pagination->create_links();
 
         $this->load->view('layouts/index', $data);
@@ -716,8 +716,8 @@ class Sites extends Front_Controller {
 
             $this->pagination->initialize($config);
 
-            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-            $data['news'] = $data['category']->getNews($config["per_page"], $page);
+            $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+            $data['news'] = $data['category']->getNews($config["per_page"], ($page-1)*$config["per_page"]);
             $data["links"] = $this->pagination->create_links();
         }else{
             $data['news'] = array();

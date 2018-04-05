@@ -27,7 +27,7 @@
     <link href="<?php echo base_url('themes/admin/css/colors/default.css')?>" id="theme" rel="stylesheet">
     <!-- morris CSS -->
     <link href="<?php echo base_url('themes/admin/plugins/bower_components/morrisjs/morris.css')?>" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="<?php echo base_url('themes/admin/js/jquery.js'); ?>"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

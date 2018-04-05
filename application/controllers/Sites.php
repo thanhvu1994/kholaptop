@@ -68,8 +68,8 @@ class Sites extends Front_Controller {
 
         $this->pagination->initialize($config);
 
-        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        $data['products'] = $this->products->getNewProducts($config["per_page"], $page);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+        $data['products'] = $this->products->getNewProducts($config["per_page"], ($page-1)*$config["per_page"]);
         $data['countProducts'] = $config['total_rows'];
         $data["links"] = $this->pagination->create_links();
 
@@ -109,8 +109,8 @@ class Sites extends Front_Controller {
 
         $this->pagination->initialize($config);
 
-        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        $data['products'] = $this->products->getFeatureProducts($config["per_page"], $page);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 1;
+        $data['products'] = $this->products->getFeatureProducts($config["per_page"], ($page-1)*$config["per_page"]);
         $data['countProducts'] = $config['total_rows'];
         $data["links"] = $this->pagination->create_links();
 

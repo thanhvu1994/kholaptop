@@ -270,6 +270,27 @@ class Categories extends CI_Model {
         return $items;
     }
 
+    public function getChildCategoriesFE($parent_id) {
+        $items = [];
+        $query = $this->db->query("SELECT * FROM ci_categories WHERE parent_id = ".$parent_id);
+        $childs = $query->result('Categories');
+
+        if (count($childs) > 0) {
+            foreach ($childs as $child) {
+                $items[$child->id] = [
+                    'name' => $child->getFieldFollowLanguage('category_name'),
+                    'title' => $child->getFieldFollowLanguage('title'),
+                    'slug' => $child->getFieldFollowLanguage('slug'),
+                    'child' => $this->rChildCategoriesFE($child->id),
+                    'url' => $child->getUrl(),
+                    'countProducts' => $child->countProducts(),
+                ];
+            }
+        }
+
+        return $items;
+    }
+
     public function getCategoryFE() {
         $items = [];
         $query = $this->db->query("SELECT * FROM ci_categories WHERE parent_id = 0 AND type = 'category' ORDER BY display_order asc");
@@ -373,12 +394,74 @@ class Categories extends CI_Model {
             $this->db->limit($limit, $start);
             $this->db->from('products');
             $this->db->where_in('id', $productIds);
+
+            if(isset($_GET['sort'])){
+                $temp = explode('_', $_GET['sort']);
+
+                if(count($temp) == 2){
+                    if($temp[0] == 'name'){
+                        $this->db->order_by('product_'.$temp[0], $temp[1]);
+                    }else{
+                        $this->db->order_by($temp[0], $temp[1]);
+                    }
+                }else{
+                    $this->db->order_by('created_date', 'desc');
+                }
+            }else{
+                $this->db->order_by('created_date', 'desc');
+            }
+
             $query3 = $this->db->get();
 
             $products = $query3->result('products');
         }
 
         return $products;
+    }
+
+    public function countProducts(){
+        $this->db->select('id');
+        $this->db->from('categories');
+        $this->db->where('parent_id', $this->id);
+        $this->db->or_where('id', $this->id);
+        $query = $this->db->get();
+
+        $categories = $query->result();
+        $cateIds = array();
+
+        if(!empty($categories)){
+            foreach($categories as $category){
+                $cateIds[] = $category->id;
+            }
+        }
+
+        if(!empty($cateIds)){
+            $this->db->select('id');
+            $this->db->from('categories');
+            $this->db->where_in('parent_id', $cateIds);
+            $query1 = $this->db->get();
+
+            $subCategories = $query1->result();
+
+            if(!empty($subCategories)){
+                foreach($subCategories as $category){
+                    if(!in_array($category->id, $cateIds)){
+                        $cateIds[] = $category->id;
+                    }
+                }
+            }
+        }
+
+        if(!empty($cateIds)){
+            $this->db->select('product_id');
+            $this->db->from('product_categories');
+            $this->db->where_in('category_id', $cateIds);
+            $query2 = $this->db->get();
+
+            $productCates = $query2->result();
+        }
+
+        return count($productCates);
     }
 
     public function getAllProducts($limit, $start){
@@ -388,24 +471,6 @@ class Categories extends CI_Model {
         $products = $query1->result('Products');
 
         return $products;
-    }
-
-    public function countProducts() {
-        $products = array();
-        $query = $this->db->get_where('product_categories', array('category_id' => $this->id) );
-        $productCategories = $query->result();
-
-        if(!empty($productCategories)){
-            foreach($productCategories as $productCategory){
-                $query1 = $this->db->get_where('products', array('id' => $productCategory->product_id, 'status' => STATUS_ACTIVE));
-                $product = $query1->row(0,'Products');
-
-                if($product){
-                    $products[] = $product;
-                }
-            }
-        }
-        return count($products);
     }
 
     public function countAllProducts() {

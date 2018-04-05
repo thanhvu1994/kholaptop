@@ -7,12 +7,13 @@ class ProductOptionValue extends CI_Model {
 	    	$this->load->helper('url');
     }
 
-	public function set_model($product_id,$productOptionId, $name)
+	public function set_model($product_id,$productOptionId, $name, $price)
 	{
         $data = array(
             'product_id' => $product_id,
             'product_option_id' => $productOptionId,
             'name' => $name,
+            'price' => $price,
         );
 
 	    return $this->db->insert('product_option_value', $data);

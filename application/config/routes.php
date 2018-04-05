@@ -63,6 +63,7 @@ $route['san-pham-hot.html'] = 'sites/featureProducts';
 $route['san-pham-hot.html/(:num)'] = 'sites/featureProducts/$1';
 
 $route['(:any)c.html'] = 'category/category/$1';
+$route['(:any)c.html/(:num)'] = 'category/category/$1';
 
 
 

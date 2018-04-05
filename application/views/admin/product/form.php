@@ -141,6 +141,10 @@
                                             <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                             <?php echo form_error('attribute_values'); ?>
                                         </div>
+                                        <div class="col-md-1">
+                                            <input type="text" class="form-control att-value-price-input money" value="0">
+                                            <?php echo form_error('attribute_values_price'); ?>
+                                        </div>
                                     </div>
                                     <div class="col-md-1" style="height: 38px; vertical-align: middle;">
                                         <button type="button" style="height: 38px;" class="btn btn-primary addAttributeValue"><i class="glyphicon glyphicon-plus"></i></button>
@@ -167,6 +171,7 @@
                                                                     <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
+
                                                         <?php else: ?>
                                                                 <div class="col-md-2">
                                                                     <input type="text" class="form-control att-value-input" value="<?php echo $attVal->name; ?>" name="attributes_values[<?php echo $key; ?>][]">
@@ -174,6 +179,10 @@
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
                                                         <?php endif; ?>
+                                                        <div class="col-md-2">
+                                                            <input type="text" class="form-control att-value-price-input money" value="<?php echo $attVal->price; ?>" name="attributes_values_price[<?php echo $key; ?>][]">
+                                                            <?php echo form_error('attribute_values_price'); ?>
+                                                        </div>
                                                     <?php endforeach; ?>
                                                 </div>
                                             <?php endif; ?>
@@ -249,6 +258,13 @@
          var att = $('.attribute-input.default-item').clone().removeClass('default-item').appendTo( ".attribute-container" );
          att.find('.att-input').attr('name','attributes['+count+']');
          att.find('.att-value-input').attr('name','attributes_values['+count+'][]');
+
+         $('.money').formatCurrency();
+
+         $('.money').blur(function()
+         {
+             $('.money').formatCurrency();
+         });
      }
 
      $(document).ready(function() {
@@ -274,6 +290,7 @@
          var count = $(this).parent().parent().find('.col-md-2').length;
 
          if(count > 1){
+             $(this).parent().next('div').remove();
              $(this).parent().remove();
          }else{
              $(this).closest('.attribute-input').remove();
@@ -288,6 +305,16 @@
      $('body').on('click', '.addAttributeValue', function (){
          var div = $(this).parent().parent().find('.att-value-input').first().parent().clone();
          $(this).parent().parent().find('.att-value-container').first().append(div);
+
+         var div1 = $(this).parent().parent().find('.att-value-price-input').first().parent().clone();
+         $(this).parent().parent().find('.att-value-container').first().append(div1);
+
+         $('.money').formatCurrency();
+
+         $('.money').blur(function()
+         {
+             $('.money').formatCurrency();
+         });
      });
 
      function deleteImage(id){
