@@ -16,10 +16,10 @@
             <!-- Tab panes -->
             <?php echo form_open_multipart($link_submit, ['class' => 'form-horizontal']); ?>
                 <div class="col-sm-12 col-xs-12">
-                    <ul class="nav nav-tabs">
+                    <!-- <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#content_vn">Tiếng Việt</a></li>
                         <li><a data-toggle="tab" href="#content_en">Tiếng Anh</a></li>
-                    </ul>
+                    </ul> -->
 
                     <div class="tab-content">
                         <div id="content_vn" class="tab-pane fade in active">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="content_en" class="tab-pane fade">
+                        <!-- <div id="content_en" class="tab-pane fade">
                             <div class="form-group">
                                 <label class="col-md-12">Tiêu đề</label>
                                 <div class="col-md-12">
@@ -49,7 +49,7 @@
                                     <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->category_name_en : ''?>" name="Categories[category_name_en]" required>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="form-group">

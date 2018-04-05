@@ -35,10 +35,10 @@
                                                 <td class="text-center check-element"><input type="checkbox" name="select[]" value="<?php echo $model->id ?>"></td>
                                                 <td><?php echo $model->title; ?></td>
                                                 <td><?php echo $model->getCategory(); ?></td>
-                                                <td><img class="center-cropped" src="<?php echo $model->featured_image; ?>" /></td>
+                                                <td><img class="center-cropped" src="<?php echo base_url($model->featured_image); ?>" /></td>
                                                 <td><?php echo $model->get_created_date() ?></td>
                                                 <td class="button-column">
-                                                    <a class="btn btn-danger button-view" href="javascript:void(0)"  data-id="<?php echo $model->id?>"><i class="fa fa-eye"></i></a>
+                                                    <!-- <a class="btn btn-danger button-view" href="javascript:void(0)"  data-id="<?php echo $model->id?>"><i class="fa fa-eye"></i></a> -->
                                                     <a class="btn btn-danger" href="<?php echo base_url('admin/newController/update/'.$model->id)?>"><i class="fa fa-edit"></i></a>
                                                     <a class="btn btn-danger button-delete" href="javascript:void(0)" title="Delete" data-id="<?php echo $model->id?>"><i class="fa fa-trash-o"></i></a>
                                                 </td>
@@ -219,10 +219,8 @@
  </script>
  <style>
      .center-cropped {
-         object-fit: none; /* Do not scale the image */
-         object-position: center; /* Center the image within the element */
-         height: 150px;
-         width: 150px;
+         height: 80px;
+         width: 80px;
      }
  </style>
 

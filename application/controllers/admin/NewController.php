@@ -9,6 +9,10 @@ class NewController extends MY_Controller {
         $config['allowed_types']        = 'jpg|png';
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);
+
+        if (!file_exists('./uploads/news')) {
+            mkdir('./uploads/news', 0777, true);
+        }
     }
 
     public function index()

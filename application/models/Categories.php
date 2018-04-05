@@ -446,6 +446,10 @@ class Categories extends CI_Model {
         return base_url().$this->slug.'c.html';
     }
 
+    public function getUrlCustom($category){
+        return anchor($category['slug'].'c.html', $category['name'], ['title' => $category['name']]);
+    }
+
     public function getFeatureCategories(){
         $query = $this->db->query("SELECT * FROM ci_categories WHERE is_featured = '".STATUS_ACTIVE."' AND type = 'category' ORDER BY display_order asc");
         $models = $query->result('Categories');

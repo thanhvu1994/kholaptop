@@ -71,8 +71,8 @@ class News extends CI_Model {
   		$this->db->delete('news');
 	}
 
-	public function get_created_date() {
-		return date_format(date_create($this->created_date), 'd-m-Y');
+	public function get_created_date($type = 'd-m-Y') {
+		return date_format(date_create($this->created_date), $type);
 	}
 
 	public function get_update_date() {
@@ -92,17 +92,17 @@ class News extends CI_Model {
 		return $result;
 	}
 
-    public function getNews($limit, $start){
+    public function getNews($limit, $start, $arr_condition){
         $this->db->limit($limit, $start);
         $this->db->order_by('created_date desc');
-        $query = $this->db->get_where('news', array() );
+        $query = $this->db->get_where('news', $arr_condition );
 
         return $query->result('News');
     }
 
-    public function countNews(){
-        $this->db->from('news');
-        return $this->db->count_all_results();
+    public function countNews($query){
+        return $query->num_rows();
+        // return $this->db->count_all_results();
     }
 
     public function fb_comment_count()
@@ -178,5 +178,9 @@ class News extends CI_Model {
         }else{
             return '';
         }
+    }
+
+    public function getNewsUrl() {
+        return base_url().$this->slug.'n.html';
     }
 }

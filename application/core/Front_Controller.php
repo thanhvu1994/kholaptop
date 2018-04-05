@@ -13,6 +13,10 @@ class Front_Controller extends CI_Controller {
         $this->load->helper('url_helper');
         $this->load->helper('url');
         $this->load->library('session');
+
+        if (!isset($this->session->userdata['languages'])) {
+            $this->session->set_userdata('languages', 'vn');
+        }
     }
 
     public function _remap($method, $params = array())

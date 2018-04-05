@@ -14,34 +14,37 @@
                 <div class="white-box">
                     <?php echo form_open_multipart($link_submit, ['class' => 'form-horizontal']); ?>
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="col-md-12">Tiêu Đề Tiếng Việt <span class="required">*</span></label>
-                                    <div class="col-md-12">
-                                        <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title : ''?>" name="title">
-                                        <?php echo form_error('title'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="col-md-12">Tiêu Đề Tiếng Anh <span class="required">*</span></label>
-                                    <div class="col-md-12">
-                                        <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title_en : ''?>" name="title_en">
-                                        <?php echo form_error('title_en'); ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-12">Meta Description <span class="required">*</span></label>
+                            <label class="col-md-12">Tiêu Đề Tiếng Việt <span class="required">*</span></label>
                             <div class="col-md-12">
-                                <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->description : ''?>" name="description">
-                                <?php echo form_error('description'); ?>
+                                <input required type="text" class="form-control" value="<?php echo (isset($model)) ? $model->title : ''?>" name="title">
+                                <?php echo form_error('title'); ?>
                             </div>
                         </div>
 
-                        <ul class="nav nav-tabs">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-md-12">Meta Description <span class="required">*</span></label>
+                                    <div class="col-md-12">
+                                        <textarea required class="form-control" name="description" rows="5" cols="80"><?php echo (isset($model)) ? $model->description : ''?></textarea>
+                                        <?php echo form_error('description'); ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-xs-12">
+                                <div id="short_content_vn" class="form-group tab-pane fade in active">
+                                    <label class="col-md-12">Nội Dung Rút Gọn <span class="required">*</span></label>
+                                    <div class="col-md-12">
+                                        <textarea required class="form-control" name="short_content" rows="5" cols="80"><?php echo (isset($model)) ? $model->short_content : ''?></textarea>
+                                        <?php echo form_error('short_content'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <!-- <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#short_content_vn">Tiếng Việt</a></li>
                             <li><a data-toggle="tab" href="#short_content_en">Tiếng Anh</a></li>
                         </ul>
@@ -61,12 +64,12 @@
                                     <?php echo form_error('short_content_en'); ?>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <ul class="nav nav-tabs">
+                        <!-- <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#content_vn">Tiếng Việt</a></li>
                             <li><a data-toggle="tab" href="#content_en">Tiếng Anh</a></li>
-                        </ul>
+                        </ul> -->
 
                         <div class="tab-content">
                             <div id="content_vn" class="form-group tab-pane fade in active">
@@ -109,6 +112,7 @@
                                 <?php endif ?>
                                 <?php echo form_error('featured_image'); ?>
                                 <?php echo isset($error) ? $error : '' ?>
+                                <input type="checkbox" value="1" name="remove_img" id="rm-img" style="display: none">
                             </div>
                         </div>
 
@@ -152,7 +156,11 @@
      $(document).ready(function() {
          var drEvent = $('.dropify').dropify();
          drEvent.on('dropify.beforeClear', function(event, element){
-             return confirm("Bạn có chắc chắn muốn xóa hình này ?");
+            if(confirm("Bạn có chắc chắn muốn xóa hình này ?")) {
+                $('#rm-img').prop('checked', true);
+                return true;
+            }
+            return false;
          });
      });
  </script>
