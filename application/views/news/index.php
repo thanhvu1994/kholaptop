@@ -23,12 +23,12 @@
 				<dl id="narrow-by-list">
 					<dt>Danh mục tin</dt>
 					<dd>
-						<?php if (count($categories) > 0):
-							foreach ($categories as $category_id => $category): ?>
-								<li><?php echo $this->categories->getUrlCustom($category) ?></a></li>
-							<?php endforeach;
-						endif ?>
 						<ol>
+							<?php if (count($categories) > 0):
+								foreach ($categories as $category_id => $category): ?>
+									<li><?php echo $this->categories->getUrlCustom($category) ?></a></li>
+								<?php endforeach;
+							endif ?>
 						</ol>
 					</dd>
 				</dl>  
@@ -60,14 +60,14 @@
 			</div><!--list-news-->
 		</div><!--category-products-->
 		<div class="row">
-            <div class="post-page col-md-12">
-                <div class="col-md-6">
-                    <div id="pagination_bottom" class="pagination clearfix">
-                        <?php echo $links; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div class="pager">
+				<div class="pages"><strong>Trang:</strong>
+					<ol>
+						<?php echo $links; ?>
+					</ol>
+				</div>
+			</div>
+		</div>
 	</div><!--col-main-->
 	<div class="col-left sidebar"></div>
 </div>
