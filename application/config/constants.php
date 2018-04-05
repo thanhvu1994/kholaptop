@@ -9,6 +9,7 @@ defined('STATUS_ORDER_TEMP')  OR define('STATUS_ORDER_TEMP', 0);
 defined('STATUS_ORDER_PENDING')  OR define('STATUS_ORDER_PENDING', 1);
 defined('STATUS_ORDER_COMPLETE')  OR define('STATUS_ORDER_COMPLETE', 2);
 defined('STATUS_ORDER_CANCEL')  OR define('STATUS_ORDER_CANCEL', 3);
+defined('PAGINATION_FE')  OR define('PAGINATION_FE', 12);
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace

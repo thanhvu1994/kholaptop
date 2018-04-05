@@ -599,11 +599,11 @@ class Categories extends CI_Model {
     }
 
     public function getUrl(){
-        return base_url().$this->slug.'c.html';
+        return base_url('').$this->slug.'n.html';
     }
 
     public function getUrlCustom($category){
-        return anchor($category['slug'].'c.html', $category['name'], ['title' => $category['name']]);
+        return anchor(''.$category['slug'].'n.html', $category['name'], ['title' => $category['name']]);
     }
 
     public function getFeatureCategories(){

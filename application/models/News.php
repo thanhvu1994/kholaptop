@@ -95,7 +95,7 @@ class News extends CI_Model {
     public function getNews($limit, $start, $arr_condition){
         $this->db->limit($limit, $start);
         $this->db->order_by('created_date desc');
-        $query = $this->db->get_where('news', $arr_condition );
+        $query = $this->db->get_where('news', $arr_condition);
 
         return $query->result('News');
     }
@@ -181,6 +181,6 @@ class News extends CI_Model {
     }
 
     public function getNewsUrl() {
-        return base_url().$this->slug.'n.html';
+        return base_url().$this->slug.'nd.html';
     }
 }
