@@ -110,6 +110,52 @@ class Categories extends CI_Model {
 		return $items;
 	}
 
+    public function get_dropdown_category_product($id, $type = 'category') {
+        $items = array();
+
+        $this->db->select(array('id','category_name'));
+        $this->db->from('categories');
+        $this->db->where('id !=', $id);
+        $this->db->where('type', $type);
+        $this->db->where('parent_id', 0);
+        $query = $this->db->get();
+
+        $rootCates = $query->result('categories');
+        if(!empty($rootCates)){
+            foreach($rootCates as $cate){
+                $items[$cate->id] = $cate->category_name;
+
+                $this->db->select(array('id','category_name'));
+                $this->db->from('categories');
+                $this->db->where('parent_id', $cate->id);
+                $query1 = $this->db->get();
+
+                $subCates = $query1->result('categories');
+
+                if(!empty($subCates)){
+                    foreach($subCates as $subCate){
+                        $items[$subCate->id] = '-- '. $subCate->category_name;
+
+                        $this->db->select(array('id','category_name'));
+                        $this->db->from('categories');
+                        $this->db->where('parent_id', $subCate->id);
+                        $query2 = $this->db->get();
+
+                        $subsubCates = $query2->result('categories');
+
+                        if(!empty($subsubCates)){
+                            foreach($subsubCates as $subsubCate){
+                                $items[$subsubCate->id] = '---- '. $subsubCate->category_name;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $items;
+    }
+
 	public function delete_model($id) {
 		$arr_id_del = [];
 		$model = $this->get_model(['id' => $id]);
@@ -274,19 +320,64 @@ class Categories extends CI_Model {
 
     public function getProducts($limit, $start){
         $products = array();
-        $this->db->limit($limit, $start);
-        $query = $this->db->get_where('product_categories', array('category_id' => $this->id) );
-        $productCategories = $query->result();
-        if(!empty($productCategories)){
-            foreach($productCategories as $productCategory){
-                $query1 = $this->db->get_where('products', array('id' => $productCategory->product_id, 'status' => STATUS_ACTIVE));
-                $product = $query1->row(0,'Products');
 
-                if($product){
-                    $products[] = $product;
+        $this->db->select('id');
+        $this->db->from('categories');
+        $this->db->where('parent_id', $this->id);
+        $this->db->or_where('id', $this->id);
+        $query = $this->db->get();
+
+        $categories = $query->result();
+        $cateIds = array();
+
+        if(!empty($categories)){
+            foreach($categories as $category){
+                $cateIds[] = $category->id;
+            }
+        }
+
+        if(!empty($cateIds)){
+            $this->db->select('id');
+            $this->db->from('categories');
+            $this->db->where_in('parent_id', $cateIds);
+            $query1 = $this->db->get();
+
+            $subCategories = $query1->result();
+
+            if(!empty($subCategories)){
+                foreach($subCategories as $category){
+                    if(!in_array($category->id, $cateIds)){
+                        $cateIds[] = $category->id;
+                    }
                 }
             }
         }
+
+        $productIds = array();
+        if(!empty($cateIds)){
+            $this->db->select('product_id');
+            $this->db->from('product_categories');
+            $this->db->where_in('category_id', $cateIds);
+            $query2 = $this->db->get();
+
+            $productCates = $query2->result();
+
+            if(!empty($productCates)){
+                foreach($productCates as $productCate){
+                    $productIds[] = $productCate->product_id;
+                }
+            }
+        }
+
+        if(!empty($productIds)){
+            $this->db->limit($limit, $start);
+            $this->db->from('products');
+            $this->db->where_in('id', $productIds);
+            $query3 = $this->db->get();
+
+            $products = $query3->result('products');
+        }
+
         return $products;
     }
 
