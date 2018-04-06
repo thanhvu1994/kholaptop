@@ -49,13 +49,14 @@ class Product extends MY_Controller {
 
             $attributes = (is_array($this->input->post('attributes')))? array_filter($this->input->post('attributes')) : array();
             $attributes_values = (is_array($this->input->post('attributes_values')))? array_filter($this->input->post('attributes_values')) : array();
+            $attributes_values_price = (is_array($this->input->post('attributes_values_price')))? array_filter($this->input->post('attributes_values_price')) : array();
 
             foreach($attributes as $attId => $att){
                 if(!empty($attributes_values[$attId])){
                     $productOptionId = $this->productOption->set_model($id,$att);
 
-                    foreach($attributes_values[$attId] as $attval){
-                        $this->productOptionValue->set_model($id,$productOptionId,$attval);
+                    foreach($attributes_values[$attId] as $key => $attval){
+                        $this->productOptionValue->set_model($id,$productOptionId,$attval, str_replace( array(' đ',',') , '', $attributes_values_price[$attId][$key]));
                     }
                 }
             }

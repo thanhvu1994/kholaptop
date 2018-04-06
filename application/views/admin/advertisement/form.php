@@ -16,7 +16,7 @@
             <?php echo form_open_multipart($link_submit, ['class' => 'form-horizontal']); ?>
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
-                        <label class="col-md-12">Tiêu đề Quản cáo</label>
+                        <label class="col-md-12">Tiêu đề Quảng cáo</label>
                         <div class="col-md-12">
                             <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->name : ''?>" name="Banner[name]">
                             <?php echo form_error('name'); ?>

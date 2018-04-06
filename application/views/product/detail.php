@@ -36,11 +36,31 @@
                                 <div class="product-name"><span class="h1"><?php echo $product->product_name; ?></span></div>
                                 <div class="price-info">
                                     <div class="price-box"><span class="regular-price" id="product-price-241">
-                                    <span class="price"><?php echo number_format($product->price,0, ',', '.').' đ'; ?></span> </span>
+                                    <span id="base_price" style="display: none;"><?php echo $product->price; ?></span>
+                                    <span id="current_price" class="price"><?php echo number_format($product->price,0, ',', '.').' đ'; ?></span> </span>
                                     </div>
                                 </div>
 
                                 <div class="clearfix"></div>
+
+                                <div class="option">
+                                    <h4 class="subtitle">Tùy Chọn Cấu Hình</h4>
+                                    <?php $attributes = $product->getAttributes(); ?>
+
+                                    <?php foreach($attributes as $key => $item): ?>
+                                        <h5 class="subtitle"><?php echo $item->name; ?></h5>
+                                        <?php $attributeValues = $item->getAttributeValues(); ?>
+                                        <div class="option-values">
+                                            <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
+                                            <?php foreach($attributeValues as $key1 => $item1): ?>
+                                                <input name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <div class="clearfix"></div>
+
                                 <div class="desc std">
                                     <?php echo $product->content; ?>
                                 </div>
@@ -114,6 +134,25 @@
         <div class="col-right sidebar">
             <?php $this->load->view('layouts/right_side_bar'); ?>
         </div><!--col-right-->
+
+        <div class="widget widget-static-block" id="navigation">
+            <ul class="products-grid products-grid--max-4-col first last odd">
+                <h2 class="subtitle">Sản Phẩm Cùng Loại</h2>
+                <?php foreach($recentProducts as $key => $product): ?>
+                    <li class="item last" style="width: 100%">
+                        <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
+                            <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
+                        </a>
+                        <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
+                            <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
+                            <div class="price-box">
+                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     </div>
 </div>
 <script>
@@ -153,6 +192,16 @@
             $('#navigation').css('position','static').css('width','100%');
         }
     });
+
+    $('.option input').on('change', function(){
+       var base_price = Number($('#base_price').html());
+        var sum = 0;
+        $('.option input:checked').each(function() {
+            sum += Number($(this).val());
+        });
+       var new_price = base_price + sum;
+       $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
+    });
 </script>
 <style>
     .btn{
@@ -166,5 +215,17 @@
     }
     .btn:hover {
         background-color: #126b98;
+    }
+    .desc p{
+        margin: 0px 0px 0px 10px;
+    }
+    .desc p:last-child{
+        margin: 20px 0px 0px 10px;
+    }
+    .option {
+        margin-bottom: 20px;
+    }
+    .option-values {
+        margin-bottom: 10px;
     }
 </style>

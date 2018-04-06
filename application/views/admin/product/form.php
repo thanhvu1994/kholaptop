@@ -127,7 +127,7 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="form-group attribute-container">
-                            <label class="col-md-12">Thuộc tính <a href="javascript:void(0)" onClick="addAttribute()"><span class="glyphicon glyphicon-plus"></span></a></label>
+                            <label class="col-md-12">Cấu Hình Tùy Chọn <a href="javascript:void(0)" onClick="addAttribute()"><span class="glyphicon glyphicon-plus"></span></a></label>
                             <div class="attribute-input default-item">
                                 <div class="row">
                                     <div class="col-md-2">

@@ -22,6 +22,7 @@
 <script src="<?php echo base_url('themes/website/script/jquery.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('themes/website/script/product_view_history.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('themes/website/script/common.js')?>"></script>
+<script src="<?php echo base_url('themes/website/js/currency.js')?>"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
