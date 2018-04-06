@@ -16,41 +16,47 @@
 	          		<tr bgcolor="#eee" style="color:#333; font-weight:bold; font-size:12px;">
 		            	<td>STT</td>
 		            	<td>Tên sản phẩm</td>
+		            	<td>Thông tin sản phẩm</td>
 		            	<td>Số lượng</td>
 		            	<td>Tổng</td>
 		            	<td>Xóa</td>
 		         	 </tr>
 		          	<!--0-->
-		          	<tr>
-		            	<td>1</td>
-			            <td class="product_cart"> 
-			              	<img src="/media/product/120_3794_24692_laptop_dell_inspiron_15_7567_70138766__i5_7300hq__4gb__1tb__2.jpg" width="50" style="float:left; margin-right:10px;">
-			              	<div style="margin-left:60px;">
-			              		<a href="http://kholaptop.vn/dell-inspiron-n7567d-i77700-8-128ssd-1tb-nvi-black.html" style="text-decoration:none;"><b>Dell Inspiron N7567D (i77700-8-128SSD-1TB-NVI) Black</b></a>
-			              		<div class="product_cart">
-			              			<span id="sell_price_pro_3794">30.500.000</span> VND 
-		              			</div>
-			              	</div>
-			            </td>
-			            <td>
-			              	<input name="quantity_pro_3794" id="quantity_pro_3794" value="1" onchange="updatePrice('pro','3794',this.value)" size="3">
-			            </td>
-			            <td class="product_cart"><b><span id="price_pro_3794">30.500.000</span> VND</b></td>
-			            <td>
-			            	<a href="javascript:void(0)" id="subCart">
-			            		<img src="/template/default/images/cart_del.png">
-			            	</a>
-			            </td>
-		          	</tr>
+		          	<?php if (isset($_SESSION['shopping_cart']['data'])):
+		          		foreach ($_SESSION['shopping_cart']['data'] as $key => $data): ?>
+		          			<tr>
+				            	<td><?php echo $key + 1 ?></td>
+					            <td class="product_cart"> 
+					              	<img src="<?php echo $data['image'] ?>" width="50" style="float:left; margin-right:10px;">
+					              	<div style="margin-left:60px;">
+					              		<a href="<?php echo $data['url'] ?>" style="text-decoration:none;"><b><?php echo $data['product_name'] ?></b></a>
+					              		<div class="product_cart">
+					              			<span id="sell_price_pro_<?php echo $data['product_id']?>"><?php echo number_format($data['price']) ?></span> VND 
+				              			</div>
+					              	</div>
+					            </td>
+					            <td></td>
+					            <td>
+					              	<input name="quantity_pro_<?php echo $data['product_id']?>" id="quantity_pro_<?php echo $data['product_id']?>" value="1" onchange="updatePrice('pro',<?php echo $data['product_id']?>,this.value)" size="3">
+					            </td>
+					            <td class="product_cart"><b><span id="price_pro_<?php echo $data['product_id']?>"><?php echo number_format($data['price']) ?></span> VND</b></td>
+					            <td>
+					            	<a href="javascript:void(0)" id="subCart">
+					            		<img src="<?php echo base_url('themes/website/images/cart_del.png') ?>">
+					            	</a>
+					            </td>
+				          	</tr>
+		          		<?php endforeach;
+		          	endif ?>
 		          	<tr>
 			            <td colspan="3">
 			              	<div class="support_in_cart">
-			                	Bạn gặp khó khăn trong việc đặt hàng? Vui lòng nhấc máy để được trợ giúp: &nbsp;&nbsp;<b class="font18 red">024.35379395 - 0985 985 278</b>
+			                	Bạn gặp khó khăn trong việc đặt hàng? Vui lòng nhấc máy để được trợ giúp: &nbsp;&nbsp;<b class="font18 red"><?php echo $this->settings->get_param('companyPhone'); ?> - <?php echo $this->settings->get_param('companyCellPhone'); ?></b>
 			              	</div>
 			            </td>
 			            <td colspan="2">
 			              	<b>Tổng tiền:</b>
-			              	<b style="color:red;"><span class="sub1" id="total_value" style="color: red; font-weight: bold;">30.500.000</span> VND</b>  
+			              	<b style="color:red;"><span class="sub1" id="total_value" style="color: red; font-weight: bold;"><?php echo number_format($_SESSION['shopping_cart']['total_price'])?></span> VND</b>  
 			            </td>
 		          	</tr>
 		        </tbody>
@@ -63,6 +69,27 @@
       	</form>
     </div>
 <script type="text/javascript">
+	function updatePrice(e,t,n){
+		check_interger(n)||(alert("Vui lòng nhập số > 0"),n=1,$("#quantity_"+e+"_"+t).val(n)),show_cart_total(e,t,n);
+
+		var r=$("#discount_code").val();
+		if(r.length>0){
+			for(var o=document.getElementById("total_value").innerHTML; o.indexOf(".")>0;)
+				o=o.replace(".","");
+			check_discount("coupon",r,parseInt(o))
+		}
+	}
+  	
+  	function show_cart_total(e,t,n){
+  		unit_price=getItemUnitPrice(e,t),document.getElementById("price_"+e+"_"+t).innerHTML=writeStringToPrice(unit_price*n+""),reCountTotal()
+  	}
+
+  	function getItemUnitPrice(e,t){
+  		for(var n=document.getElementById("sell_price_"+e+"_"+t).innerHTML;n.indexOf(".")>0;)
+  			n=n.replace(".","");
+  		return n=parseInt(n)
+  	}
+
   	function validateEmail(sEmail) {
             var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
             if (filter.test(sEmail)) {

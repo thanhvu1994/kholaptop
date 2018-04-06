@@ -113,19 +113,39 @@
         </div><!--col-main-->
         <div class="col-right sidebar">
             <?php $this->load->view('layouts/right_side_bar'); ?>
+            <div class="widget widget-static-block" id="navigation">
+                <ul class="products-grid products-grid--max-4-col first last odd">
+                    <h2 class="subtitle">Sản phẩm cùng loại</h2>
+                    <?php foreach($recentProducts as $key => $product): ?>
+                        <li class="item last" style="width: 100%">
+                            <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
+                                <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
+                            </a>
+                            <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
+                                <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
+                                <div class="price-box">
+                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div><!--col-right-->
     </div>
 </div>
 <script>
     $(document).ready(function() {
         $('#addCart').click(function() {
-            var id = 0;
+            var id = <?php echo $product->id ?>;
             $.ajax({
                 url: '<?php echo base_url('sites/addCart')?>',
                 type: 'POST',
                 data: {id: id},
                 success: function (returndata) {
-                    
+                    if (returndata == 1) {
+                        window.location.replace('<?php echo base_url('sites/shoppingCart') ?>')
+                    };
                 }
             });
         });
