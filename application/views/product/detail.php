@@ -44,19 +44,23 @@
                                 <div class="clearfix"></div>
 
                                 <div class="option">
-                                    <h4 class="subtitle">Tùy Chọn Cấu Hình</h4>
                                     <?php $attributes = $product->getAttributes(); ?>
 
-                                    <?php foreach($attributes as $key => $item): ?>
-                                        <h5 class="subtitle"><?php echo $item->name; ?></h5>
-                                        <?php $attributeValues = $item->getAttributeValues(); ?>
-                                        <div class="option-values">
-                                            <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
-                                            <?php foreach($attributeValues as $key1 => $item1): ?>
-                                                <input name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endforeach; ?>
+                                    <?php if(!empty($attributes)): ?>
+                                        <h4 class="subtitle">Tùy Chọn Cấu Hình</h4>
+
+
+                                        <?php foreach($attributes as $key => $item): ?>
+                                            <h5 class="subtitle"><?php echo $item->name; ?></h5>
+                                            <?php $attributeValues = $item->getAttributeValues(); ?>
+                                            <div class="option-values">
+                                                <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
+                                                <?php foreach($attributeValues as $key1 => $item1): ?>
+                                                    <input name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="clearfix"></div>
