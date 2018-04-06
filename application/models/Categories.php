@@ -525,6 +525,16 @@ class Categories extends CI_Model {
                     <a class="btn btn-danger button-delete" href="javascript:void(0)" title="Delete" data-id="'.$this->id.'"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>';
+        } elseif ($this->type == 'news') {
+            echo '<tr id="tr-'.$this->id.'">
+                    <td class="text-center check-element"><input type="checkbox" name="select[]" value="'.$this->id.'"></td>
+                    <td>'.$str.' '.$this->category_name.'</td>
+                    <td>'.$this->get_update_date().'</td>
+                    <td class="button-column">
+                        <a class="btn btn-danger" href="'.base_url($url.'/update/'.$this->id).'"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger button-delete" href="javascript:void(0)" title="Delete" data-id="'.$this->id.'"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>';
         } else {
             echo '<tr id="tr-'.$this->id.'">
                     <td class="text-center check-element"><input type="checkbox" name="select[]" value="'.$this->id.'"></td>

@@ -20,7 +20,7 @@ class Settings extends CI_Model {
                 // ['name' => 'defaultPageTitle_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => 'required'],
                 // ['name' => 'introduce', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full'], 'rules' => ''],
                 // ['name' => 'introduce_en', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-2'], 'rules' => ''],
-                ['name' => 'copyrightOnFooter', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full'], 'rules' => ''],
+                ['name' => 'copyrightOnFooter', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-3'], 'rules' => ''],
                 ['name' => 'googleAnalytics', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['cols' => 77, 'rows' => 4], 'rules' => ''],
             ],
         ],
@@ -43,12 +43,13 @@ class Settings extends CI_Model {
             'htmlOptions' => [],
             'icon' => '<span class="glyphicon glyphicon-search"></span>',
             'items' => [
-                ['name' => 'companyAddress', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                // ['name' => 'companyAddress_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['simaxlengthze' => 80], 'rules' => ''],
-                ['name' => 'companyCellPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'companyPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'companyEmail', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-
+                // ['name' => 'companyAddress', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // // ['name' => 'companyAddress_en', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['simaxlengthze' => 80], 'rules' => ''],
+                // ['name' => 'companyCellPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'companyPhone', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'companyEmail', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                ['name' => 'showroom', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full'], 'rules' => ''],
+                ['name' => 'right_sidebar', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-2'], 'rules' => ''],
             ],
         ],
     ];
@@ -69,6 +70,8 @@ class Settings extends CI_Model {
             'companyEmail' => 'Địa chỉ Email',
             // 'introduce' => 'Sơ lược công ty',
             // 'introduce_en' => 'Sơ lược công ty (tiếng anh)'
+            'showroom' => 'Showroom',
+            'right_sidebar' => 'Bán hàng online',
         ];
 
         if (isset($attrbute_name[$field])) {
