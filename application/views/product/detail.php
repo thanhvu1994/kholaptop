@@ -105,7 +105,7 @@
                 </div><!--product-collateral toggle-content-->
 
                 <div class="clear"></div>
-                <div class="fb-comments" data-width="970" data-href="http://kholaptop.vn/laptop/dell/dell-vostro/dell-vostro-v5568-077m51-i37100-4-1tb-nvi-w10-gray.html" data-numposts="10" data-colorscheme="light"></div>
+                <div class="fb-comments" data-width="970" data-href="<?php echo current_url(); ?>" data-numposts="10" data-colorscheme="light"></div>
                 <div class="clear"></div>
 
 
@@ -169,8 +169,23 @@
                     </div>
                 </div>
             </div>
-            <div class="widget widget-static-block">
-
+            <div class="widget widget-static-block" id="navigation">
+                <ul class="products-grid products-grid--max-4-col first last odd">
+                    <h2 class="subtitle">Sản Phẩm Cùng Loại</h2>
+                    <?php foreach($recentProducts as $key => $product): ?>
+                        <li class="item last" style="width: 100%">
+                            <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
+                                <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
+                            </a>
+                            <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
+                                <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
+                                <div class="price-box">
+                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div><!--col-right-->
     </div>
@@ -186,6 +201,17 @@
         $(this).addClass("current");
         $(".tab-container").hide();
         $($(this).attr("data-tab")).show();
+    });
+
+    var elementPosition = $('#navigation').offset();
+
+    $(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top){
+            var width = $('#navigation').width();
+            $('#navigation').css('position','fixed').css('width',width).css('top','0');
+        } else {
+            $('#navigation').css('position','static').css('width','100%');
+        }
     });
 </script>
 <style>

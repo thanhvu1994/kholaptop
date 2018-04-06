@@ -22,4 +22,12 @@
 <script src="<?php echo base_url('themes/website/script/jquery.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('themes/website/script/product_view_history.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('themes/website/script/common.js')?>"></script>
-<!-- Global site tag (gtag.js) - Google Analytics --> 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
