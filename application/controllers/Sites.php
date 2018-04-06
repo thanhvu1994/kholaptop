@@ -133,26 +133,41 @@ class Sites extends Front_Controller {
             $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
 
             $id = isset($_POST['id']) ? $_POST['id'] : 0;
+            $info = isset($_POST['info']) ? $_POST['info'] : '';
             $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
 
             $product = $this->products->get_model(['id' => $id]);
             if (count($product) > 0) {
-                $arr_product[$product->id] = [
-                    'product_name' => $product->product_name,
-                    'quantity' => $quantity,
-                    'price' => (int)$product->price * (int)$quantity,
-                ];
+                $is_add = true;
+                if (isset($arr_product['data']) && !empty($arr_product['data'])) {
+                    foreach ($arr_product['data'] as $pro) {
+                        if ($pro['product_id'] == $product->id && $pro['info'] == $info) {
+                            $is_add = false;
+                        }
+                    }
+                }
+                if ($is_add) {
+                    $arr_product['data'][] = [
+                        'product_id' => $product->id,
+                        'image' => $product->getFirstImage(),
+                        'url' => $product->getUrl(),
+                        'product_name' => $product->product_name,
+                        'info' => $info,
+                        'quantity' => $quantity,
+                        'price' => (int)$product->price * (int)$quantity,
+                    ];
+                }
 
                 $total_price = 0;
-                foreach ($arr_product as $row) {
+                foreach ($arr_product['data'] as $row) {
                     $total_price += (int)$row['price'];
                 }
                 $arr_product['total_price'] = $total_price;
 
                 $_SESSION['shopping_cart'] = $arr_product;
+
+                echo 1;
             }
-        } else {
-            
         }
     }
 
@@ -160,12 +175,9 @@ class Sites extends Front_Controller {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
 
-            $id = isset($_POST['id']) ? $_POST['id'] : 0;
-            $product = $this->products->get_model(['id' => $id]);
-            if (count($product) > 0) {
-                if (isset($arr_product[$product->id])) {
-                    unset($arr_product[$product->id]);
-                }
+            $key = isset($_POST['key']) ? $_POST['key'] : -1;
+            if (isset($arr_product['data'][$key])) {
+                unset($arr_product['data'][$key]);
 
                 $total_price = 0;
                 foreach ($arr_product as $row) {
@@ -175,8 +187,6 @@ class Sites extends Front_Controller {
 
                 $_SESSION['shopping_cart'] = $arr_product;
             }
-        } else {
-            
         }
     }
 }
