@@ -30,7 +30,7 @@ class Categories extends CI_Model {
 
 	public function set_model($data_insert)
 	{
-	    if ($data_insert['parent_id'] == 0) {
+	    if (!isset($data_insert['parent_id']) || $data_insert['parent_id'] == 0) {
 	    	$type_level = 1;
 	    } else {
 	    	$parent = $this->get_model(['id' => $data_insert['parent_id']]);
