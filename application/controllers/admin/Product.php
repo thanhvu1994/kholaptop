@@ -6,9 +6,13 @@ class Product extends MY_Controller {
     {
         parent::__construct();
         $config['upload_path']          = './uploads/products';
-        $config['allowed_types']        = 'jpg|png';
+        $config['allowed_types']        = '*';
         $config['encrypt_name']         = TRUE;
         $this->load->library('upload', $config);
+
+        if (!file_exists('./uploads/products')) {
+            mkdir('./uploads/products', 0777, true);
+        }
     }
 
     public function index()

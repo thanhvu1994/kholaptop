@@ -98,20 +98,4 @@
         }
         return true;
     }
-</script> 
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#addCart').click(function() {
-			var id = 0;
-			$.ajax({
-                url: '<?php echo base_url('sites/addCart')?>',
-                type: 'POST',
-                data: {id: id},
-                success: function (returndata) {
-                    
-                }
-            });
-		});
-	});
 </script>
