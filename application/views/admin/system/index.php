@@ -157,5 +157,11 @@
             filebrowserWindowWidth: '1000',
             filebrowserWindowHeight: '700'
         });
+        CKEDITOR.replace('editor-full-3', {
+            filebrowserBrowseUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/ckfinder.html')?>",
+            filebrowserUploadUrl: "<?php echo base_url('themes/admin/plugins/ckfinder/core/connector/php/connector.php').'?command=QuickUpload&type=Files' ?>",
+            filebrowserWindowWidth: '1000',
+            filebrowserWindowHeight: '700'
+        });
     });
 </script>

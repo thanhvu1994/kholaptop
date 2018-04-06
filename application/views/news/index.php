@@ -1,6 +1,6 @@
 <div class="breadcrumbs">
   	<ul>
-	    <li class="home"><a href="/" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
+	    <li class="home"><a href="<?php echo base_url() ?>" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
 	    <li class="category3">
 	    	<?php echo $link_1 ?>
 	    	<?php if (isset($link_2)): ?>

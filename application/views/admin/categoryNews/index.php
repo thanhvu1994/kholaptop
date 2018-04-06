@@ -25,7 +25,7 @@
                                     <tr>
                                         <th class="no-sort text-center"><input type="checkbox" name="" id="select_all"></th>
                                         <th>Tên danh mục</th>
-                                        <th>Danh mục cha</th>
+                                        <!-- <th>Danh mục cha</th> -->
                                         <th>Ngày cập nhật</th>
                                         <th>Action</th>
                                     </tr>

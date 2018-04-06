@@ -723,12 +723,13 @@ a.skip-link{text-decoration:none;}
     li.level1.nav-1-1.parent:hover ul.level1 {display: block;}
 }
 /* ============================================ * * General Navigation Styles * ============================================ */
-.nav-primary a{text-decoration:none;position:relative;display:block;color:#636363;line-height:30px;font-family:"Roboto", Verdana, Arial, sans-serif;font-weight:bold;}
+.nav-primary a{text-decoration:none;position:relative;display:block;color:#CCCCCC;line-height:30px;font-family:"Roboto", Verdana, Arial, sans-serif;font-weight:bold;}
+.nav-primary ul a{color:#636363;}
 .nav-primary li{position:relative;}
 
 .nav-primary li.level1 a{border-bottom:1px solid #cccccc;}
 .nav-primary .menu-active > ul.level0,.nav-primary li.level0 li.sub-menu-active > ul{display:block;}
-.nav-primary li.level0 > a{text-transform:uppercase;}
+.nav-primary li.level0 > a{text-transform:capitalize;}
 /* ============================================ * * Small Viewports - Accordion Style Menu * ============================================ */
 @media only screen and (max-width:770px){.nav-primary a.level0, .nav-primary a{line-height:35px;}
     .nav-primary li.level0 ul{display:none;}

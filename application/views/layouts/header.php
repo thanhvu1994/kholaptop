@@ -2,8 +2,8 @@
     <div class="navbar navbar-default portal">
         <div class="container container-custom">
             <div class="navbar-header">
-                <a href="https://www.bitmain.com" class="navbar-brand">                
-                    <img src="https://dn-bitmain-cdn.qbox.me/assets/1608010935/images/icons/logo.png" height="18">       
+                <a href="<?php echo base_url() ?>" class="navbar-brand" title="<?php echo $this->settings->get_param('defaultPageTitle') ?>">
+                    <img src="<?php echo $this->settings->get_logoFE() ?>" height="18" alt="<?php echo $this->settings->get_param('defaultPageTitle') ?>">       
                 </a>
             </div>
             <div class="skip-links">

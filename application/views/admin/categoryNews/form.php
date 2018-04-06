@@ -52,7 +52,7 @@
                         </div> -->
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="col-sm-12">Lớp cha</label>
                         <div class="col-sm-12">
                             <?php
@@ -71,7 +71,7 @@
                                 endif; ?>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- <div class="col-sm-6 col-xs-12">
                     <ul class="nav nav-tabs">
