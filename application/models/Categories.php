@@ -599,7 +599,7 @@ class Categories extends CI_Model {
     }
 
     public function getUrl(){
-        return base_url('').$this->slug.'n.html';
+        return base_url('').$this->slug.'c.html';
     }
 
     public function getUrlCustom($category){
@@ -611,5 +611,21 @@ class Categories extends CI_Model {
         $models = $query->result('Categories');
 
         return $models;
+    }
+
+    public function getBreadCrumb(){
+        if($this->parent_id != 0):
+        $parent = $this->get_model(array('id' => $this->parent_id));
+            if($parent):
+                if($parent->parent_id != 0):
+                $parentParent = $this->get_model(array('id' => $parent->parent_id));
+                    if($parentParent):
+                        echo '<li class="category3"><a href="'.$parentParent->getUrl().'" title="'.$parentParent->category_name.'">'.$parentParent->category_name.'</a><span>/ </span></li>';
+                    endif;
+                endif;
+            echo '<li class="category3"><a href="'.$parent->getUrl().'" title="'.$parent->category_name.'">'.$parent->category_name.'</a><span>/ </span></li>';
+            endif;
+        endif;
+        echo '<li class="category3"><a href="'.$this->getUrl().'" title="'.$this->category_name.'">'.$this->category_name.'</a></li>';
     }
 }

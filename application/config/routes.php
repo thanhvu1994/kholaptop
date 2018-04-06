@@ -71,6 +71,8 @@ $route['(:any)nd.html'] = 'newsSite/detail/$1';
 $route['(:any)c.html'] = 'category/category/$1';
 $route['(:any)c.html/(:num)'] = 'category/category/$1';
 
+$route['(:any)/(:any)p.html'] = 'product/detail/$2';
+
 
 
 

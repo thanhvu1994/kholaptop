@@ -130,7 +130,7 @@
                             <label class="col-md-12">Thuộc tính <a href="javascript:void(0)" onClick="addAttribute()"><span class="glyphicon glyphicon-plus"></span></a></label>
                             <div class="attribute-input default-item">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <input type="text" class="form-control att-input" value="" list="options">
                                         <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                         <?php echo form_error('attributes'); ?>
@@ -156,7 +156,7 @@
                                 <?php foreach($attributes as $key => $attribute): ?>
                                     <div class="attribute-input">
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <input type="text" class="form-control att-input" value="<?php echo $attribute->name; ?>" name="attributes[<?php echo $key; ?>]" list="options">
                                                 <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
                                                 <?php echo form_error('attributes'); ?>
@@ -179,7 +179,7 @@
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
                                                         <?php endif; ?>
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-1">
                                                             <input type="text" class="form-control att-value-price-input money" value="<?php echo $attVal->price; ?>" name="attributes_values_price[<?php echo $key; ?>][]">
                                                             <?php echo form_error('attribute_values_price'); ?>
                                                         </div>
@@ -258,6 +258,7 @@
          var att = $('.attribute-input.default-item').clone().removeClass('default-item').appendTo( ".attribute-container" );
          att.find('.att-input').attr('name','attributes['+count+']');
          att.find('.att-value-input').attr('name','attributes_values['+count+'][]');
+         att.find('.att-value-price-input').attr('name','attributes_values_price['+count+'][]');
 
          $('.money').formatCurrency();
 

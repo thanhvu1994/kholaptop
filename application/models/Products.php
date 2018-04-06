@@ -166,6 +166,21 @@ class Products extends CI_Model {
         return $attributes;
     }
 
+    public function getCategoryObject(){
+        $query = $this->db->get_where('product_categories', array('product_id' => $this->id));
+        $productCategory = $query->row();
+
+        if ($productCategory) {
+            $query = $this->db->get_where('categories', array('id' => $productCategory->category_id));
+            $category = $query->row(0,'categories');
+            if($category){
+                return $category;
+            }
+        }
+
+        return '';
+    }
+
     public function getCategoryId(){
         $query = $this->db->get_where('product_categories', array('product_id' => $this->id));
         $productCategory = $query->row();
@@ -317,6 +332,6 @@ class Products extends CI_Model {
     }
 
     public function getUrl(){
-        return base_url().$this->slug.'p.html';
+        return base_url().$this->getCategorySlug().'/'.$this->slug.'p.html';
     }
 }

@@ -3,21 +3,7 @@
         <div class="breadcrumbs">
             <ul>
                 <li class="home"><a href="<?php echo base_url(); ?>" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
-                <?php if($curCategory->parent_id != 0): ?>
-                    <?php $parent = $this->categories->get_model(array('id' => $curCategory->parent_id)); ?>
-                    <?php if($parent): ?>
-
-                        <?php if($parent->parent_id != 0): ?>
-                            <?php $parentParent = $this->categories->get_model(array('id' => $parent->parent_id)); ?>
-                            <?php if($parentParent): ?>
-                                <li class="category3"><a href="<?php echo $parentParent->getUrl(); ?>" title="<?php echo $parentParent->category_name; ?>"><?php echo $parentParent->category_name; ?></a><span>/ </span></li>
-                            <?php endif; ?>
-                        <?php endif; ?>
-
-                        <li class="category3"><a href="<?php echo $parent->getUrl(); ?>" title="<?php echo $parent->category_name; ?>"><?php echo $parent->category_name; ?></a><span>/ </span></li>
-                    <?php endif; ?>
-                <?php endif; ?>
-                <li class="category3"><a title="<?php echo $curCategory->category_name; ?>"><?php echo $curCategory->category_name; ?></a></li>
+                <?php $curCategory->getBreadCrumb(); ?>
             </ul>
         </div>
         <div class="col-wrapper">
