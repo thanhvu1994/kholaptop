@@ -23,7 +23,7 @@ class product extends Front_Controller {
 
         if(isset($data['product'])){
             $data['category'] = $data['product']->getCategoryObject();
-            $data['recentProducts'] = $data['category']->getProducts(4,0);
+            $data['recentProducts'] = $data['category']->getProducts(10,0);
             $data['title'] = $data['product']->title;
             $data['description'] = $data['product']->meta_description;
             $data['template'] = 'product/detail';

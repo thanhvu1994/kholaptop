@@ -22,7 +22,7 @@
                     <div class="product-essential">
                         <form action="" method="post" id="product_addtocart_form">
                             <div class="product-img-box">
-                                <div class="product-name"><h1><?php echo $product->getFirstImage(); ?></h1></div>
+                                <div class="product-name"><h1><?php echo $product->product_name; ?></h1></div>
                                 <div class="product-image product-image-zoom">
                                     <div class="product-image-gallery">
                                         <a class="MagicZoom" id="Zoomer" rel="selectors-effect-speed: 600" href="<?php echo $product->getFirstImage(); ?>" title="<?php echo $product->product_name; ?>" >
@@ -56,7 +56,7 @@
                                             <div class="option-values">
                                                 <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
                                                 <?php foreach($attributeValues as $key1 => $item1): ?>
-                                                    <input name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
+                                                    <input data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
                                                 <?php endforeach; ?>
                                             </div>
                                         <?php endforeach; ?>
@@ -128,6 +128,27 @@
                     </dl>
                 </div><!--product-collateral toggle-content-->
 
+                <div class="widget widget-static-block" id="navigation">
+                    <ul class="products-grid products-grid--max-4-col first last odd">
+                        <h2 class="subtitle">Sản phẩm cùng loại</h2>
+                        <?php foreach($recentProducts as $key => $recentProduct): ?>
+                            <?php if($product->id != $recentProduct->id) : ?>
+                                <li class="item last">
+                                    <a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>" class="product-image">
+                                        <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $recentProduct->getFirstImage(); ?>" alt="<?php echo $recentProduct->product_name; ?>" />
+                                    </a>
+                                    <div class="product-info" style="padding-bottom: 10px;">
+                                        <h2 class="product-name"><a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>"><?php echo $recentProduct->product_name; ?></a></h2>
+                                        <div class="price-box">
+                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                    <span class="price"><?php echo number_format($recentProduct->price).' đ'; ?></span> </span></div>
+                                    </div>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
                 <div class="clear"></div>
                 <div class="fb-comments" data-width="970" data-href="<?php echo current_url(); ?>" data-numposts="10" data-colorscheme="light"></div>
                 <div class="clear"></div>
@@ -137,44 +158,7 @@
         </div><!--col-main-->
         <div class="col-right sidebar">
             <?php $this->load->view('layouts/right_side_bar'); ?>
-            <div class="widget widget-static-block" id="navigation">
-                <ul class="products-grid products-grid--max-4-col first last odd">
-                    <h2 class="subtitle">Sản phẩm cùng loại</h2>
-                    <?php foreach($recentProducts as $key => $product): ?>
-                        <li class="item last" style="width: 100%">
-                            <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
-                                <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
-                            </a>
-                            <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
-                                <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
-                                <div class="price-box">
-                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
-                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
         </div><!--col-right-->
-
-        <div class="widget widget-static-block" id="navigation">
-            <ul class="products-grid products-grid--max-4-col first last odd">
-                <h2 class="subtitle">Sản Phẩm Cùng Loại</h2>
-                <?php foreach($recentProducts as $key => $product): ?>
-                    <li class="item last" style="width: 100%">
-                        <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
-                            <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
-                        </a>
-                        <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
-                            <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
-                            <div class="price-box">
-                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
-                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
     </div>
 </div>
 <script>
@@ -207,21 +191,31 @@
     });
 
     var elementPosition = $('#navigation').offset();
+    var footer = $('#footer').offset();
 
-    $(window).scroll(function(){
-        if($(window).scrollTop() > elementPosition.top){
-            var width = $('#navigation').width();
-            $('#navigation').css('position','fixed').css('width',width).css('top','0');
-        } else {
-            $('#navigation').css('position','static').css('width','100%');
+    /*$(window).scroll(function(){
+        if(window.screen.width >= 768){
+            if($(window).scrollTop() > elementPosition.top) {
+                var width = $('#navigation').width();
+                $('#navigation').css('position','fixed').css('width',width).css('top',0);
+            } else {
+                $('#navigation').css('position','static').css('width','100%');
+            }
         }
-    });
+    });*/
 
     $('.option input').on('change', function(){
-       var base_price = Number($('#base_price').html());
+        var base_price = Number($('#base_price').html());
         var sum = 0;
+        $('#cart-product-options').find('ul').first().html('');
+
         $('.option input:checked').each(function() {
             sum += Number($(this).val());
+
+            var attr = $(this).attr('data-id');
+            if (typeof attr !== typeof undefined && attr !== false) {
+                $('#cart-product-options').find('ul').first().append('<li>'+attr+'</li>')
+            }
         });
        var new_price = base_price + sum;
        $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
@@ -253,3 +247,16 @@
         margin-bottom: 10px;
     }
 </style>
+
+<div id="cart-detail" style="display: none;">
+    <div id="cart-product-id">
+        <?php echo $product->id; ?>
+    </div>
+    <div id="cart-product-price">
+        <?php echo $product->price; ?>
+    </div>
+    <div id="cart-product-options">
+        <ul>
+        </ul>
+    </div>
+</div>

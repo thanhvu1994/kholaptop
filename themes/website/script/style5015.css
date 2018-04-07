@@ -911,7 +911,7 @@ h2.product-name a:hover,h3.product-name a:hover,h4.product-name a:hover,h5.produ
 .products-grid > li{position:relative;margin-bottom:20px;text-align:center;}
 .products-grid > li:after{content:'';display:table;clear:both;}
 .products-grid .product-image{width:100%;margin-bottom:15px;}
-.products-grid .product-image img{width:100%;height:auto;}
+.products-grid .product-image img{width:100%;height:175px; object-fit: contain; object-position: center}
 .products-grid .product-image img:hidden{display:none;}
 .widget-new-products .products-grid .product-image{width:75%;margin-bottom:15px;margin-left:10%;}
 .products-grid .product-info{position:relative;padding-bottom:95px;}
