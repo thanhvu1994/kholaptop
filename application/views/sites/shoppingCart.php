@@ -57,11 +57,13 @@
 						            		foreach ($info as $product_option_value_id => $row): 
 						            			$total += (int)$row['price'];
 						            		?>
-								        	<input type="hidden" name="Product[option_value]" value="<?php echo $product_option_value_id ?>">
-						            		<?php if (strtolower($row['name_option']) == 'color'): ?>
-						            			<p><b><?php echo $row['name_option'] ?></b>: <span class="color" style="background-color:<?php echo $row['name_option_value']; ?>"></span> (Giá: <?php echo number_format($row['price']) ?>)</p>
-						            		<?php else: ?>
-						            			<p><b><?php echo $row['name_option'] ?></b>: <?php echo $row['name_option_value'] ?> (Giá: <?php echo number_format($row['price']) ?>)</p>
+								        	<input type="hidden" name="Product[option_value][]" value="<?php echo $product_option_value_id ?>">
+						            		<?php if (!empty($row['name_option'])): ?>
+						            			<?php if (strtolower($row['name_option']) == 'color'): ?>
+							            			<p><b><?php echo $row['name_option'] ?></b>: <span class="color" style="background-color:<?php echo $row['name_option_value']; ?>"></span> (Giá: <?php echo number_format($row['price']) ?>)</p>
+							            		<?php else: ?>
+							            			<p><b><?php echo $row['name_option'] ?></b>: <?php echo $row['name_option_value'] ?> (Giá: <?php echo number_format($row['price']) ?>)</p>
+							            		<?php endif ?>
 						            		<?php endif ?>
 						            	<?php endforeach;
 						            	endforeach; 
@@ -73,7 +75,7 @@
 					              	<input class="change-qty" data-up="<?php echo $count?>" id="quantity_pro_<?php echo $data['product_id']?>" value="<?php echo $infos['quantity'] ?>" size="3">
 					            </td>
 					            <td class="product_cart">
-					            	<b><span class="price-pro" id="price_pro_<?php echo $data['product_id']?>" data-price="<?php echo $arr_price[$key_infos] ?>"><?php echo number_format($arr_price[$key_infos]) ?></span> VND</b></td>
+					            	<b><span class="price-pro" id="price_pro_<?php echo $count?>" data-price="<?php echo $arr_price[$key_infos] ?>"><?php echo number_format($arr_price[$key_infos]) ?></span> VND</b></td>
 					            <td>
 					            	<a href="javascript:void(0)" class="subCart" data-del="<?php echo $count?>">
 					            		<img src="<?php echo base_url('themes/website/images/cart_del.png') ?>">
@@ -117,15 +119,17 @@
 	$('.change-qty').change(function() {
 		if (checkInt($(this).val())) {
 			var count = $(this).data('up');
+			var price = $('#price_pro_'+count).data('price') * $(this).val();
+			price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			
 			$("#cart-detail-"+count+" input[class=qty-hidden]").val($(this).val());
 			$.ajax({
-	            url: '<?php echo base_url('sites/addCart')?>',
+	            url: '<?php echo base_url('sites/updateCart')?>',
 	            type: 'POST',
 	            data: $('#cart-detail-'+count).serialize(),
 	            success: function (returndata) {
-	                if (returndata == 1) {
-	                    
-	                };
+	            	$('#total_value').html(returndata);
+	            	$('#price_pro_'+count).html(price);
 	            }
 	        });
 		} else {
