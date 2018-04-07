@@ -666,7 +666,7 @@ html,body{height:100%;}
 @media only screen and (min-width:771px){.skip-links{border:0;}
 }
 /* -------------------------------------------- * * Skip - Link */
-.skip-link{position:relative;float:left;width:20%;height:44px;/*background:#FFFFFF*/;color:#636363;line-height:42px;text-align:center;}
+.skip-link{right:0;position:absolute;float:left;width:20%;height:44px;/*background:#FFFFFF*/;color:#636363;line-height:42px;text-align:center;}
 a.skip-link{text-decoration:none;}
 .skip-link:not(.skip-active):hover{opacity:0.8;}
 @media only screen and (max-width:770px){
@@ -725,8 +725,8 @@ a.skip-link{text-decoration:none;}
 /* ============================================ * * General Navigation Styles * ============================================ */
 .nav-primary a{text-decoration:none;position:relative;display:block;color:#CCCCCC;line-height:30px;font-family:"Roboto", Verdana, Arial, sans-serif;font-weight:bold;}
 .nav-primary ul a{color:#636363;}
-.nav-primary li{position:relative;}
-.nav-primary {margin-top: 37px;}
+.nav-primary li{position:relative; display: table-cell; width: auto;}
+.nav-primary {margin-top: 37px; display: table; width: 80%; padding-left: 50px;}
 .nav-primary li.level1 a{border-bottom:1px solid #cccccc;}
 .nav-primary .menu-active > ul.level0,.nav-primary li.level0 li.sub-menu-active > ul{display:block;}
 .nav-primary li.level0 > a{text-transform:capitalize;}
@@ -746,8 +746,8 @@ a.skip-link{text-decoration:none;}
     /* Correct menus that will hang off the page (class added by js) */
     /* Level 1+ */
 }
-    .nav-primary a.level0{padding:0 25px;}
-    .nav-primary li.level0, .nav-primary a.level0{display:inline-block;}
+    .nav-primary a.level0{padding:0 10px;}
+    .nav-primary li.level0, .nav-primary a.level0{display:table-cell;}
     .nav-primary li:last-child > a{border-bottom:none;}
     .nav-primary a:hover, .nav-primary li:hover > a{color:#3399cc;}
     .nav-primary .menu-active{z-index:200;}

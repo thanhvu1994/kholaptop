@@ -33,6 +33,11 @@
 		        $(".skip-link").click(function(){
 		            $(this).toggleClass("skip-active");
 		            $("#header-nav").toggleClass("skip-active");
+		            $("#header-nav").css('background','none');
+		            $("#header-nav ol").css('display','inline-grid').css('width','100%').css('padding-left','15px');
+		            $("#header-nav li").css('display','list-item');
+		            $("#header-nav li a").css('color','white');
+		            $(this).css('background','none');
 
 		            return false;
 		        });
