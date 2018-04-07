@@ -124,49 +124,70 @@ class Sites extends Front_Controller {
         $data['description'] = 'Giỏ hàng';
 
         $data['template'] = 'sites/shoppingCart';
-
+        // unset($_SESSION['shopping_cart']);
+        // var_dump($_SESSION['shopping_cart']);die;
         $this->load->view('layouts/index', $data);
     }
 
     public function addCart() {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-            $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
+            if (isset($_POST['Product'])) {
+                $this->load->model('productOptionValue');
+                $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
 
-            $id = isset($_POST['id']) ? $_POST['id'] : 0;
-            $info = isset($_POST['info']) ? $_POST['info'] : '';
-            $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+                $product = $this->products->get_model(['id' => $_POST['Product']['product_id']]);
+                if (count($product) > 0) {
+                    $info = [];
+                    if (isset($_POST['Product']['option_value'])) {
+                        foreach ($_POST['Product']['option_value'] as $product_option_value_id) {
+                            $product_option_value = $this->productOptionValue->getOptionValueById($product_option_value_id);
+                            if (count($product_option_value) > 0) {
+                                $info[$product_option_value->product_option_id][$product_option_value->id] = [
+                                    'name_option' => $product_option_value->getAttributeName($product_option_value->product_option_id),
+                                    'name_option_value' => $product_option_value->name,
+                                    'price' => (int)$product_option_value->price,
+                                ];
+                            }
+                        }
+                    } else {
+                        $info[0][0] = [
+                            'name_option' => '',
+                            'name_option_value' => '',
+                            'price' => 0,
+                        ];
+                    }
+                    if (!isset($arr_product['data'][$product->id])) {
+                        $arr_product['data'][$product->id] = [
+                            'product_id' => $product->id,
+                            'image' => $product->getFirstImage(),
+                            'url' => $product->getUrl(),
+                            'product_name' => $product->product_name,
+                            'base_price' => (int)$_POST['Product']['base_price'],
+                        ];
+                    }
+                    
+                    $arr_product['data'][$product->id]['info'][] = [
+                        'data' => $info,
+                        'quantity' => $_POST['Product']['quantity'],
+                    ];
 
-            $product = $this->products->get_model(['id' => $id]);
-            if (count($product) > 0) {
-                $is_add = true;
-                if (isset($arr_product['data']) && !empty($arr_product['data'])) {
-                    foreach ($arr_product['data'] as $pro) {
-                        if ($pro['product_id'] == $product->id && $pro['info'] == $info) {
-                            $is_add = false;
+                    foreach ($arr_product['data'] as $data) {
+                        $total_price = 0;
+                        foreach ($data['info'] as $arr_type) {
+                            $total_price_more = 0;
+                            foreach ($arr_type['data'] as $type) {
+                                foreach ($type as $row) {
+                                    $total_price_more += (int)$row['price'];
+                                }
+                            }
+                            $total_price += ((int)$total_price_more + (int)$_POST['Product']['base_price']) * $arr_type['quantity'];
                         }
                     }
-                }
-                if ($is_add) {
-                    $arr_product['data'][] = [
-                        'product_id' => $product->id,
-                        'image' => $product->getFirstImage(),
-                        'url' => $product->getUrl(),
-                        'product_name' => $product->product_name,
-                        'info' => $info,
-                        'quantity' => $quantity,
-                        'price' => (int)$product->price * (int)$quantity,
-                    ];
-                }
+                    $arr_product['total_price'] = $total_price;
 
-                $total_price = 0;
-                foreach ($arr_product['data'] as $row) {
-                    $total_price += (int)$row['price'];
+                    $_SESSION['shopping_cart'] = $arr_product;
+                    echo 1;
                 }
-                $arr_product['total_price'] = $total_price;
-
-                $_SESSION['shopping_cart'] = $arr_product;
-
-                echo 1;
             }
         }
     }
