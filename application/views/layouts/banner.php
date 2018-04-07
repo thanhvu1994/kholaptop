@@ -11,7 +11,7 @@
             $banners = $query->result('Banner');
         ?>
         <?php if (count($banners) > 0): ?>
-            <div class="flexslider flexslider-7-1">
+            <div class="flexslider flexslider-7-1" style="overflow:hidden">
                 <ul class="slides">
                     <?php foreach ($banners as $banner): ?>
                         <li><a href="<?php echo !empty($banner->url) ? $banner->url : 'javascript:void(0)'?>" target='_blank' rel='nofollow'><img border=0 src="<?php echo $banner->get_image() ?>" alt="<?php echo $banner->name ?>"/></a></li>

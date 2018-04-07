@@ -25,6 +25,11 @@ class ProductOptionValue extends CI_Model {
         return $query->result('ProductOptionValue');
     }
 
+    public function getOptionValueById($id) {
+        $query = $this->db->query("SELECT * FROM ci_product_option_value WHERE id = ".$id);
+        return $query->row(0, 'ProductOptionValue');
+    }
+
     public function delete_all_model($product_id){
         $this->db->where('product_id', $product_id);
         $this->db->delete('product_option_value');

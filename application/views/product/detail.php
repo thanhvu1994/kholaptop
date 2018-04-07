@@ -171,14 +171,44 @@
         </div><!--col-right-->
     </div>
 </div>
+
+<form id="cart-detail">
+    <div id="cart-product-id">
+        <input type="text" name="Product[product_id]" value="<?php echo $product->id; ?>">
+    </div>
+    <div id="cart-product-price">
+        <input type="text" name="Product[quantity]" value="1">
+        <input type="text" name="Product[base_price]" value="<?php echo $product->price; ?>">
+    </div>
+    <div id="cart-product-options">
+        <ul>
+        </ul>
+    </div>
+</form>
 <script>
     $(document).ready(function() {
+        $('.option input').on('change', function(){
+            var base_price = Number($('#base_price').html());
+            var sum = 0;
+            $('#cart-product-options').find('ul').first().html('');
+
+            $('.option input:checked').each(function() {
+                sum += Number($(this).val());
+
+                var attr = $(this).attr('data-id');
+                if (typeof attr !== typeof undefined && attr !== false) {
+                    $('#cart-product-options').find('ul').first().append('<li><input type="text" name="Product[option_value][]" value="'+attr+'"></li>')
+                }
+            });
+            var new_price = base_price + sum;
+            $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
+        });
+
         $('#addCart').click(function() {
-            var id = <?php echo $product->id ?>;
             $.ajax({
                 url: '<?php echo base_url('sites/addCart')?>',
                 type: 'POST',
-                data: {id: id},
+                data: $('#cart-detail').serialize(),
                 success: function (returndata) {
                     if (returndata == 1) {
                         window.location.replace('<?php echo base_url('sites/shoppingCart') ?>')
@@ -213,23 +243,6 @@
             }
         }
     });*/
-
-    $('.option input').on('change', function(){
-        var base_price = Number($('#base_price').html());
-        var sum = 0;
-        $('#cart-product-options').find('ul').first().html('');
-
-        $('.option input:checked').each(function() {
-            sum += Number($(this).val());
-
-            var attr = $(this).attr('data-id');
-            if (typeof attr !== typeof undefined && attr !== false) {
-                $('#cart-product-options').find('ul').first().append('<li>'+attr+'</li>')
-            }
-        });
-       var new_price = base_price + sum;
-       $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
-    });
 </script>
 <style>
     .btn{
@@ -257,16 +270,3 @@
         margin-bottom: 10px;
     }
 </style>
-
-<div id="cart-detail" style="display: none;">
-    <div id="cart-product-id">
-        <?php echo $product->id; ?>
-    </div>
-    <div id="cart-product-price">
-        <?php echo $product->price; ?>
-    </div>
-    <div id="cart-product-options">
-        <ul>
-        </ul>
-    </div>
-</div>
