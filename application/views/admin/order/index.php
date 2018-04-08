@@ -37,7 +37,7 @@
                                     <tr id="tr-<?php echo $model->id?>">
                                         <td class="text-center check-element"><input type="checkbox" name="select[]" value="<?php echo $model->id ?>"></td>
                                         <td><?php echo $model->number_invoice ?></td>
-                                        <td><?php echo $model->getCustomerName() ?></td>
+                                        <td><?php echo ucwords($model->customer_name) ?></td>
                                         <td><?php echo $model->getStatus() ?></td>
                                         <td><?php echo $model->get_order_date() ?></td>
                                         <td class="button-column">

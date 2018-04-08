@@ -120,13 +120,67 @@ class Sites extends Front_Controller {
     }
 
     public function shoppingCart() {
-        $data['title'] = 'Giỏ hàng';
-        $data['description'] = 'Giỏ hàng';
+        $data['title'] = 'Thông tin giỏ hàng';
+        $data['description'] = 'Thông tin giỏ hàng';
 
         $data['template'] = 'sites/shoppingCart';
-        // unset($_SESSION['shopping_cart']);
-        // var_dump($_SESSION['shopping_cart']);die;
+
         $this->load->view('layouts/index', $data);
+    }
+
+    public function shoppingCartStep2() {
+        if (isset($_SESSION['shopping_cart'])) {
+            $this->load->model('orders');
+            $this->load->model('orderDetails');
+
+            $data['title'] = 'Thông tin giỏ hàng';
+            $data['description'] = 'Thông tin giỏ hàng';
+            $data['template'] = 'sites/shoppingCartStep2';
+
+            $data['show_card'] = false;
+
+            if (isset($_POST['Orders'])) {
+                $orders = $_POST['Orders'];
+                $orders['number_invoice'] = $this->orders->generateCode();
+                $orders['order_date'] = date('Y-m-d H:i:s');
+                $orders['status'] = STATUS_ORDER_PENDING;
+                $this->orders->set_model($orders);
+                $order_id = $this->db->insert_id();
+                if (!empty($order_id)) {
+                    $arr_product = $_SESSION['shopping_cart'];
+                    $order_detail['order_id'] = $order_id;
+                    $total_price_order = 0;
+                    foreach ($arr_product['data'] as $product_id => $data_cart) {
+                        $order_detail['product_id'] = $product_id;
+                        $order_detail['base_price'] = $data_cart['base_price'];
+                        foreach ($data_cart['info'] as $infos) {
+                            $order_detail['more_info'] = json_encode($infos['data']);
+                            $price = 0;
+                            foreach ($infos['data'] as $infos_data) {
+                                foreach ($infos_data as $info) {
+                                    $price += (int)$info['price'];
+                                }
+                            }
+                            $order_detail['quantity'] = $infos['quantity'];
+                            $order_detail['total_price'] = ((int)$price + (int)$data_cart['base_price']) * $infos['quantity'];
+                            $total_price_order += $order_detail['total_price'];
+                            $this->orderDetails->set_model($order_detail);
+                        }
+                    }
+
+                    $this->db->where('id', $order_id);
+                    $this->db->update('orders', ['total_payment' => $total_price_order]);
+                    unset($_SESSION['shopping_cart']);
+                    if ($_POST['Orders']['type_payment'] == PAYMENT_CARD) {
+                        $data['show_card'] = true;
+                    }
+                    $data['finish'] = true;
+                }
+            }
+            $this->load->view('layouts/index', $data);
+        } else {
+            redirect('/', 'refresh');
+        }
     }
 
     public function addCart() {
@@ -138,21 +192,23 @@ class Sites extends Front_Controller {
                 $product = $this->products->get_model(['id' => $_POST['Product']['product_id']]);
                 if (count($product) > 0) {
                     $added = false;
-                    foreach ($arr_product['data'] as $data) {
-                        foreach ($data['info'] as $arr_type) {
-                            foreach ($arr_type['data'] as $type) {
-                                if ($data['product_id'] == $_POST['Product']['product_id']) {
-                                    $temp = [];
-                                    if (!isset($_POST['Product']['option_value'])) {
-                                        if (isset($type[0])) {
-                                            $added = true;
-                                        }
-                                    } else {
-                                        foreach ($type as $product_option_value_id => $row) {
-                                            $temp[] = $product_option_value_id;
-                                        }
-                                        if (empty(array_diff($temp, $_POST['Product']['option_value'])) && empty(array_diff($_POST['Product']['option_value'], $temp))) {
-                                            $added = true;
+                    if (isset($arr_product['data'])) {
+                        foreach ($arr_product['data'] as $data) {
+                            foreach ($data['info'] as $arr_type) {
+                                foreach ($arr_type['data'] as $type) {
+                                    if ($data['product_id'] == $_POST['Product']['product_id']) {
+                                        $temp = [];
+                                        if (!isset($_POST['Product']['option_value'])) {
+                                            if (isset($type[0])) {
+                                                $added = true;
+                                            }
+                                        } else {
+                                            foreach ($type as $product_option_value_id => $row) {
+                                                $temp[] = $product_option_value_id;
+                                            }
+                                            if (empty(array_diff($temp, $_POST['Product']['option_value'])) && empty(array_diff($_POST['Product']['option_value'], $temp))) {
+                                                $added = true;
+                                            }
                                         }
                                     }
                                 }
@@ -276,19 +332,66 @@ class Sites extends Front_Controller {
 
     public function subCart() {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-            $arr_product = isset($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
+            if (isset($_POST['Product']) && isset($_SESSION['shopping_cart'])) {
+                $arr_product = $_SESSION['shopping_cart'];
+                $product_id = $_POST['Product']['product_id'];
+                $quantity = $_POST['Product']['quantity'];
 
-            $key = isset($_POST['key']) ? $_POST['key'] : -1;
-            if (isset($arr_product['data'][$key])) {
-                unset($arr_product['data'][$key]);
+                $info = [];
+                if (isset($_POST['Product']['option_value'])) {
+                    $temp = [];
+                    foreach ($_POST['Product']['option_value'] as $product_option_value_id) {
+                        $product_option_value = $this->productOptionValue->getOptionValueById($product_option_value_id);
+                        if (count($product_option_value) > 0) {
+                            $temp[$product_option_value->product_option_id][] = $product_option_value->id;
+                        } else {
+                            $temp[0][] = 0;
+                        }
+                    }
+                }
+                $is_exists = true;
+                if (isset($arr_product['data'][$product_id]['info'])) {
+                    foreach ($arr_product['data'][$product_id]['info'] as $key => $pro) {
+                        if (count($pro['data']) == count($temp)) {
+                            foreach ($temp as $product_option_id => $arr_option_value) {
+                                foreach ($arr_option_value as $product_option_value_id) {
+                                    if (!isset($pro['data'][$product_option_id][$product_option_value_id])) {
+                                        $is_exists = false;
+                                    }
+                                }
+                            }
+                            if ($is_exists == true) {
+                                unset($arr_product['data'][$product_id]['info'][$key]);
+                                if ($arr_product['data'][$product_id]['info'] === NULL) {
+                                    unset($arr_product['data'][$product_id]);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                $arr_product['data'][$product_id]['info'] = array_values($arr_product['data'][$product_id]['info']);
 
                 $total_price = 0;
-                foreach ($arr_product as $row) {
-                    $total_price += (int)$row['price'];
+                if (isset($arr_product['data']) && !empty($arr_product['data'])) {
+                    foreach ($arr_product['data'] as $data) {
+                        foreach ($data['info'] as $arr_type) {
+                            $total_price_more = 0;
+                            foreach ($arr_type['data'] as $type) {
+                                foreach ($type as $row) {
+                                    $total_price_more += (int)$row['price'];
+                                }
+                            }
+                            $total_price += ((int)$total_price_more + (int)$data['base_price']) * $arr_type['quantity'];
+                        }
+                    }
                 }
-                $arr_product['total_price'] = $total_price;
-
-                $_SESSION['shopping_cart'] = $arr_product;
+                if ($total_price == 0) {
+                    unset($_SESSION['shopping_cart']);
+                } else {
+                    $arr_product['total_price'] = $total_price;
+                    $_SESSION['shopping_cart'] = $arr_product;
+                }
             }
         }
     }

@@ -22,12 +22,7 @@ class Order extends MY_Controller {
         $data['template'] = 'admin/order/form';
         $model = $this->orders->get_model(['id' => $id]);
         $data['model'] = $model;
-        $billing = $model->getBilling();
-        if (count($billing) > 0) {
-            $data['billing'] = $billing;
-        } else {
-            redirect('admin/order/index', 'refresh');
-        }
+        
         $order_details = $model->getOrderDetails();
         if (count($order_details) > 0) {
             $data['order_details'] = $order_details;

@@ -7,7 +7,7 @@
 </style>
 <div class="breadcrumbs">
   	<ul>
-	    <li class="home"><a href="/" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
+	    <li class="home"><a href="<?php echo base_url(); ?>" title="Quay lại trang chủ">Trang chủ</a> <span>/ </span></li>
 	    <li class="category3"><a href="" title="">Giỏ hàng</a></li>
   	</ul>
 </div>
@@ -104,8 +104,8 @@
 
 	        <div class="clear space2"></div>
 	        <div align="right"> 
-	        	<a class="btnBuy" href="/gio-hang?step=2">Thanh toán</a> 
-	        	<a class="btnBuy" href="/">Mua tiếp</a> 
+	        	<a class="btnBuy" href="<?php echo base_url('gio-hang/thanh-toan.html') ?>">Thanh toán</a> 
+	        	<a class="btnBuy" href="<?php echo base_url() ?>">Mua tiếp</a> 
 	        </div>
     </div>
 <script type="text/javascript">
@@ -137,57 +137,19 @@
 			$(this).val(1);
 		};
 	});
-  	
-  	function show_cart_total(e,t,n){
-  		// unit_price=getItemUnitPrice(e,t),document.getElementById("price_"+e+"_"+t).innerHTML=writeStringToPrice(unit_price*n+""),reCountTotal()
-  		var price = getItemUnitPrice(e,t) * n;
-  		$("#price_"+e+"_"+t).attr('data-price', price);
-  		$("#price_"+e+"_"+t).html(price);
-  		var total = 0;
-  		$('.price-pro').each(function(k,v) {
-  			total += $(this).data('price');
-  		});
-  		$('#total_value').html(total);
-  	}
 
-  	function getItemUnitPrice(e,t){
-  		// for(var n=$("#sell_price_"+e+"_"+t).data('price'); n.indexOf(".") > 0;)
-  		// 	n=n.replace(".","");
-  		// return n=parseInt(n)
-  		return $("#sell_price_"+e+"_"+t).data('price');
-  	}
 
-  	function validateEmail(sEmail) {
-        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-        if (filter.test(sEmail)) {
-        	return true;
-    	} else {
-     		return false;
-    	}
-	}
-    function check_field(){
-  		var number_regex1 = /^[0]\d{9}$/i;
-  		var number_regex2 = /^[0]\d{10}$/i;
-        var error = "";
-        var check_name = document.getElementById('buyer_name').value;
-        if(check_name.length < 2) error += "- Bạn chưa nhập tên\n";
-        var check_email = document.getElementById('buyer_email').value;
-        if(check_email.length < 4) {
-        //error += "- Bạn chưa nhập email\n";
-  		}	
-  		if(check_email.length > 4){
-        //if(validateEmail(check_email)==false) error += "- Email không hợp lệ\n";
-        }
-        var check_add = document.getElementById('buyer_address').value;
-        if(check_add.length < 10) error += "- Bạn chưa nhập địa chỉ\n";
-        var check_tel = document.getElementById('buyer_tel').value;
-        if(check_tel.length < 4) error += "- Bạn chưa nhập SĐT\n";
-  		else{
-  			if(number_regex1.test(check_tel) == false && number_regex2.test(check_tel) == false) error += "- Số điện thoại chưa chính xác\n";
-  		}
-        if(error != "") {
-            alert(error); return false;
-        }
-        return true;
-    }
+	$('.subCart').click(function() {
+		if (confirm('Bạn có chắc muốn xóa sản phẩm này?')) {
+			var count = $(this).data('del');
+			$.ajax({
+	            url: '<?php echo base_url('sites/subCart')?>',
+	            type: 'POST',
+	            data: $('#cart-detail-'+count).serialize(),
+	            success: function (returndata) {
+	            	location.reload();
+	            }
+	        });
+		}
+	});
 </script>

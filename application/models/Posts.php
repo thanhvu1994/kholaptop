@@ -34,15 +34,15 @@ class Posts extends CI_Model {
 	{
         $data = array(
             'title' => $this->input->post('title'),
-            'title_en' => $this->input->post('title_en'),
+            // 'title_en' => $this->input->post('title_en'),
             'description' => $this->input->post('description'),
             'short_content' => $this->input->post('short_content'),
-            'short_content_en' => $this->input->post('short_content_en'),
+            // 'short_content_en' => $this->input->post('short_content_en'),
             'content' => $this->input->post('content'),
-            'content_en' => $this->input->post('content_en'),
+            // 'content_en' => $this->input->post('content_en'),
             'featured_image' => $image,
             'slug' => $this->generateSlug($this->input->post('title')),
-            'language' => 'vn',
+            // 'language' => 'vn',
         );
 
 	    return $this->db->insert('posts', $data);
@@ -52,14 +52,14 @@ class Posts extends CI_Model {
 	{
 	    $data = array(
 	        'title' => $this->input->post('title'),
-	        'title_en' => $this->input->post('title_en'),
+	        // 'title_en' => $this->input->post('title_en'),
 	        'description' => $this->input->post('description'),
 	        'short_content' => $this->input->post('short_content'),
-	        'short_content_en' => $this->input->post('short_content_en'),
+	        // 'short_content_en' => $this->input->post('short_content_en'),
 	        'content' => $this->input->post('content'),
-	        'content_en' => $this->input->post('content_en'),
+	        // 'content_en' => $this->input->post('content_en'),
 	        'featured_image' => $image,
-            'language' => 'vn',
+            // 'language' => 'vn',
 	    );
 
 	    $this->db->where('id', $id);
@@ -87,20 +87,19 @@ class Posts extends CI_Model {
         $query = $this->db->query("SELECT * FROM ci_categories WHERE type = 'category' ORDER BY display_order asc, category_name asc");
         $categories =  $query->result('Categories');
 
-        $result['cat.html'] = 'Danh Mục :Tổng hợp Sản Phẩm';
         if (count($categories) > 0) {
             foreach ($categories as $category) {
-                $url = 'cat-'.$category->slug.'.html';
+                $url = ''.$category->slug.'c.html';
                 $result[$url] = 'Danh mục: '.$category->category_name;
             }
         }
 
         $query = $this->db->query("SELECT * FROM ci_news ORDER BY title asc");
         $news =  $query->result('News');
-        $result['new.html'] = 'Trang :Tổng hợp Tin tức';
+        $result['tin-tuc.html'] = 'Trang :Tổng hợp Tin tức';
         if (count($news) > 0) {
             foreach ($news as $new) {
-                $url = 'new-'.$new->getCategoryLink().'/'.$new->slug.'.html';
+                $url = $new->slug.'n.html';
                 $result[$url] = 'Tin Tức: '.$new->title;
             }
         }
@@ -108,7 +107,7 @@ class Posts extends CI_Model {
 		$posts = $this->get_model();
 		if (count($posts) > 0) {
 			foreach ($posts as $post) {
-				$url = 'page-'.$post->slug.'.html';
+				$url = $post->slug.'p.html';
 				$result[$url] = 'Trang: '.$post->title;
 			}
 		}
@@ -178,5 +177,9 @@ class Posts extends CI_Model {
         );
         foreach($unicode as $nonUnicode=>$uni) $str = preg_replace("/($uni)/i",$nonUnicode,$str);
         return $str;
+    }
+
+    public function getUrl() {
+        return base_url($this->slug.'p.html');
     }
 }

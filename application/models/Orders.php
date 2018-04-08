@@ -73,7 +73,7 @@ class Orders extends CI_Model {
         if ($row) {
             $maxid = $row->maxid;
         }
-        return 'P'.date('dmY').(str_pad($maxid+1, 4, '0', STR_PAD_LEFT));
+        return 'O'.date('dmY').(str_pad($maxid+1, 4, '0', STR_PAD_LEFT));
     }
 
     public function getStatus() {

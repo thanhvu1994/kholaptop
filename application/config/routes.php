@@ -68,11 +68,12 @@ $route['(:any)n.html'] = 'newsSite/index/$1';
 $route['(:any)n.html/(:num)'] = 'newsSite/index/$1/$2';
 $route['(:any)nd.html'] = 'newsSite/detail/$1';
 
+$route['(:any)p.html'] = 'pages/detail/$1';
+
 $route['(:any)c.html'] = 'category/category/$1';
 $route['(:any)c.html/(:num)'] = 'category/category/$1';
 
 $route['(:any)/(:any)p.html'] = 'product/detail/$2';
 
-
-
-
+$route['gio-hang.html'] = 'sites/shoppingCart';
+$route['gio-hang/thanh-toan.html'] = 'sites/shoppingCartStep2';

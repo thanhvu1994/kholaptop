@@ -139,24 +139,26 @@
                 </div><!--product-collateral toggle-content-->
 
                 <div class="widget widget-static-block" id="navigation">
-                    <ul class="products-grid products-grid--max-4-col first last odd">
+                    <?php if (count($recentProducts) > 1): ?>
                         <h2 class="subtitle">Sản phẩm cùng loại</h2>
-                        <?php foreach($recentProducts as $key => $recentProduct): ?>
-                            <?php if($product->id != $recentProduct->id) : ?>
-                                <li class="item last">
-                                    <a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>" class="product-image">
-                                        <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $recentProduct->getFirstImage(); ?>" alt="<?php echo $recentProduct->product_name; ?>" />
-                                    </a>
-                                    <div class="product-info" style="padding-bottom: 10px;">
-                                        <h2 class="product-name"><a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>"><?php echo $recentProduct->product_name; ?></a></h2>
-                                        <div class="price-box">
-                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
-                                    <span class="price"><?php echo number_format($recentProduct->price).' đ'; ?></span> </span></div>
-                                    </div>
-                                </li>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ul>
+                        <ul class="products-grid products-grid--max-4-col first last odd">
+                            <?php foreach($recentProducts as $key => $recentProduct): ?>
+                                <?php if($product->id != $recentProduct->id) : ?>
+                                    <li class="item last">
+                                        <a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>" class="product-image">
+                                            <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $recentProduct->getFirstImage(); ?>" alt="<?php echo $recentProduct->product_name; ?>" />
+                                        </a>
+                                        <div class="product-info" style="padding-bottom: 10px;">
+                                            <h2 class="product-name"><a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>"><?php echo $recentProduct->product_name; ?></a></h2>
+                                            <div class="price-box">
+                                        <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                        <span class="price"><?php echo number_format($recentProduct->price).' đ'; ?></span> </span></div>
+                                        </div>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif ?>
                 </div>
 
                 <div class="clear"></div>
@@ -172,7 +174,7 @@
     </div>
 </div>
 
-<form id="cart-detail">
+<form id="cart-detail" style="display:none">
     <div id="cart-product-id">
         <input type="text" name="Product[product_id]" value="<?php echo $product->id; ?>">
     </div>
@@ -211,7 +213,7 @@
                 data: $('#cart-detail').serialize(),
                 success: function (returndata) {
                     if (returndata == 1) {
-                        window.location.replace('<?php echo base_url('sites/shoppingCart') ?>')
+                        window.location.replace('<?php echo base_url('gio-hang.html') ?>')
                     };
                 }
             });

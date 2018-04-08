@@ -29,13 +29,14 @@ class Settings extends CI_Model {
             'htmlOptions' => [],
             'icon' => '<i class="glyphicon glyphicon-star-empty"></i>',
             'items' => [
-                ['name' => 'facebook', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'googleplus', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'twitter', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'youtube', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'instagram', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'pinterest', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
-                ['name' => 'linkedin', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'facebook', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'googleplus', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'twitter', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'youtube', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'instagram', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'pinterest', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                // ['name' => 'linkedin', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
+                ['name' => 'fanpage', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-5'], 'rules' => ''],
             ]
         ],
         "contactsetting" => [
@@ -50,6 +51,7 @@ class Settings extends CI_Model {
                 // ['name' => 'companyEmail', 'controlTyle' => 'text', 'notes' => '', 'unit' => '', 'htmlOptions' => ['maxlength' => 80], 'rules' => ''],
                 ['name' => 'showroom', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full'], 'rules' => ''],
                 ['name' => 'right_sidebar', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-2'], 'rules' => ''],
+                ['name' => 'info_card', 'controlTyle' => 'textarea', 'notes' => '', 'unit' => '', 'htmlOptions' => ['class' => 'editor-full', 'id' => 'editor-full-4'], 'rules' => ''],
             ],
         ],
     ];
@@ -72,6 +74,8 @@ class Settings extends CI_Model {
             // 'introduce_en' => 'Sơ lược công ty (tiếng anh)'
             'showroom' => 'Showroom',
             'right_sidebar' => 'Bán hàng online',
+            'info_card' => 'Thông tin tài khoản ngân hàng',
+            'fanpage' => 'Fanpage Facebook'
         ];
 
         if (isset($attrbute_name[$field])) {
