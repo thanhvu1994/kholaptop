@@ -9,6 +9,7 @@ class NewsSite extends Front_Controller {
 
         $this->load->model('news');
         $this->load->library('pagination');
+        $this->load->model('posts');
     }
 
     public function index($slug = "") {

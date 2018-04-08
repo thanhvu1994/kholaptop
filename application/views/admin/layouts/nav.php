@@ -14,7 +14,7 @@
             <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i class="icon-arrow-left-circle ti-menu"></i></a></li>
         </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
-            <li class=""> <a class="waves-effect waves-light" href="http://hungthinhphatvn.com/admin/login/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            <li class=""> <a class="waves-effect waves-light" href="<?php echo base_url('admin/login/logout') ?>"><i class="fa fa-power-off"></i> Logout</a></li>
         </ul>
         <!-- <ul class="nav navbar-top-links navbar-right pull-right"> -->
             <!-- /.Megamenu -->

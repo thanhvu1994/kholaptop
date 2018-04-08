@@ -17,7 +17,7 @@
 	        <!--Buoc 1 : gio hang-->
 	        <span style="display: none;"></span>
 	        <span style="display: none;"></span>
-	        <table cellpadding="5" border="1" bordercolor="#CCCCCC" class="table-shopping-cart">
+	        <table cellpadding="6" border="1" bordercolor="#CCCCCC" class="table-shopping-cart">
 	          	<tbody>
 	          		<tr bgcolor="#eee" style="color:#333; font-weight:bold; font-size:12px;">
 		            	<td>STT</td>
