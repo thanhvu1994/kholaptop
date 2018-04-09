@@ -3,15 +3,18 @@
         <div class="row">
             <?php echo $this->settings->get_param('showroom'); ?>
         </div>
-        <div class="row">
+        <?php 
+        $page = $this->posts->get_model();
+        if (count($page)): ?>
+            <div class="row">
             <h1>Thông tin hỗ trợ</h1>
-            <ul>
-                <li><a href="#" title="Giới thiệu công ty">Giới thiệu công ty</a></li>
-                <li><a href="#" title="Chính sách ưu đãi">Chính sách ưu đãi</a></li>
-                <li><a href="#" title="Chính sách bảo hành">Chính sách bảo hành</a></li>
-                <li><a href="#" title="Dowload Driver">Dowload Driver</a></li>
-            </ul>
-        </div>
+                <ul>
+                    <?php foreach ($page as $row): ?>
+                        <li><a href="<?php echo $row->getUrl() ?>" title="<?php echo $row->title ?>"><?php echo $row->title ?></a></li>
+                    <?php endforeach ?>
+                </ul>
+            </div>
+        <?php endif ?>
         <?php 
         $categories_news = $this->categories->getCategoryNewFE();
         if (count($categories_news) > 0): ?>
@@ -26,10 +29,9 @@
     </div>
     <div class="ft-right">
         <div class="share-fb">
-            <div id="fb-root"></div>
-        </div>
-        <div class="dangky"><img
-                    src="../i1.wp.com/online.gov.vn/PublicImages/2015/08/27/11/20150827110756-dadangky.png" alt="" />
+            <div id="fb-root">
+                <?php echo $this->settings->get_param('fanpage'); ?>
+            </div>
         </div>
     </div>
 </div>

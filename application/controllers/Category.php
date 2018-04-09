@@ -66,7 +66,7 @@ class Category extends Front_Controller {
 
             $this->load->view('layouts/index', $data);
         }else{
-            redirect('sites/index');
+            redirect('/');
         }
     }
 }

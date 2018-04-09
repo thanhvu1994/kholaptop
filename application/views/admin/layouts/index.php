@@ -62,7 +62,7 @@
                         </div>
                         <!-- /.right-sidebar -->
                     </div>
-                    <footer class="footer text-center"> 2017 &copy; Agile Admin brought to you by wrappixel.com </footer>
+                    <footer class="footer text-center"> 2018 © CÔNG TY TNHH CÔNG NGHỆ OPTECH </footer>
                 </div>
         <?php } else {
             $this->load->view($template);

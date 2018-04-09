@@ -265,9 +265,9 @@
 </script>
  <style>
      .center-cropped {
-         object-fit: none; /* Do not scale the image */
-         object-position: center; /* Center the image within the element */
-         height: 100px;
+         /*object-fit: none;*/ /* Do not scale the image */
+         /*object-position: center;*/ /* Center the image within the element */
+         height: 80px;
          /*width: 150px;*/
      }
  </style>

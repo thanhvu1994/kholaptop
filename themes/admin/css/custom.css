@@ -82,7 +82,7 @@ span.required {
 
 .delete-att{
     position: absolute;
-    top:-5%;
+    top:0;
     right:10px;
     color: red;
     opacity:0;
@@ -98,7 +98,7 @@ span.required {
     -webkit-transition: opacity 2s linear;
 }​,
 
-.col-md-3:hover .delete-att {
+.col-md-2:hover .delete-att {
     opacity: 1;
     transition:opacity 2s linear;
     -moz-transition: opacity 2s linear;

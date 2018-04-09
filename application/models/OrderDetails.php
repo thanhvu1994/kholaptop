@@ -29,9 +29,8 @@ class OrderDetails extends CI_Model {
     public function set_model($data_insert)
     {
         $data_insert['created_date'] = date('Y-m-d H:i:s');
-        $data_insert['update_date'] = date('Y-m-d H:i:s');
 
-        return $this->db->insert('partner', $data_insert);
+        return $this->db->insert('order_details', $data_insert);
     }
 
     public function update_model($id, $data_insert)
@@ -120,6 +119,26 @@ class OrderDetails extends CI_Model {
             }
         }
 
+        return '';
+    }
+
+    public function getMoreInfoCustom() {
+        if (!empty($this->more_info)) {
+            $result = [];
+            $more_info = json_decode($this->more_info);
+            if (!is_array($more_info)) {
+                foreach ($more_info as $infos) {
+                    foreach ($infos as $key => $info) {
+                        if ($info->name_option == 'Color') {
+                            $result[] = $info->name_option.': <span style="background-color: '.$info->name_option_value.'; color: '.$info->name_option_value.'">'.$info->name_option_value.'</span> ( Giá: '.number_format($info->price).')';
+                        } else {
+                            $result[] = $info->name_option.': '.$info->name_option_value.' ( Giá: '.number_format($info->price).')';
+                        }
+                    }
+                }
+            }
+            return implode('<br>', $result);
+        }
         return '';
     }
 }

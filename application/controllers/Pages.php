@@ -1,18 +1,30 @@
 <?php
-class Pages extends CI_Controller {
+require_once APPPATH . 'core/Front_Controller.php';
 
-    public function view($page = 'home')
+class Pages extends Front_Controller {
+
+    public function __construct()
     {
-    	if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
-        {
-                // Whoops, we don't have a page for that!
-                show_404();
+        parent::__construct();
+
+        $this->load->model('posts');
+    }
+
+    public function detail($slug) {
+        $data['template'] = 'pages/detail';
+
+        $page = $this->posts->get_model(['slug' => $slug]);
+        $data['page'] = $page;
+        if (count($page) > 0) {
+            $data['title'] = $page->title;
+            $data['description'] = $page->description;
+
+            $pages = $this->posts->get_model();
+            $data['pages'] = $pages;
+
+            $this->load->view('layouts/index', $data);
+        } else {
+            redirect('/', 'refresh');
         }
-
-        $data['title'] = ucfirst($page); // Capitalize the first letter
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/'.$page, $data);
-        $this->load->view('templates/footer', $data);
     }
 }

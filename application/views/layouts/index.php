@@ -33,6 +33,11 @@
 		        $(".skip-link").click(function(){
 		            $(this).toggleClass("skip-active");
 		            $("#header-nav").toggleClass("skip-active");
+		            $("#header-nav").css('background','none');
+		            $("#header-nav ol").css('display','inline-grid').css('width','100%').css('padding-left','15px');
+		            $("#header-nav li").css('display','list-item');
+		            $("#header-nav li a").css('color','white');
+		            $(this).css('background','none');
 
 		            return false;
 		        });
@@ -80,7 +85,7 @@
             <p><span style="float:left; margin-right:2px;">Mua hàng gọi ngay</span> <a href="tel:0985 985 278" style="font-weight:bold; float:left;">0985 985 278</a></p>
             <a href="tel:0985 985 278" class="font18"><img src="<?php echo base_url('themes/website/images/icon_tel_whitef195.png?v=2.1')?>" alt="hotline" />&nbsp;Gọi</a>
         </div>
-        <div class="footer">
+        <div id="footer" class="footer">
             <!-- Footer -->
             <?php $this->load->view('layouts/footer'); ?>
         </div>

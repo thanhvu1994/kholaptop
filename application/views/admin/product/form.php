@@ -127,21 +127,21 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="form-group attribute-container">
-                            <label class="col-md-12">Thuộc tính <a href="javascript:void(0)" onClick="addAttribute()"><span class="glyphicon glyphicon-plus"></span></a></label>
+                            <label class="col-md-12">Cấu Hình Tùy Chọn <a href="javascript:void(0)" onClick="addAttribute()"><span class="glyphicon glyphicon-plus"></span></a></label>
                             <div class="attribute-input default-item">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <input type="text" class="form-control att-input" value="" list="options">
-                                        <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
+                                        <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-remove"></i></a>
                                         <?php echo form_error('attributes'); ?>
                                     </div>
                                     <div class="att-value-container" style="margin-top: 0px;">
                                         <div class="col-md-2">
                                            <input type="text" class="form-control att-value-input" value="">
-                                            <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
+                                            <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-remove"></i></a>
                                             <?php echo form_error('attribute_values'); ?>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <input type="text" class="form-control att-value-price-input money" value="0">
                                             <?php echo form_error('attribute_values_price'); ?>
                                         </div>
@@ -158,7 +158,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <input type="text" class="form-control att-input" value="<?php echo $attribute->name; ?>" name="attributes[<?php echo $key; ?>]" list="options">
-                                                <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
+                                                <a class='delete-att' href="javascript:void(0)"><i class="glyphicon glyphicon-remove"></i></a>
                                                 <?php echo form_error('attributes'); ?>
                                             </div>
 
@@ -168,18 +168,18 @@
                                                         <?php if($attribute->name == 'Color'): ?>
                                                                 <div class="col-md-2">
                                                                     <input type="color" class="form-control att-value-input" value="<?php echo $attVal->name; ?>" name="attributes_values[<?php echo $key; ?>][]">
-                                                                    <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
+                                                                    <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-remove"></i></a>
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
 
                                                         <?php else: ?>
                                                                 <div class="col-md-2">
                                                                     <input type="text" class="form-control att-value-input" value="<?php echo $attVal->name; ?>" name="attributes_values[<?php echo $key; ?>][]">
-                                                                    <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-minus"></i></a>
+                                                                    <a class='delete-att-value' href="javascript:void(0)"><i class="glyphicon glyphicon-remove"></i></a>
                                                                     <?php echo form_error('attribute_values'); ?>
                                                                 </div>
                                                         <?php endif; ?>
-                                                        <div class="col-md-1">
+                                                        <div class="col-md-2">
                                                             <input type="text" class="form-control att-value-price-input money" value="<?php echo $attVal->price; ?>" name="attributes_values_price[<?php echo $key; ?>][]">
                                                             <?php echo form_error('attribute_values_price'); ?>
                                                         </div>

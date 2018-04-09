@@ -32,6 +32,43 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-md-12">Địa chỉ</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" disabled><?php echo (isset($model)) ? $model->address : ''?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">Ngày đặt hàng</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->get_order_date() : ''?>" disabled>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label class="col-md-12">Tên khách hàng</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? ucwords($model->customer_name) : ''?>" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">Số điện thoại</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->phone_number : ''?>" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">Ghi chú</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" disabled><?php echo (isset($model)) ? $model->note : ''?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-md-12">Trạng thái</label>
                         <div class="col-md-12">
                             <select name="Orders[status]" class="form-control">
@@ -47,118 +84,18 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label class="col-md-12">Tên khách hàng</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->getCustomerName() : ''?>" disabled>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-md-12">Ngày đặt hàng</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($model)) ? $model->get_order_date() : ''?>" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <h3>Thông tin địa chỉ giao hàng</h3>
-                </div>
-
-                <div class="col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label class="col-md-12">Tên người nhận</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->getFullName() : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Tên công ty</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->company_name : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Mã số thuế</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->tax_code : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Điện thoại bàn</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->phone : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Chứng minh nhân dân</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->identity_card : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Thông tin thêm</label>
-                        <div class="col-md-12">
-                            <textarea class="form-control" disabled><?php echo (isset($billing)) ? $billing->more_info : '' ?></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <label class="col-md-12">Quốc gia</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="Việt Nam" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Địa chỉ công ty</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->company_address : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Mã bưu chính</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->postal_code : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Điện thoại di động</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->cell_phone : ''?>" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-12">Địa chỉ cá nhân</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" value="<?php echo (isset($billing)) ? $billing->address : ''?>" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row m-t-30">
+                <div class="m-t-30">
                     <div class="col-sm-12">
                         <div class="table-responsive">
                             <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Tên sản phẩm</th>
-                                        <th>Màu sắc</th>
-                                        <th>Số lượng</th>
+                                        <th>Giá gốc</th>
                                         <th>Thông tin thêm</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,9 +103,10 @@
                                     foreach ($order_details as $detail) :?>
                                         <tr>
                                             <td><?php echo $detail->getProductName() ?></td>
-                                            <td><span style="background-color: <?php echo $detail->getColor() ?>; color: <?php echo $detail->getColor() ?>"><?php echo $detail->getColor() ?></span></td>
+                                            <td><?php echo number_format($detail->base_price) ?> đ</td>
+                                            <td><?php echo $detail->getMoreInfoCustom() ?></td>
                                             <td><?php echo $detail->quantity ?></td>
-                                            <td><?php echo $detail->getMoreInfo() ?></td>
+                                            <td><?php echo number_format($detail->total_price) ?> đ</td>
                                         </tr>
                                 <?php endforeach;
                                 endif ?>

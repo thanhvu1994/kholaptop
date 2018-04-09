@@ -26,7 +26,7 @@
 						<ol>
 							<?php if (count($categories) > 0):
 								foreach ($categories as $category_id => $category): ?>
-									<li><?php echo $this->categories->getUrlCustom($category) ?></a></li>
+									<li><?php echo $this->categories->getUrlCustom($category) ?></li>
 								<?php endforeach;
 							endif ?>
 						</ol>

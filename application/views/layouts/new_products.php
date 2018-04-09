@@ -7,7 +7,7 @@
             </a>
             <h3 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->product_name; ?>"><?php echo $product->product_name; ?></a></h3>
             <div class="price-box"><span class="regular-price" id="product-price-<?php echo $key; ?>-new">
-            <span class="price"><?php echo $product->sale_price; ?></span> </span>
+            <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span>
             </div>
         </li>
     <?php endforeach; ?>

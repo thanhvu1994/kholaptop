@@ -22,7 +22,7 @@
                     <div class="product-essential">
                         <form action="" method="post" id="product_addtocart_form">
                             <div class="product-img-box">
-                                <div class="product-name"><h1><?php echo $product->getFirstImage(); ?></h1></div>
+                                <div class="product-name"><h1><?php echo $product->product_name; ?></h1></div>
                                 <div class="product-image product-image-zoom">
                                     <div class="product-image-gallery">
                                         <a class="MagicZoom" id="Zoomer" rel="selectors-effect-speed: 600" href="<?php echo $product->getFirstImage(); ?>" title="<?php echo $product->product_name; ?>" >
@@ -36,11 +36,45 @@
                                 <div class="product-name"><span class="h1"><?php echo $product->product_name; ?></span></div>
                                 <div class="price-info">
                                     <div class="price-box"><span class="regular-price" id="product-price-241">
-                                    <span class="price"><?php echo number_format($product->price,0, ',', '.').' đ'; ?></span> </span>
+                                    <span id="base_price" style="display: none;"><?php echo $product->price; ?></span>
+                                    <span id="current_price" class="price"><?php echo number_format($product->price,0, ',', '.').' đ'; ?></span> </span>
                                     </div>
                                 </div>
 
                                 <div class="clearfix"></div>
+
+                                <div class="option">
+                                    <?php $attributes = $product->getAttributes(); ?>
+
+                                    <?php if(!empty($attributes)): ?>
+                                        <h4 class="subtitle">Tùy Chọn Cấu Hình</h4>
+
+
+                                        <?php foreach($attributes as $key => $item): ?>
+                                            <h5 class="subtitle"><?php echo $item->name; ?></h5>
+                                            <?php if($item->name == 'Color' || $item->name == 'Color'): ?>
+                                                <?php $attributeValues = $item->getAttributeValues(); ?>
+                                                <div class="option-values">
+                                                    <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
+                                                    <?php foreach($attributeValues as $key1 => $item1): ?>
+                                                        <input data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><p style="display: inline-block; background-color:<?php echo $item1->name; ?>">&emsp;&emsp;&emsp;</p></label>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php else: ?>
+                                                <?php $attributeValues = $item->getAttributeValues(); ?>
+                                                <div class="option-values">
+                                                    <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
+                                                    <?php foreach($attributeValues as $key1 => $item1): ?>
+                                                        <input data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="clearfix"></div>
+
                                 <div class="desc std">
                                     <?php echo $product->content; ?>
                                 </div>
@@ -48,7 +82,7 @@
                             <div class="add-to-cart-wrapper">
                                 <div class="add-to-box" style="margin-top:10px;"><span class="or">Hoặc</span>
                                     <ul class="add-to-links">
-                                        <li><a class="btn" href="javascript:void(0)" onclick="addToShoppingCart('pro','241',1,'12590000')">Đặt mua hàng</a></li>
+                                        <li><a class="btn" href="javascript:void(0)" id="addCart">Đặt mua hàng</a></li>
                                     </ul>
                                     <ul class="sharing-links" style="padding-top: 5px;">
                                         <li>
@@ -104,6 +138,29 @@
                     </dl>
                 </div><!--product-collateral toggle-content-->
 
+                <div class="widget widget-static-block" id="navigation">
+                    <?php if (count($recentProducts) > 1): ?>
+                        <h2 class="subtitle">Sản phẩm cùng loại</h2>
+                        <ul class="products-grid products-grid--max-4-col first last odd">
+                            <?php foreach($recentProducts as $key => $recentProduct): ?>
+                                <?php if($product->id != $recentProduct->id) : ?>
+                                    <li class="item last">
+                                        <a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>" class="product-image">
+                                            <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $recentProduct->getFirstImage(); ?>" alt="<?php echo $recentProduct->product_name; ?>" />
+                                        </a>
+                                        <div class="product-info" style="padding-bottom: 10px;">
+                                            <h2 class="product-name"><a href="<?php echo $recentProduct->getUrl(); ?>" title="<?php echo $recentProduct->title; ?>"><?php echo $recentProduct->product_name; ?></a></h2>
+                                            <div class="price-box">
+                                        <span class="regular-price" id="product-price-<?php echo $key; ?>">
+                                        <span class="price"><?php echo number_format($recentProduct->price).' đ'; ?></span> </span></div>
+                                        </div>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif ?>
+                </div>
+
                 <div class="clear"></div>
                 <div class="fb-comments" data-width="970" data-href="<?php echo current_url(); ?>" data-numposts="10" data-colorscheme="light"></div>
                 <div class="clear"></div>
@@ -112,85 +169,57 @@
             </div><!--product-view-->
         </div><!--col-main-->
         <div class="col-right sidebar">
-            <div class="widget widget-static-block"><h2 class="subtitle">Bán hàng online</h2>
-                <div id="right_content">
-                    <div id="help">
-                        <table style="width: 100%;">
-                            <tbody>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold; font-size: 16px;"><span style="color: #000000;">HÀ NỘI - <span style="color: #ff0000;">024 3537 9395</span></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold;">Kinh doanh bán lẻ</td>
-                            </tr>
-                            <tr>
-                                <td><a href="Skype:anhanh552?chat"><img alt="" src="http://findicons.com/files/icons/727/leopard/128/skype.png"/>
-                                    </a></td>
-                                <td><a href="Skype:anhanh552?chat">&nbsp;Mr. Toản</a> - 096 727 6008</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold;">Bảo hành & Sửa chữa</td>
-                            </tr>
-                            <tr>
-                                <td><a href="Skype:duyhunghhtv?chat"><img alt="" src="http://findicons.com/files/icons/727/leopard/128/skype.png"/>
-                                    </a></td>
-                                <td><p><a href="Skype:duyhunghhtv?chat">&nbsp;Mr. Hùng</a>- 024 3538 1088
-                                    </p>
-                                    <p>098 273 6916</p></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="help">
-                        <table style="width: 100%;">
-                            <tbody>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold; font-size: 16px;">
-                                    <span style="color: #000000;">SÀI GÒN - </span><span style="color: #000000;"><span
-                                                style="color: #ff0000;">028 3977 1918</span></span></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold;">121 Hồ Bá Kiện - P15 - Q10</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="font-weight: bold;">Kinh doanh bán lẻ</td>
-                            </tr>
-                            <tr>
-                                <td><a href="Skype:thanglaptopnp-sg1?chat"><img alt="" src="http://findicons.com/files/icons/727/leopard/128/skype.png"/>
-                                    </a></td>
-                                <td><a href="Skype:thanglaptopnp-sg1?chat">&nbsp;Mr. Thắng</a> - 0904 325 909
-                                </td>
-                            </tr>
-                            <tr></tr>
-                            <tr></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="widget widget-static-block" id="navigation">
-                <ul class="products-grid products-grid--max-4-col first last odd">
-                    <h2 class="subtitle">Sản Phẩm Cùng Loại</h2>
-                    <?php foreach($recentProducts as $key => $product): ?>
-                        <li class="item last" style="width: 100%">
-                            <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>" class="product-image">
-                                <img id="product-collection-image-<?php echo $key; ?>" src="<?php echo $product->getFirstImage(); ?>" alt="<?php echo $product->product_name; ?>" />
-                            </a>
-                            <div class="product-info" style="padding-bottom: 75px; min-height: 157px;">
-                                <h2 class="product-name"><a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->title; ?>"><?php echo $product->product_name; ?></a></h2>
-                                <div class="price-box">
-                                    <span class="regular-price" id="product-price-<?php echo $key; ?>">
-                                    <span class="price"><?php echo number_format($product->price).' đ'; ?></span> </span></div>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+            <?php $this->load->view('layouts/right_side_bar'); ?>
         </div><!--col-right-->
     </div>
 </div>
+
+<form id="cart-detail" style="display:none">
+    <div id="cart-product-id">
+        <input type="text" name="Product[product_id]" value="<?php echo $product->id; ?>">
+    </div>
+    <div id="cart-product-price">
+        <input type="text" name="Product[quantity]" value="1">
+        <input type="text" name="Product[base_price]" value="<?php echo $product->price; ?>">
+    </div>
+    <div id="cart-product-options">
+        <ul>
+        </ul>
+    </div>
+</form>
 <script>
+    $(document).ready(function() {
+        $('.option input').on('change', function(){
+            var base_price = Number($('#base_price').html());
+            var sum = 0;
+            $('#cart-product-options').find('ul').first().html('');
+
+            $('.option input:checked').each(function() {
+                sum += Number($(this).val());
+
+                var attr = $(this).attr('data-id');
+                if (typeof attr !== typeof undefined && attr !== false) {
+                    $('#cart-product-options').find('ul').first().append('<li><input type="text" name="Product[option_value][]" value="'+attr+'"></li>')
+                }
+            });
+            var new_price = base_price + sum;
+            $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
+        });
+
+        $('#addCart').click(function() {
+            $.ajax({
+                url: '<?php echo base_url('sites/addCart')?>',
+                type: 'POST',
+                data: $('#cart-detail').serialize(),
+                success: function (returndata) {
+                    if (returndata == 1) {
+                        window.location.replace('<?php echo base_url('gio-hang.html') ?>')
+                    };
+                }
+            });
+        });
+    });
+
     $(".tab").click(function(){
         $(".tab").removeClass("current");
         $(this).addClass("current");
@@ -204,15 +233,18 @@
     });
 
     var elementPosition = $('#navigation').offset();
+    var footer = $('#footer').offset();
 
-    $(window).scroll(function(){
-        if($(window).scrollTop() > elementPosition.top){
-            var width = $('#navigation').width();
-            $('#navigation').css('position','fixed').css('width',width).css('top','0');
-        } else {
-            $('#navigation').css('position','static').css('width','100%');
+    /*$(window).scroll(function(){
+        if(window.screen.width >= 768){
+            if($(window).scrollTop() > elementPosition.top) {
+                var width = $('#navigation').width();
+                $('#navigation').css('position','fixed').css('width',width).css('top',0);
+            } else {
+                $('#navigation').css('position','static').css('width','100%');
+            }
         }
-    });
+    });*/
 </script>
 <style>
     .btn{
@@ -226,5 +258,17 @@
     }
     .btn:hover {
         background-color: #126b98;
+    }
+    .desc p{
+        margin: 0px 0px 0px 10px;
+    }
+    .desc p:last-child{
+        margin: 20px 0px 0px 10px;
+    }
+    .option {
+        margin-bottom: 20px;
+    }
+    .option-values {
+        margin-bottom: 10px;
     }
 </style>

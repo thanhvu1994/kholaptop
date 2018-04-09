@@ -9,8 +9,7 @@ class NewsSite extends Front_Controller {
 
         $this->load->model('news');
         $this->load->library('pagination');
-        
-
+        $this->load->model('posts');
     }
 
     public function index($slug = "") {
@@ -41,14 +40,14 @@ class NewsSite extends Front_Controller {
     }
 
     public function detail($slug) {
-        $data['title'] = 'Tin tức';
-        $data['description'] = 'Tin tức';
-
         $data['template'] = 'news/detail';
 
         $new = $this->news->get_model(['slug' => $slug]);
         $data['new'] = $new;
         if (count($new) > 0) {
+            $data['title'] = $new->title;
+            $data['description'] = $new->description;
+
             $data['link_1'] = anchor('tin-tuc.html', 'Tin Tức', ['title' => 'Tin Tức']);
             $category = $this->categories->get_model(['id' => $new->category_id]);
             if (count($category) > 0) {
