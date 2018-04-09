@@ -37,6 +37,7 @@
 		            $("#header-nav ol").css('display','inline-grid').css('width','100%').css('padding-left','15px');
 		            $("#header-nav li").css('display','list-item');
 		            $("#header-nav li a").css('color','white');
+		            $("#header-nav li a").css('text-align','left');
 		            $(this).css('background','none');
 
 		            return false;
