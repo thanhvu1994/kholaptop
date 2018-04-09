@@ -657,6 +657,10 @@ html,body{height:100%;}
 .logo .small{display:block;}
 .logo .large{display:none;}
 .logo:hover{opacity:0.8;}
+.skip-links {
+    right: 5%;
+    position: absolute;
+}
 @media only screen and (min-width:771px){.logo{max-width:300px;}
     .logo .small{display:none;}
     .logo .large{display:block;}
@@ -714,7 +718,7 @@ a.skip-link{text-decoration:none;}
 @media only screen and (max-width:770px){#header-nav{padding:5px 0;}
 }
 @media only screen and (min-width:771px){#header-nav{display:block;/* Force visibility */
-    /*border-bottom:1px solid #ededed*/;background:inherit;margin-top: 37px;}
+    /*border-bottom:1px solid #ededed*/;background:inherit;padding-top: 37px;}
 }
 /* ============================================ * * Nav Primary * ============================================ */
 @media only screen and (min-width:771px){
@@ -843,7 +847,7 @@ a.skip-link{text-decoration:none;}
 /* ============================================ * * Footer * ============================================ */
 /* -------------------------------------------- * * Footer */
 .footer,.footer button{font-family:"Roboto", Verdana, Arial, sans-serif;}
-.footer{clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#3398cc;/* -------------------------------------------- * * Social icons */
+.footer{clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
 }
 @media only screen and (max-width:479px){.footer{padding-top:15px;}
 }
@@ -2388,11 +2392,11 @@ div.calendar table td.button{display:table-cell;background:inherit;color:inherit
 .sidebar .widget img{margin-bottom:10px;}
 .footer .links .block-title strong span, .footer .block-subscribe .block-title strong span{text-transform:uppercase;color:#123352;font-weight:bold;}
 .view-more{text-align:center;text-transform:uppercase;font-weight:bold;margin-bottom:20px;}
-.footer ul li, .footer ul li a{color:#fff;}
+.footer ul li, .footer ul li a{color:#CCCCCC;}
 .ft-left{float:left;width:80%;}
 .ft-right{float:right;width:20%;}
 .ft-left .row{width:23%;float:left;margin-right:10px;}
-.ft-left .row h1{color:#123352;font-size:16px;font-weight:bold;}
+.ft-left .row h1{color:white;font-size:16px;font-weight:bold;}
 .ft-right .dangky{margin-top:10px;float:right;}
 @media only screen and (max-width:770px){.logo{width:100%;float:left;}
     .logo img{margin:0 auto;}
