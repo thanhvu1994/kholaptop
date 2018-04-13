@@ -848,7 +848,7 @@ a.skip-link{text-decoration:none;}
 /* ============================================ * * Footer * ============================================ */
 /* -------------------------------------------- * * Footer */
 .footer,.footer button{font-family:"Roboto", Verdana, Arial, sans-serif;}
-.footer{clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
+.footer{position: absolute; bottom:0; clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
 }
 @media only screen and (max-width:479px){.footer{padding-top:15px;}
 }
@@ -2459,7 +2459,10 @@ body .promos > li{margin:0 0 10px 0;list-style:none;text-align:center;position:r
 @media only screen and (max-width:770px){.catblocks li{width:49% !important;margin-right:2% !important;}
     .catblocks li:nth-child(even){margin-right:0 !important;}
 }
-@media only screen and (max-width:479px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;}
+@media only screen and (max-width:479px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;} .table-shopping-cart td{border:1px solid #ccc;padding:5px 5px !important;font-size:12px !important;font-weight:normal;}
+}
+
+@media only screen and (max-width:380px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;} .table-shopping-cart td{border:1px solid #ccc;padding:2px 2px !important;font-size:10px !important;font-weight:normal;}
 }
 .catblocks li:last-child{margin-right:0 !important;}
 .catblocks li img{width:100%;max-width:100%;}

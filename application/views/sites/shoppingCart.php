@@ -76,7 +76,7 @@
 					            </td>
 					            <td class="product_cart">
 					            	<b><span class="price-pro" id="price_pro_<?php echo $count?>" data-price="<?php echo $arr_price[$key_infos] ?>"><?php echo number_format($arr_price[$key_infos]) ?></span> VND</b></td>
-					            <td>
+					            <td style="text-align: center;">
 					            	<a href="javascript:void(0)" class="subCart" data-del="<?php echo $count?>">
 					            		<img src="<?php echo base_url('themes/website/images/cart_del.png') ?>">
 					            	</a>
@@ -92,7 +92,7 @@
 			                	Bạn gặp khó khăn trong việc đặt hàng? Vui lòng nhấc máy để được trợ giúp: &nbsp;&nbsp;<b class="font18 red"><?php echo $this->settings->get_param('companyPhone'); ?> - <?php echo $this->settings->get_param('companyCellPhone'); ?></b>
 			              	</div>
 			            </td>
-			            <td colspan="2">
+			            <td colspan="3">
 			            	<?php if (isset($_SESSION['shopping_cart']['total_price'])): ?>
 				              	<b>Tổng tiền:</b>
 				              	<b style="color:red;"><span class="sub1" id="total_value" style="color: red; font-weight: bold;"><?php echo number_format($_SESSION['shopping_cart']['total_price'])?></span> VND</b>  
