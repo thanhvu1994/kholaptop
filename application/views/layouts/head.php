@@ -1,11 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>KHOLAPTOP.VN | Phân phối Laptop chính hãng</title>
-<meta name="description" content="Phân phối, Laptop, chính hãng, giá rẻ, laptop hà nôị"/>
-<meta name="keywords" content=""/>
+<title><?php echo (isset($title))? $title.' - '.$this->settings->get_param('defaultPageTitle') : $this->settings->get_param('defaultPageTitle'); ?></title>
+<meta name="description" content="<?php echo (isset($description))? $description.' - '.$this->settings->get_param('defaultPageTitle') : $this->settings->get_param('defaultPageTitle'); ?>">
+<link rel="icon" href="<?php echo base_url($this->settings->get_param('favicon')) ?>" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?php echo base_url($this->settings->get_param('favicon')) ?>" type="image/x-icon"/>
 <meta name="robots" content="INDEX,FOLLOW"/>
-<link rel="icon" href="<?php echo base_url('themes/website/images/favicon.ico')?>" type="image/x-icon"/>
-<link rel="shortcut icon" href="<?php echo base_url('themes/website/images/favicon.ico')?>" type="image/x-icon"/>
 <!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 <!-- header -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('themes/website/css/bt-layout.css?timestamp=1522490327355.css') ?>" media="all"/>
