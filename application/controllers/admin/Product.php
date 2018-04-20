@@ -86,7 +86,6 @@ class Product extends MY_Controller {
                         }else{
                             $data['error'] = $this->upload->display_errors();
                         }
-
                     }else{
                         $uploadData = $this->upload->data();
                         $image = '/uploads/products/'. $uploadData['file_name'];
