@@ -28,7 +28,7 @@ class product extends Front_Controller {
             $data['description'] = $data['product']->meta_description;
             $data['template'] = 'product/detail';
         }else{
-            $data['template'] = 'sites/index';
+            redirect('sites/index', 'refresh');
         }
 
         $this->load->view('layouts/index', $data);
