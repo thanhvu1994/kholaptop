@@ -1,5 +1,5 @@
 <h2 class="subtitle">Sản phẩm mới</h2>
-<ul class="products-grid products-grid--max-5-col">
+<ul class="products-grid products-grid--max-4-col">
     <?php foreach($newProducts as $key => $product): ?>
         <li class="item">
             <a href="<?php echo $product->getUrl(); ?>" title="<?php echo $product->product_name; ?>" class="product-image">

@@ -55,17 +55,31 @@
                                             <?php if($item->name == 'Color' || $item->name == 'Color'): ?>
                                                 <?php $attributeValues = $item->getAttributeValues(); ?>
                                                 <div class="option-values">
-                                                    <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
-                                                    <?php foreach($attributeValues as $key1 => $item1): ?>
-                                                        <input data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><p style="display: inline-block; background-color:<?php echo $item1->name; ?>">&emsp;&emsp;&emsp;</p></label>
+                                                    <!-- <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label> -->
+                                                    <?php 
+                                                    $count = 0;
+                                                    foreach($attributeValues as $key1 => $item1):
+                                                        $class = '';
+                                                        if ($count == 0) {
+                                                            $class = 'select-first';
+                                                            $count++;
+                                                        } ?>
+                                                        <input class="<?php echo $class ?>" data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><p style="display: inline-block; background-color:<?php echo $item1->name; ?>">&emsp;&emsp;&emsp;</p></label>
                                                     <?php endforeach; ?>
                                                 </div>
                                             <?php else: ?>
                                                 <?php $attributeValues = $item->getAttributeValues(); ?>
                                                 <div class="option-values">
-                                                    <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label>
-                                                    <?php foreach($attributeValues as $key1 => $item1): ?>
-                                                        <input data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
+                                                    <!-- <input checked name="att-<?php echo $item->id; ?>" id="default-<?php echo $key; ?>" type="radio" value="0"/><label for="default-<?php echo $key; ?>"><span></span>Mặc Định</label> -->
+                                                    <?php 
+                                                    $count = 0;
+                                                    foreach($attributeValues as $key1 => $item1): 
+                                                        $class = '';
+                                                        if ($count == 0) {
+                                                            $class = 'select-first';
+                                                            $count++;
+                                                        } ?>
+                                                        <input class="<?php echo $class ?>" data-id="<?php echo $item1->id; ?>" name="att-<?php echo $item->id; ?>" id="att-val-<?php echo $key.'-'.$key1; ?>" type="radio" value="<?php echo $item1->price; ?>"/><label for="att-val-<?php echo $key.'-'.$key1; ?>"><span></span><?php echo $item1->name; ?></label>
                                                     <?php endforeach; ?>
                                                 </div>
                                             <?php endif; ?>
@@ -204,6 +218,10 @@
             });
             var new_price = base_price + sum;
             $('#current_price').html(new_price).formatCurrency({ symbol: 'đ', roundToDecimalPlace: 0 });
+        });
+
+        $('.select-first').each(function() {
+            $(this).trigger("click");
         });
 
         $('#addCart').click(function() {

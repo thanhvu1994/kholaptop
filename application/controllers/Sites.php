@@ -29,8 +29,8 @@ class Sites extends Front_Controller {
         $advertisements = $query->result('Banner');
         $data['advertisements'] = $advertisements;
 
-        $data['newProducts'] = $this->products->getNewProducts(10,0);
-        $data['featureProducts'] = $this->products->getFeatureProducts(10,0);
+        $data['newProducts'] = $this->products->getNewProducts(8,0);
+        $data['featureProducts'] = $this->products->getFeatureProducts(4,0);
         
         $data['categories'] = $this->categories->getFeatureCategories();
 
@@ -129,6 +129,8 @@ class Sites extends Front_Controller {
     }
 
     public function shoppingCartStep2() {
+        $this->load->model('payment');
+
         if (isset($_SESSION['shopping_cart'])) {
             $this->load->model('orders');
             $this->load->model('orderDetails');
@@ -171,9 +173,7 @@ class Sites extends Front_Controller {
                     $this->db->where('id', $order_id);
                     $this->db->update('orders', ['total_payment' => $total_price_order]);
                     unset($_SESSION['shopping_cart']);
-                    if ($_POST['Orders']['type_payment'] == PAYMENT_CARD) {
-                        $data['show_card'] = true;
-                    }
+                    $data['show_card'] = $_POST['Orders']['type_payment'];
                     $data['finish'] = true;
                 }
             }

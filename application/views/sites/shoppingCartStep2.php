@@ -21,10 +21,11 @@
 		<div class="title_box_cart custom-notify" style="text-align:center"> 
 			Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên lạc trong thời gian sớm nhất!
 		</div>
-		<?php if ($show_card): ?>
+		<?php 
+		$payment = $this->payment->get_model(['id' => $show_card]);
+		if (count($payment) > 0): ?>
 			<div class="info-cart">
-				<h3><b>Thông tin tài khoản ngân hàng</b></h3>
-				<?php echo $this->settings->get_param('info_card'); ?>
+				<?php echo $payment->content; ?>
 			</div>
 		<?php endif ?>
 	<?php else: ?>
@@ -40,7 +41,7 @@
 						<input required type="text" name="Orders[email]" id="buyer_email" value="" style="width:100%;">
 					</div>
 					<div> Số điện thoại <span class="txt2">*</span> <br>
-						<input required type="text" name="Orders[phone_number]" id="buyer_tel" value="" style="width:100%;">
+						<input required type="number" name="Orders[phone_number]" id="buyer_tel" value="" style="width:100%;">
 					</div>
 					<div> Địa chỉ <span class="txt2">(số nhà, đường, tỉnh) *</span> <br>
 						<textarea required name="Orders[address]" id="buyer_address" style="height: 50px; width:100%;"></textarea>
@@ -50,8 +51,13 @@
 					</div>
 					<div> Hình thức thanh toán <br>
 						<div class="form-group">
-							<input type="radio" name="Orders[type_payment]" value="<?php echo PAYMENT_CASH ?>" checked> Tiền mặt
-							<input type="radio" name="Orders[type_payment]" value="<?php echo PAYMENT_CARD ?>"> Chuyển khoản
+							<?php $payments = $this->payment->get_model(); 
+							if (count($payments) > 0) :
+								foreach ($payments as $key => $payment) :
+									$checked = $key == 0 ? 'checked' : ''?>
+									<input type="radio" name="Orders[type_payment]" value="<?php echo $payment->id ?>" <?php echo $checked ?>> <?php echo $payment->name ?>
+							<?php endforeach;
+							endif ?>
 						</div>
 					</div>
 				</div><!--col-->

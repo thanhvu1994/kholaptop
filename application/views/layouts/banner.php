@@ -7,7 +7,7 @@
             });
         </script>
         <?php
-            $query = $this->db->query("SELECT * FROM ci_banners WHERE publish = 1 AND type = 'home'");
+            $query = $this->db->query("SELECT * FROM ci_banners WHERE publish = 1 AND type = 'home' ORDER BY update_date desc");
             $banners = $query->result('Banner');
         ?>
         <?php if (count($banners) > 0): ?>

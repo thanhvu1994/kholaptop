@@ -848,7 +848,7 @@ a.skip-link{text-decoration:none;}
 /* ============================================ * * Footer * ============================================ */
 /* -------------------------------------------- * * Footer */
 .footer,.footer button{font-family:"Roboto", Verdana, Arial, sans-serif;}
-.footer{position: absolute; bottom:0; clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
+.footer{/*position: absolute; bottom:0; */clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
 }
 @media only screen and (max-width:479px){.footer{padding-top:15px;}
 }
@@ -949,10 +949,10 @@ h2.product-name a:hover,h3.product-name a:hover,h4.product-name a:hover,h5.produ
     /* Undo three-column config */
     .products-grid--max-4-col > li:nth-child(odd){clear:none;}
     .products-grid--max-4-col > li:nth-child(3n+1){clear:none;}
-    .products-grid--max-4-col > li:nth-child(even), .products-grid--max-4-col > li:nth-child(3n){margin-right:2.22222%;}
+    .products-grid--max-4-col > li:nth-child(even), .products-grid--max-4-col > li:nth-child(3n){margin-right:3.88888%;}
     /* Set column config */
-    .products-grid--max-4-col > li{margin-right:2.22222%;}
-    .products-grid--max-4-col > li{width:18.2%;margin-right:2.22222%;}
+    .products-grid--max-4-col > li{margin-right:3.88888%;}
+    .products-grid--max-4-col > li{width:22%;margin-right:3.88888%;}
     .products-grid--max-4-col > li:nth-child(5n+1){clear:left;}
     .products-grid--max-4-col > li:nth-child(5n){margin-right:0;}
     /* Config:Columns + flexible gutter */
@@ -2503,7 +2503,7 @@ html[xmlns] .slides{display:block;}
 .carousel li{margin-right:5px}
 /* Direction Nav */
 .flex-direction-nav{*height:0;}
-.flex-direction-nav a{width:30px;height:30px;margin:-20px 0 0;display:block;background:url(../images/bg_direction_nav.png) no-repeat 0 0;position:absolute;top:50%;z-index:10;cursor:pointer;text-indent:-9999px;opacity:0;-webkit-transition:all .3s ease;}
+.flex-direction-nav a{width:30px;height:30px;margin:-20px 0 0;display:block;background:url(../images/bg_direction_nav.png) no-repeat 0 0;position:absolute;top:50%;z-index:10;cursor:pointer;text-indent:-9999px;opacity:0;-webkit-transition:all .3s ease;background-size: 200%;}
 .flex-direction-nav .flex-next{background-position:100% 0;right:-36px;}
 .flex-direction-nav .flex-prev{left:-36px;}
 .flexslider:hover .flex-next{opacity:0.8;right:5px;}

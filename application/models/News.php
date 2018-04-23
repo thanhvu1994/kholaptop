@@ -17,14 +17,18 @@ class News extends CI_Model {
     	return $rules;
     }
 
-	public function get_model($conditions = [])
+	public function get_model($conditions = [], $limit = '')
 	{
 		if (!empty($conditions)) {
 			$query = $this->db->get_where('news', $conditions);
 
         	return $query->row(0,'News');
 		} else {
-			$query = $this->db->query("SELECT * FROM ci_news ORDER BY created_date desc");
+            $str_limit = '';
+            if ($limit != '') {
+                $str_limit = ' LIMIT '.$limit;
+            }
+			$query = $this->db->query("SELECT * FROM ci_news ORDER BY created_date desc".$str_limit);
 			return $query->result('News');
 		}
 	}
@@ -182,5 +186,20 @@ class News extends CI_Model {
 
     public function getNewsUrl() {
         return base_url().$this->slug.'nd.html';
+    }
+
+    public function shorterContent($text, $chars_limit)
+    {   
+        $text = strip_tags($text);
+        if (strlen($text) > $chars_limit) {
+            $length = (int)(strlen($text) / $chars_limit);
+            $new_text = substr($text, 0, strpos($text, ' ', $chars_limit));
+            // Trim off white space
+            $new_text = trim($new_text);
+            // Add at end of text ...
+            return $new_text . "...";
+        } else {
+            return $text;
+        }
     }
 }

@@ -42,6 +42,23 @@
 			<div class="content">
 				<?php echo $new->content ?>
 			</div>
+            <div class="product-view">
+		        <ul class="sharing-links" style="padding-top: 5px;list-style: none; float:none">
+	                <li>
+	                    <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?php echo str_replace(base_url(),'', current_url()); ?>"
+	                       target="_blank" title="Share on Facebook" class="link-facebook">
+	                        Share Facebook
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="http://twitter.com/home?status=<?php echo str_replace(base_url(),'', current_url()); ?>"
+	                       target="_blank" title="Share on Twitter" class="link-twitter">Share
+	                        on Twitter
+	                    </a>
+	                </li>
+	            </ul>
+            </div>
+
 			<div id="other-news">
 				<?php if (count($news) > 0): ?>
 					<h2>Bài viết liên quan</h2>
