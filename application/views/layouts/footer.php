@@ -10,7 +10,7 @@
             <h1>Thông tin hỗ trợ</h1>
                 <ul>
                     <?php foreach ($page as $row): ?>
-                        <li><a href="<?php echo $row->getUrl() ?>" title="<?php echo $row->title ?>"><?php echo $row->title ?></a></li>
+                        <li><a href="<?php echo $row->getUrl() ?>" title="<?php echo $row->title ?>"><i class="fa fa-arrow-circle-right"></i> <?php echo $row->title ?></a></li>
                     <?php endforeach ?>
                 </ul>
             </div>
@@ -21,7 +21,7 @@
             <div class="row"><h1>Tin tức</h1>
                 <ul>
                     <?php foreach ($categories_news as $category_id => $category): ?>
-                        <li><?php echo $this->categories->getUrlCustom($category) ?></a></li>
+                        <li><i class="fa fa-arrow-circle-right"></i> <?php echo $this->categories->getUrlCustom($category) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

@@ -11,6 +11,8 @@
 <!-- end header -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('themes/website/script/style5015.css?v=2.99')?>" media="all"/>
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,600"/>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script type="text/javascript" src="<?php echo base_url('themes/website/js/jquery/jquery-1.11.0.min.js')?>"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 
