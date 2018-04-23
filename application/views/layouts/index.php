@@ -117,5 +117,36 @@
         <style>@media (min-width:770px){#narrow-by-list dd{display:block !important;}}</style>
     </div>
 </div>
+<style type="text/css">
+    .products-grid .product-image {
+        padding: 10px 10px;
+    }
+    .products-grid .product-image img {
+        height: auto;
+        min-height: 155px;
+    }
+    .nav-primary li ul{
+        padding: 0px !important;
+    }
+    .nav-primary li ul li{
+        text-align: left;
+    }
+    .nav-primary li ul li a{
+        line-height: 35px;
+        padding-left: 10px;
+    }
+    .cms-index-index h2.subtitle {
+        border: none;
+        text-align: left;
+        border-bottom: 1px solid #3399cc;
+    }
+    .footer ul li,.footer ul li a {
+        font-weight: normal;
+        font-size: 13px;
+    }
+    .cms-index-index h2.subtitle {
+        font-size: 20px;
+    }
+</style>
 </body>
 </html>

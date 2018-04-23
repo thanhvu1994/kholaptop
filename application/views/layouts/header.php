@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="header-height" style="background: rgb(38, 38, 38)">
     <div class="navbar navbar-default portal">
         <div class="container container-custom">
@@ -7,10 +8,10 @@
                 </a>
             </div>
             <div class="skip-links">
-		    <a href="#header-nav" class="skip-link skip-nav">
-		        <span class="icon"></span>
-		    </a>
-		</div>
+			    <a href="#header-nav" class="skip-link skip-nav">
+			        <span class="icon"></span>
+			    </a>
+			</div>
             <div id="header-nav" class="skip-content">
 	            <nav id="nav navbar-nav navbar-left en">
 	            	<?php $menus = $this->categories->get_menuFE();
@@ -42,6 +43,7 @@
 				            	<?php endif ?>
 				            </li>
 		                <?php endforeach ?>
+				            <li class="level0 nav-1 first parent"><a class="level0 has-children" href="<?php echo base_url('gio-hang.html') ?>"><i class="fa fa-shopping-cart"></i> (<?php echo isset($_SESSION['shopping_cart']['count']) ? $_SESSION['shopping_cart']['count'] : 0 ?>)</a></li>
 				        </ol>
 				    <?php endif ?>
 		        </nav>

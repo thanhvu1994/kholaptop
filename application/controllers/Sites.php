@@ -252,9 +252,11 @@ class Sites extends Front_Controller {
                         ];
 
                         $total_price = 0;
+                        $count = 0;
                         foreach ($arr_product['data'] as $data) {
                             foreach ($data['info'] as $arr_type) {
                                 $total_price_more = 0;
+                                $count++;
                                 foreach ($arr_type['data'] as $type) {
                                     foreach ($type as $row) {
                                         $total_price_more += (int)$row['price'];
@@ -263,6 +265,7 @@ class Sites extends Front_Controller {
                                 $total_price += ((int)$total_price_more + (int)$data['base_price']) * $arr_type['quantity'];
                             }
                         }
+                        $arr_product['count'] = $count;
                         $arr_product['total_price'] = $total_price;
 
                         $_SESSION['shopping_cart'] = $arr_product;
@@ -311,9 +314,11 @@ class Sites extends Front_Controller {
                     }
                 }
                 $total_price = 0;
+                $count = 0;
                 foreach ($arr_product['data'] as $data) {
                     foreach ($data['info'] as $arr_type) {
                         $total_price_more = 0;
+                        $count++;
                         foreach ($arr_type['data'] as $type) {
                             foreach ($type as $row) {
                                 $total_price_more += (int)$row['price'];
@@ -324,6 +329,7 @@ class Sites extends Front_Controller {
                 }
 
                 $arr_product['total_price'] = $total_price;
+                $arr_product['count'] = $count;
                 $_SESSION['shopping_cart'] = $arr_product;
                 echo number_format($total_price);
             }
@@ -373,10 +379,12 @@ class Sites extends Front_Controller {
                 $arr_product['data'][$product_id]['info'] = array_values($arr_product['data'][$product_id]['info']);
 
                 $total_price = 0;
+                $count = 0;
                 if (isset($arr_product['data']) && !empty($arr_product['data'])) {
                     foreach ($arr_product['data'] as $data) {
                         foreach ($data['info'] as $arr_type) {
                             $total_price_more = 0;
+                            $count++;
                             foreach ($arr_type['data'] as $type) {
                                 foreach ($type as $row) {
                                     $total_price_more += (int)$row['price'];
@@ -389,6 +397,10 @@ class Sites extends Front_Controller {
                 if ($total_price == 0) {
                     unset($_SESSION['shopping_cart']);
                 } else {
+                    if ($count <= 0) {
+                        $count = 0;
+                    }
+                    $arr_product['count'] = $count;
                     $arr_product['total_price'] = $total_price;
                     $_SESSION['shopping_cart'] = $arr_product;
                 }
