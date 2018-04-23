@@ -15,9 +15,9 @@ class Products extends CI_Model {
             ['product_name', 'Product Name', 'trim|required'],
             //['title', 'Title', 'trim|required'],
             // ['slug', 'Slug', 'trim|required'],
-            ['description', 'Description', 'trim|required'],
+            /*['description', 'Description', 'trim|required'],*/
             //['meta_description', 'Meta Description', 'trim|required'],
-            ['content', 'Content', 'trim|required'],
+            /*['content', 'Content', 'trim|required'],*/
         ];
 
         return $rules;

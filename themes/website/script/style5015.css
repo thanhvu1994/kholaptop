@@ -657,6 +657,10 @@ html,body{height:100%;}
 .logo .small{display:block;}
 .logo .large{display:none;}
 .logo:hover{opacity:0.8;}
+.skip-links {
+    right: 5%;
+    position: absolute;
+}
 @media only screen and (min-width:771px){.logo{max-width:300px;}
     .logo .small{display:none;}
     .logo .large{display:block;}
@@ -666,7 +670,7 @@ html,body{height:100%;}
 @media only screen and (min-width:771px){.skip-links{border:0;}
 }
 /* -------------------------------------------- * * Skip - Link */
-.skip-link{right:0;position:absolute;float:left;width:20%;height:44px;/*background:#FFFFFF*/;color:#636363;line-height:42px;text-align:center;}
+.skip-link{position:relative;float:left;width:20%;height:44px;/*background:#FFFFFF*/;color:#636363;line-height:42px;text-align:center;}
 a.skip-link{text-decoration:none;}
 .skip-link:not(.skip-active):hover{opacity:0.8;}
 @media only screen and (max-width:770px){
@@ -726,7 +730,7 @@ a.skip-link{text-decoration:none;}
 .nav-primary a{text-decoration:none;position:relative;display:block;color:#CCCCCC;line-height:30px;font-family:"Roboto", Verdana, Arial, sans-serif;font-weight:bold;}
 .nav-primary ul a{color:#636363;}
 .nav-primary li{position:relative; width: auto;}
-.nav-primary {margin-top: 37px; display: table; width: 80%; padding-left: 50px;}
+.nav-primary {padding-top: 37px; display: table; width: 80%;}
 .nav-primary li.level1 a{border-bottom:1px solid #cccccc;}
 .nav-primary .menu-active > ul.level0,.nav-primary li.level0 li.sub-menu-active > ul{display:block;}
 .nav-primary li.level0 > a{text-transform:capitalize;}
@@ -748,7 +752,7 @@ a.skip-link{text-decoration:none;}
     /* Level 1+ */
 }
     .nav-primary a.level0{padding:0 10px;}
-    .nav-primary li.level0, .nav-primary a.level0{display:table-cell;}
+    .nav-primary li.level0, .nav-primary a.level0{display:inline-block; padding: 0px 10px 0px 10px;}
     .nav-primary li:last-child > a{border-bottom:none;}
     .nav-primary a:hover, .nav-primary li:hover > a{color:#3399cc;}
     .nav-primary .menu-active{z-index:200;}
@@ -844,7 +848,7 @@ a.skip-link{text-decoration:none;}
 /* ============================================ * * Footer * ============================================ */
 /* -------------------------------------------- * * Footer */
 .footer,.footer button{font-family:"Roboto", Verdana, Arial, sans-serif;}
-.footer{clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#3398cc;/* -------------------------------------------- * * Social icons */
+.footer{position: absolute; bottom:0; clear:both;width:100%;border-top:1px solid #cccccc;padding-top:30px;background:#262626;/* -------------------------------------------- * * Social icons */
 }
 @media only screen and (max-width:479px){.footer{padding-top:15px;}
 }
@@ -2389,11 +2393,11 @@ div.calendar table td.button{display:table-cell;background:inherit;color:inherit
 .sidebar .widget img{margin-bottom:10px;}
 .footer .links .block-title strong span, .footer .block-subscribe .block-title strong span{text-transform:uppercase;color:#123352;font-weight:bold;}
 .view-more{text-align:center;text-transform:uppercase;font-weight:bold;margin-bottom:20px;}
-.footer ul li, .footer ul li a{color:#fff;}
+.footer ul li, .footer ul li a{color:#CCCCCC;}
 .ft-left{float:left;width:80%;}
 .ft-right{float:right;width:20%;}
 .ft-left .row{width:23%;float:left;margin-right:10px;}
-.ft-left .row h1{color:#123352;font-size:16px;font-weight:bold;}
+.ft-left .row h1{color:white;font-size:16px;font-weight:bold;}
 .ft-right .dangky{margin-top:10px;float:right;}
 @media only screen and (max-width:770px){.logo{width:100%;float:left;}
     .logo img{margin:0 auto;}
@@ -2455,7 +2459,10 @@ body .promos > li{margin:0 0 10px 0;list-style:none;text-align:center;position:r
 @media only screen and (max-width:770px){.catblocks li{width:49% !important;margin-right:2% !important;}
     .catblocks li:nth-child(even){margin-right:0 !important;}
 }
-@media only screen and (max-width:479px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;}
+@media only screen and (max-width:479px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;} .table-shopping-cart td{border:1px solid #ccc;padding:5px 5px !important;font-size:12px !important;font-weight:normal;}
+}
+
+@media only screen and (max-width:380px){.catblocks li{width:100% !important;margin-right:0 !important;float:none;} .table-shopping-cart td{border:1px solid #ccc;padding:2px 2px !important;font-size:10px !important;font-weight:normal;}
 }
 .catblocks li:last-child{margin-right:0 !important;}
 .catblocks li img{width:100%;max-width:100%;}

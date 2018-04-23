@@ -6,6 +6,7 @@
   margin-bottom: 0px;
   position: relative;
   z-index: 200;
+  text-align: center;
 }
 
 .navbar.navbar-default.portal .navbar-header{
